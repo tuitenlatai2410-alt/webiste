@@ -98,10 +98,10 @@ File `_headers` đã cấu hình: cache 1 năm cho `/assets/*` (an toàn vì m�
 ## Ghi chú kỹ thuật
 
 - **Màn chào mừng 3D:** hiện 1 lần mỗi phiên. Tự chuyển sang bản chữ HTML (nhẹ) khi: khách bật giảm chuyển động, máy không có WebGL, trình duyệt không hỗ trợ import map, máy chỉ có WebGL giả lập bằng CPU (không có GPU), hoặc Three.js tải quá 2,2 giây. Muốn xem bản 3D trên máy không có GPU, mở `/?intro3d=force`.
-- **Font chữ 3D:** `assets/fonts/qnf-3d.typeface.json` chỉ chứa các ký tự `Quỳnh Như Florist` (12KB). Nếu đổi chữ, chạy:
+- **Chữ 3D kiểu bong bóng:** font Baloo 2 ExtraBold (Google Fonts, có đủ dấu tiếng Việt). Mỗi chữ được "bơm phồng" từ trường khoảng cách (SDF) nên mép mềm, góc bo tròn. File `assets/fonts/qnf-3d.typeface.json` chỉ chứa các ký tự `Quỳnh Như Florist` (9KB). Nếu đổi chữ, chạy:
 
 ```bash
-npm run font3d -- duong-dan/CormorantGaramond-Bold.ttf "Chữ mới" assets/fonts/qnf-3d.typeface.json
+npm run font3d -- duong-dan/Baloo2-ExtraBold.ttf "Chữ mới" assets/fonts/qnf-3d.typeface.json
 ```
 
 - **Three.js** nạp từ CDN jsDelivr phiên bản cố định `0.160.0` (khai báo trong `tools/build.mjs`).

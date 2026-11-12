@@ -62,22 +62,35 @@
     c.width = innerWidth * dpr; c.height = innerHeight * dpr;
     doc.body.appendChild(c);
     var ctx = c.getContext('2d'); ctx.scale(dpr, dpr);
-    var colors = ['#E8679A', '#F7C9DA', '#C2437A', '#FFFFFF', '#D9D6DA'];
     var n = lowPower ? Math.round(count / 2) : count, ps = [];
     for (var i = 0; i < n; i++) {
-      var a = Math.random() * Math.PI * 2, sp = 160 + Math.random() * 320;
-      ps.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 180, r: Math.random() * 6, vr: (Math.random() - .5) * 10, s: 5 + Math.random() * 6, c: colors[i % colors.length] });
+      var a = Math.random() * Math.PI * 2, sp = 140 + Math.random() * 260;
+      ps.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 120, r: Math.random() * 6, vr: (Math.random() - .5) * 4, s: 7 + Math.random() * 6, ph: Math.random() * 6.3, k: .6 + Math.random() * .4 });
     }
-    var t0 = performance.now(), last = t0, life = 1400;
+    // Vẽ cánh hoa hồng: giữa nhạt, chân hồng đậm
+    function petal(s, k) {
+      var g = ctx.createRadialGradient(0, s * .55, 0, 0, 0, s * 1.1);
+      g.addColorStop(0, 'rgb(214,52,118)'); g.addColorStop(.35, 'rgb(244,166,196)'); g.addColorStop(1, 'rgb(253,228,238)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.moveTo(0, s * .5);
+      ctx.bezierCurveTo(s * .55, s * .4, s * .55, -s * .3, s * .3, -s * .45);
+      ctx.bezierCurveTo(s * .12, -s * .55, 0, -s * .45, 0, -s * .42);
+      ctx.bezierCurveTo(0, -s * .45, -s * .12, -s * .55, -s * .3, -s * .45);
+      ctx.bezierCurveTo(-s * .55, -s * .3, -s * .55, s * .4, 0, s * .5);
+      ctx.save(); ctx.scale(k, 1); ctx.fill(); ctx.restore();
+    }
+    var t0 = performance.now(), last = t0, life = 2400;
     function frame(now) {
-      var dt = Math.min((now - last) / 1000, 1 / 30), age = now - t0; last = now;
+      var dt = Math.min((now - last) / 1000, .05), age = now - t0; last = now;
       ctx.clearRect(0, 0, innerWidth, innerHeight);
-      ctx.globalAlpha = clamp(1 - (age - life * .55) / (life * .45), 0, 1);
+      ctx.globalAlpha = clamp(1 - (age - life * .65) / (life * .35), 0, 1);
       ps.forEach(function (p) {
-        p.vy += 520 * dt; p.vx *= .985; p.vy *= .985; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt;
-        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
-        ctx.strokeStyle = 'rgba(194,67,122,.35)'; ctx.lineWidth = .8;
-        ctx.beginPath(); ctx.ellipse(0, 0, p.s * .55, p.s, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.restore();
+        var drag = Math.exp(-2.6 * dt);
+        p.vx *= drag; p.vy = Math.min(p.vy * drag + 260 * dt, 90);
+        p.x += (p.vx + Math.sin(now / 320 + p.ph) * 30) * dt; p.y += p.vy * dt; p.r += p.vr * dt;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        petal(p.s, Math.abs(Math.cos(now / 400 + p.ph)) * p.k + .25); ctx.restore();
       });
       if (age < life) requestAnimationFrame(frame); else c.remove();
     }
@@ -109,20 +122,20 @@
 
     function cssFallback() {
       if (!reduced) {
-        var box = $('.intro__petals', intro), cols = ['#E8679A', '#F7C9DA', '#C2437A', '#FFFFFF', '#D9D6DA'];
+        var box = $('.intro__petals', intro);
         var n = lowPower ? 18 : 36;
         for (var i = 0; i < n; i++) {
           var p = doc.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * .3, d = 120 + Math.random() * 220;
-          p.className = 'cpetal';
-          p.style.background = cols[i % cols.length];
+          p.className = 'cpetal cpetal--' + (i % 3);
           p.style.setProperty('--dx', Math.cos(a) * d + 'px');
-          p.style.setProperty('--dy', Math.sin(a) * d + 60 + 'px');
+          p.style.setProperty('--dy', Math.sin(a) * d * .8 + 'px');
+          p.style.setProperty('--sx', (Math.random() * 60 - 30) + 'px');
           p.style.setProperty('--rot', (Math.random() * 540 - 270) + 'deg');
           p.style.animationDelay = (.25 + Math.random() * .15) + 's';
           box.appendChild(p);
         }
       }
-      later(finish, 1500 + 400);
+      later(finish, 1500 + 500);
     }
 
     // Chỉ chạy 3D khi máy có GPU thật; máy dùng WebGL giả lập bằng CPU (rất chậm) sẽ dùng bản chữ HTML
@@ -157,7 +170,7 @@
         }).then(function (c) {
           if (done || fellBack) { c.dispose(); return; }
           ctrl = c; intro.classList.add('is-3d');
-          later(finish, 3100);
+          later(finish, 3400);
         });
       })
       .catch(function (err) {
