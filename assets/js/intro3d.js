@@ -8,7 +8,8 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 // Dòng chữ 3D: "Welcome to" nhỏ phía trên, tên tiệm 2 dòng lớn — cùng font bong bóng
-const LINES = [{ t: 'Welcome to', s: 0.46 }, { t: 'Quỳnh Như', s: 1 }, { t: 'Florist', s: 1 }];
+// small: dòng chữ nhỏ → phồng ít, làm mềm ít, giãn chữ rộng hơn, màu đậm hơn để rõ nét
+const LINES = [{ t: 'Welcome to', s: 0.6, small: true }, { t: 'Quỳnh Như', s: 1 }, { t: 'Florist', s: 1 }];
 const MAX_ROT = THREE.MathUtils.degToRad(15);
 const BG_TOP = '#FFFFFF', BG_BOTTOM = '#FFFFFF'; // nền trắng
 
@@ -88,6 +89,13 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     transparent: !!lowPower,
     opacity: lowPower ? 0.88 : 1,
   }));
+  // Chất liệu cho dòng chữ nhỏ "Welcome to": hồng đậm hơn, ít trong hơn → đọc rõ trên nền trắng
+  const jellyDeep = keep(jelly.clone());
+  jellyDeep.color.set(lowPower ? 0xe8679a : 0xf48ab3);
+  jellyDeep.transmission = lowPower ? 0 : 0.55;
+  jellyDeep.attenuationColor.set(0xe8679a);
+  jellyDeep.attenuationDistance = 0.9;
+  jellyDeep.opacity = 1; jellyDeep.transparent = false;
 
   /* ---- Tạo khối "bơm phồng" như bong bóng từ hình 2D ----
      Vẽ hình lên canvas → tính trường khoảng cách tới mép (SDF) → nâng bề mặt theo cung tròn:
@@ -108,7 +116,7 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     for (let x = 0; x < W; x++) { for (let y = 0; y < H; y++) f[y] = grid[y * W + x]; edt1d(f, H, d, v, z); for (let y = 0; y < H; y++) grid[y * W + x] = d[y]; }
     for (let y = 0; y < H; y++) { for (let x = 0; x < W; x++) f[x] = grid[y * W + x]; edt1d(f, W, d, v, z); for (let x = 0; x < W; x++) grid[y * W + x] = d[x]; }
   }
-  function inflate(shapes, { R = 0.1, grow = 0.03, zk = 1.15, ppu = 220, cell = lowPower ? 3 : 2 } = {}) {
+  function inflate(shapes, { R = 0.1, grow = 0.03, zk = 1.15, ppu = 220, cell = lowPower ? 3 : 2, blur = 0.028 } = {}) {
     const groups = shapes.map((sh) => [sh.getPoints(16), ...sh.holes.map((h) => h.getPoints(16))]);
     const pts = groups.flat();
     let minX = INF, minY = INF, maxX = -INF, maxY = -INF;
@@ -132,7 +140,7 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     const sdf = new Float32Array(W * H); // dương bên trong, đơn vị = đơn vị chữ
     for (let i = 0; i < W * H; i++) sdf[i] = (inG[i] > 0 ? Math.sqrt(inG[i]) - 0.5 : 0.5 - Math.sqrt(outG[i])) / ppu + grow;
     // Làm mờ trường khoảng cách → sống lưng giữa nét được bo tròn, không còn nếp gấp
-    const rad = Math.max(2, Math.round(ppu * 0.028)), tmp = new Float32Array(W * H);
+    const rad = Math.max(1, Math.round(ppu * blur)), tmp = new Float32Array(W * H);
     for (let pass = 0; pass < 3; pass++) {
       for (let y = 0; y < H; y++) { let acc = 0; const o = y * W;
         for (let x = -rad; x <= rad; x++) acc += sdf[o + Math.min(W - 1, Math.max(0, x))];
@@ -189,8 +197,9 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
   const LH = 1.14, TRACK = 0.06;
   const res = fontJSON.resolution;
   const lineWidths = [];
-  const LINE_Y = [LH / 2 + 0.92, LH / 2, -LH / 2].map((y) => y - 0.28);
-  LINES.forEach(({ t: line, s: scale }, li) => {
+  const LINE_Y = [LH / 2 + 1.0, LH / 2, -LH / 2].map((y) => y - 0.3);
+  LINES.forEach(({ t: line, s: scale, small }, li) => {
+    const track = small ? 0.11 : TRACK;
     const chars = [...line];
     let x = 0;
     const items = [];
@@ -199,17 +208,19 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
       const adv = (g ? g.ha / res : 0.3) * scale;
       if (ch !== ' ') {
         const shapes = font.generateShapes(ch, scale);
-        const geo = keep(inflate(shapes, { R: 0.1 * scale, grow: 0.035 * scale, zk: 1.2, ppu: 220 / Math.sqrt(scale) }));
+        const geo = keep(inflate(shapes, small
+          ? { R: 0.045, grow: 0.006, zk: 1, ppu: 420, cell: 2, blur: 0.007 }
+          : { R: 0.1 * scale, grow: 0.035 * scale, zk: 1.2, ppu: 220 / Math.sqrt(scale) }));
         geo.computeBoundingBox();
         const bb = geo.boundingBox, c = new THREE.Vector3();
         bb.getCenter(c);
         geo.translate(-c.x, -c.y, -c.z);
-        const mesh = new THREE.Mesh(geo, jelly);
+        const mesh = new THREE.Mesh(geo, small ? jellyDeep : jelly);
         items.push({ mesh, cx: x + c.x, cy: c.y });
       }
-      x += adv + TRACK * scale;
+      x += adv + track * scale;
     });
-    const width = x - TRACK * scale;
+    const width = x - track * scale;
     lineWidths.push(width);
     const y = LINE_Y[li];
     items.forEach((it) => {
