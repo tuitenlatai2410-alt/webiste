@@ -347,3 +347,17 @@ html.modal-open{overflow:hidden}
   .btn:hover,.sol__card:hover,.philo__card:hover{transform:none}
   .nav__menu{transform:none!important}
 }
+
+/* ---------- Điện thoại / màn cảm ứng: không rê chuột được → thẻ kiểu "ảnh trên, chữ dưới", tên luôn hiện ---------- */
+@media (hover:none){
+  .pcard{display:flex}
+  .pcard__link{flex:1;display:flex;flex-direction:column;aspect-ratio:auto;background:#fff;transform:none!important;box-shadow:0 1px 0 rgba(20,18,20,.05),0 8px 20px -16px rgba(20,18,20,.35)}
+  .pcard__media{position:relative;inset:auto;aspect-ratio:4/5;overflow:hidden}
+  .pcard__link:hover .pcard__media{transform:none}
+  .pcard__info{position:static;transform:none;background:#fff;padding:10px 12px 12px;flex:1}
+  .pcard__name{color:var(--black);font-size:1.05rem}
+  .pcard__size{color:var(--gray-700);font-size:.74rem;margin-top:3px}
+  .pcard__price{color:var(--pink-ink);font-size:.76rem;margin-top:4px}
+  .pcard__link:hover .ph span{opacity:1}
+  .pcard__glare{display:none}
+}

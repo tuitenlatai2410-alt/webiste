@@ -343,24 +343,13 @@
     var loai = { 'hoa-theo-dip': 'occasion', 'tru-hoa-de-ban': 'table' }[new URLSearchParams(location.search).get('loai')];
     if (loai) setFilter(loai);
 
-    // Chạm lần 1 (cảm ứng) hiện thông tin, lần 2 mở popup
-    var lastPointer = 'mouse';
-    grid.addEventListener('pointerdown', function (e) { lastPointer = e.pointerType; }, { passive: true });
+    // Bấm/chạm 1 lần là mở chi tiết (trên điện thoại tên + kích thước đã hiện sẵn trên ô)
     grid.addEventListener('click', function (e) {
       var link = e.target.closest('.pcard__link');
       if (!link) return;
       e.preventDefault();
-      var card = link.closest('.pcard');
-      if (lastPointer === 'touch' && !card.classList.contains('is-active')) {
-        cards.forEach(function (c) { c.classList.remove('is-active'); });
-        card.classList.add('is-active');
-        lastPointer = 'mouse';
-        return;
-      }
-      lastPointer = 'mouse';
-      openModal(card.id, link);
+      openModal(link.closest('.pcard').id, link, true);
     });
-    doc.addEventListener('click', function (e) { if (!e.target.closest('.pcard')) cards.forEach(function (c) { c.classList.remove('is-active'); }); });
 
     // Nghiêng 3D theo chuột (tối đa 8°) + vệt sáng
     if (reduced || !finePointer) return;
@@ -412,7 +401,8 @@
     $$('.pm__thumb', pmThumbs).forEach(function (t, k) { t.setAttribute('aria-current', String(k === i)); });
   }
 
-  function openModal(id, from) {
+  var pmPushed = false; // popup mở bằng cách bấm → có 1 bước trong lịch sử để nút "Quay lại" chỉ đóng popup
+  function openModal(id, from, push) {
     var p = productById(id);
     if (!p || !pm) return;
     pmCurrent = p;
@@ -432,12 +422,18 @@
     var fab = $('#fab'); if (fab) fab.classList.add('is-hidden');
     requestAnimationFrame(function () { requestAnimationFrame(function () { pm.classList.add('is-open'); }); });
     $('.pm__close', pm).focus({ preventScroll: true });
-    if (location.hash !== '#' + id && history.replaceState) history.replaceState(null, '', '#' + id);
+    if (location.hash !== '#' + id && history.pushState) {
+      if (push && !pmPushed) { history.pushState({ qnfModal: id }, '', '#' + id); pmPushed = true; }
+      else history.replaceState(history.state, '', '#' + id);
+    }
     showSlide(0);
   }
 
-  function closeModal() {
+  // fromHistory = true khi đóng do khách bấm nút "Quay lại" của trình duyệt/điện thoại
+  function closeModal(fromHistory) {
     if (!pm || pm.hidden) return;
+    if (pmPushed && fromHistory !== true) { pmPushed = false; history.back(); return; } // popstate sẽ gọi lại closeModal(true)
+    pmPushed = false;
     pm.classList.remove('is-open');
     pmPanel.style.transform = '';
     html.classList.remove('modal-open');
@@ -527,10 +523,11 @@
     // Mở theo hash (#sp-01) để chia sẻ link
     function fromHash() {
       var m = /^#(sp-\d{2})$/.exec(location.hash);
-      if (m && doc.getElementById(m[1])) openModal(m[1]);
-      else if (!pm.hidden) closeModal();
+      if (m && doc.getElementById(m[1])) { if (pm.hidden || !pmCurrent || pmCurrent.id !== m[1]) openModal(m[1]); }
+      else if (!pm.hidden) closeModal(true);
     }
     window.addEventListener('hashchange', fromHash);
+    window.addEventListener('popstate', fromHash);
     fromHash();
   }
 
