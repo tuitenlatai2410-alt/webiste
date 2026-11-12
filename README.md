@@ -4,25 +4,24 @@ Website tĩnh (HTML + CSS + JavaScript thuần, Three.js chỉ cho màn chào m�
 
 ## Cấu trúc
 
+Website có 5 trang riêng, trang nào cũng có thanh menu:
+
+| Trang | Đường dẫn | File nội dung (sửa ở đây) |
+|---|---|---|
+| Trang chủ | `/` | `tools/pages/home.html` |
+| Giới thiệu | `/gioi-thieu/` | `tools/pages/gioi-thieu.html` |
+| Sản phẩm | `/san-pham/` | `tools/pages/san-pham.html` (20 ô lấy từ `products.js`) |
+| Giải pháp + Hỏi đáp | `/giai-phap/` | `tools/pages/giai-phap.html` (câu hỏi đáp nằm trong `tools/build.mjs`) |
+| Liên hệ | `/lien-he/` | `tools/pages/lien-he.html` |
+
+Phần dùng chung: `tools/partials/head.html` (thẻ SEO), `top.html` (màn chào mừng, dải thông báo, menu), `bottom.html` (chân trang, nút nổi). Tiêu đề và mô tả SEO từng trang nằm trong `PAGES` ở `tools/build.mjs`.
+
 ```
-index.html            ← ĐƯỢC TẠO TỰ ĐỘNG, đừng sửa tay (sửa tools/index.template.html)
-404.html, robots.txt, sitemap.xml   ← cũng tạo tự động
-site.webmanifest, _headers, favicon.svg, *.png
-MISSING-INFO.md       ← danh sách thông tin còn thiếu
-assets/
-  css/critical.css    ← CSS màn hình đầu (được nhúng thẳng vào <head>)
-  css/style.css       ← CSS còn lại
-  js/config.js        ← tên miền, SĐT, link MXH, khóa form…
-  js/products.js      ← dữ liệu 20 sản phẩm
-  js/main.js          ← menu, cuộn, nghiêng, popup, form
-  js/intro3d.js       ← màn chào mừng 3D (nạp lười)
-  fonts/              ← Cormorant Garamond + Be Vietnam Pro (latin + vietnamese), qnf-3d.typeface.json
-  img/                ← zalo-qr, og-cover, products/
-tools/
-  index.template.html ← khung trang (nội dung chữ ở đây)
-  build.mjs           ← ghép trang
-  images.mjs          ← tối ưu ảnh sản phẩm
-  make-3d-font.mjs    ← tạo font JSON cho chữ 3D
+index.html, gioi-thieu/, san-pham/, giai-phap/, lien-he/   ← TẠO TỰ ĐỘNG, đừng sửa tay
+404.html, robots.txt, sitemap.xml                           ← cũng tạo tự động
+wrangler.jsonc, .assetsignore                               ← cấu hình Cloudflare
+assets/css, assets/js, assets/fonts, assets/img
+tools/  (build.mjs, images.mjs, make-3d-font.mjs, pages/, partials/)
 ```
 
 ## Cài đặt (1 lần)
@@ -101,7 +100,8 @@ File `_headers` đã cấu hình: cache 1 năm cho `/assets/*` (an toàn vì m�
 
 ## Ghi chú kỹ thuật
 
-- **Màn chào mừng 3D:** hiện 1 lần mỗi phiên. Tự chuyển sang bản chữ HTML (nhẹ) khi: khách bật giảm chuyển động, máy không có WebGL, trình duyệt không hỗ trợ import map, máy chỉ có WebGL giả lập bằng CPU (không có GPU), hoặc Three.js tải quá 2,2 giây. Muốn xem bản 3D trên máy không có GPU, mở `/?intro3d=force`.
+- **Lọc sản phẩm qua link:** `/san-pham/?loai=hoa-theo-dip` hoặc `/san-pham/?loai=tru-hoa-de-ban`; mở thẳng 1 mẫu: `/san-pham/#sp-05`.
+- **Màn chào mừng 3D:** hiện 1 lần mỗi phiên (ở bất kỳ trang nào khách vào đầu tiên). Tự chuyển sang bản chữ HTML (nhẹ) khi: khách bật giảm chuyển động, máy không có WebGL, trình duyệt không hỗ trợ import map, máy chỉ có WebGL giả lập bằng CPU (không có GPU), hoặc Three.js tải quá 2,2 giây. Muốn xem bản 3D trên máy không có GPU, mở `/?intro3d=force`.
 - **Chữ 3D kiểu bong bóng:** font Baloo 2 ExtraBold (Google Fonts, có đủ dấu tiếng Việt). Mỗi chữ được "bơm phồng" từ trường khoảng cách (SDF) nên mép mềm, góc bo tròn. File `assets/fonts/qnf-3d.typeface.json` chỉ chứa các ký tự `Quỳnh Như Florist` (9KB). Nếu đổi chữ, chạy:
 
 ```bash

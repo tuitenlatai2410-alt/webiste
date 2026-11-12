@@ -1,0 +1,20 @@
+<!-- POPUP SẢN PHẨM -->
+<div class="pm" id="pm" role="dialog" aria-modal="true" aria-labelledby="pm-name" hidden>
+  <div class="pm__backdrop" data-close></div>
+  <div class="pm__panel" tabindex="-1">
+    <button type="button" class="pm__close" data-close aria-label="Đóng"><span aria-hidden="true">×</span></button>
+    <div class="pm__stage">
+      <div class="pm__frame" id="pm-frame"></div>
+      <div class="pm__cap">
+        <p class="pm__cat" id="pm-cat"></p>
+        <h2 class="pm__name" id="pm-name">Sản phẩm</h2>
+        <p class="pm__size" id="pm-size"></p>
+        <p class="pm__desc" id="pm-desc"></p>
+        <p class="pm__price">Liên hệ báo giá</p>
+        <a class="btn btn--pink pm__zalo" id="pm-zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo hỏi mẫu này</a>
+      </div>
+    </div>
+    <div class="pm__thumbs" id="pm-thumbs" role="group" aria-label="Chọn ảnh"></div>
+  </div>
+</div>
+

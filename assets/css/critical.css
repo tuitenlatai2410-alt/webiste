@@ -22,7 +22,7 @@
 
 :root{
   --pink-soft:#F7C9DA;--pink:#E8679A;--pink-deep:#C2437A;--black:#141214;--white:#FFFFFF;
-  --gray-100:#F4F2F4;--gray-400:#9A979C;--gray-700:#4A474D;--blush:#FBEFF4;--warm:#ECE8E6;
+  --pink-ink:#A8336A;--gray-100:#F4F2F4;--gray-400:#9A979C;--gray-700:#4A474D;--blush:#FBEFF4;--warm:#ECE8E6;
   --serif:'Cormorant Garamond','QN Serif Fallback','QN Serif Fallback 2',serif;
   --sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);--r:16px;--gut:16px;--nav-h:64px;
@@ -77,9 +77,9 @@ button{cursor:pointer;background:none;border:0;padding:0}
 @media (min-width:1024px){
   .nav__burger{display:none}
   .nav__menu{display:block;position:static}
-  .nav__menu ul{display:flex;gap:6px}
-  .nav__menu ul a{position:relative;display:block;padding:10px 14px;font-weight:500;font-size:.95rem;color:var(--black)}
-  .nav__menu ul a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+  .nav__menu ul{display:flex;gap:2px}
+  .nav__menu ul a{position:relative;display:block;padding:10px 12px;font-weight:500;font-size:.95rem;color:var(--black)}
+  .nav__menu ul a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
   .nav__menu ul a:hover::after,.nav__menu ul a.is-active::after{transform:scaleX(1)}
   .nav__menu-zalo{display:none}
   .nav__zalo{display:inline-flex;margin-left:12px}

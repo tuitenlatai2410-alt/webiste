@@ -20,9 +20,9 @@ html.menu-open{overflow:hidden}
 /* ---------- Chung ---------- */
 .section{position:relative;padding:88px 0}
 @media (min-width:1024px){.section{padding:120px 0}}
-.label{font-weight:600;font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;color:var(--pink-deep);margin-bottom:14px}
+.label{font-weight:600;font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:14px}
 .label--light{color:var(--pink)}
-.label--deep{color:var(--pink-deep)}
+.label--deep{color:var(--pink-ink)}
 .h2{font:600 clamp(2.3rem,7vw,4.2rem)/1.04 var(--serif);color:var(--black);text-transform:uppercase;letter-spacing:.02em}
 .h2 em{font-style:italic;color:var(--pink-deep);text-transform:none}
 .sec-head{max-width:46rem;margin-bottom:40px}
@@ -38,6 +38,34 @@ html.menu-open{overflow:hidden}
 /* Hiện dần khi cuộn tới */
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
+
+/* ---------- Trang con: đường dẫn + khoảng trên ---------- */
+.page-first{padding-top:40px}
+@media (min-width:1024px){.page-first{padding-top:56px}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.85rem;margin-bottom:28px;color:var(--gray-700)}
+.crumbs a{color:var(--pink-ink);font-weight:500;padding:6px 0}
+.crumbs a:hover{text-decoration:underline;text-underline-offset:3px}
+.crumbs [aria-current]{color:var(--black);font-weight:500}
+.contact .crumbs{position:relative}
+
+/* ---------- Trang chủ: 4 ô dẫn sang các trang ---------- */
+.explore{padding-top:56px}
+.explore__grid{display:grid;gap:14px}
+@media (min-width:768px){.explore__grid{grid-template-columns:1fr 1fr;gap:18px}}
+.xcard{position:relative;display:flex;flex-direction:column;gap:10px;min-height:200px;padding:28px 26px 72px;border-radius:20px;background:var(--gray-100);color:var(--gray-700);border:1.5px solid transparent;transition:transform .5s var(--ease),border-color .4s,box-shadow .5s var(--ease)}
+.xcard:hover,.xcard:focus-visible{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 28px 48px -30px rgba(194,67,122,.55)}
+.xcard .label{margin:0}
+.xcard__t{font:600 clamp(1.9rem,5vw,2.6rem)/1.08 var(--serif);color:var(--black);text-transform:uppercase;letter-spacing:.02em}
+.xcard__t em{font-style:italic;color:var(--pink-deep);text-transform:none}
+.xcard__d{font-size:.95rem;max-width:30rem}
+.xcard__go{position:absolute;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1.5px solid currentColor;color:var(--black);transition:background-color .35s,color .35s,border-color .35s}
+.xcard__go svg{width:18px;height:18px;transition:transform .45s var(--ease)}
+.xcard:hover .xcard__go{background:var(--pink-deep);border-color:var(--pink-deep);color:#fff}
+.xcard:hover .xcard__go svg{transform:translateX(4px)}
+.xcard--dark{background:var(--black);color:#d9d6da}
+.xcard--dark .xcard__t{color:#fff}
+.xcard--dark .xcard__go{color:#fff}
+.xcard--pink{background:var(--blush)}
 
 /* ---------- [E] Giới thiệu ---------- */
 .about__grid{display:grid;gap:28px}
@@ -58,7 +86,7 @@ html.menu-open{overflow:hidden}
 .philo__card{position:relative;background:var(--black);color:#d9d6da;border-radius:var(--r);padding:30px 26px 28px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 .philo__card:hover{transform:translateY(-6px);box-shadow:0 24px 44px -24px rgba(194,67,122,.7)}
 .philo__no{display:block;font:700 1rem/1 var(--sans);color:var(--pink);letter-spacing:.15em;margin-bottom:22px}
-.philo__card h4{font:600 1.7rem/1.15 var(--serif);color:#fff;margin-bottom:10px}
+.philo__card h3,.philo__card h4{font:600 1.7rem/1.15 var(--serif);color:#fff;margin-bottom:10px}
 @media (min-width:768px){.philo__list{grid-template-columns:repeat(3,1fr);gap:16px}}
 
 /* ---------- [F] Sản phẩm ---------- */
@@ -149,8 +177,8 @@ html.modal-open{overflow:hidden}
 .sol__icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--pink-deep);margin-bottom:22px}
 .sol__card--dark .sol__icon{background:var(--pink-deep);color:#fff}
 .sol__icon svg{width:34px;height:34px}
-.sol__card h3{font:600 clamp(1.9rem,4.6vw,2.5rem)/1.1 var(--serif);color:var(--black);margin-bottom:12px}
-.sol__card--dark h3{color:#fff}
+.sol__card h2,.sol__card h3{font:600 clamp(1.9rem,4.6vw,2.5rem)/1.1 var(--serif);color:var(--black);margin-bottom:12px}
+.sol__card--dark h2,.sol__card--dark h3{color:#fff}
 .sol__card p{flex:1}
 .sol__ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 
@@ -162,7 +190,7 @@ html.modal-open{overflow:hidden}
 .step::before{content:"";position:absolute;left:22px;right:22px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .2s}
 .step.is-in::before{transform:scaleX(1)}
 .step__no{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--black);color:var(--pink);font-weight:600;font-size:.85rem;margin-bottom:16px}
-.step h4{font:600 1.45rem/1.2 var(--serif);color:var(--black);margin-bottom:6px}
+.step h3,.step h4{font:600 1.45rem/1.2 var(--serif);color:var(--black);margin-bottom:6px}
 .js .steps .step:nth-child(2){transition-delay:.12s}
 .js .steps .step:nth-child(3){transition-delay:.24s}
 .js .steps .step:nth-child(4){transition-delay:.36s}
@@ -224,7 +252,7 @@ html.modal-open{overflow:hidden}
 .lrow__ic{flex:none;width:44px;height:44px;border-radius:12px;background:#fff;color:var(--black);display:grid;place-items:center}
 .lrow__ic svg{width:22px;height:22px}
 .lrow__txt{flex:1;display:grid;min-width:0}
-.lrow__k{font-size:.68rem;font-weight:600;letter-spacing:.22em;color:var(--pink-deep)}
+.lrow__k{font-size:.68rem;font-weight:600;letter-spacing:.22em;color:var(--pink-ink)}
 .lrow__n{font-weight:600;color:var(--black);overflow:hidden;text-overflow:ellipsis}
 .lrow__d{font-size:.85rem}
 .lrow__go{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--black);display:grid;place-items:center;color:var(--black);transition:background-color .35s,border-color .35s,color .35s}

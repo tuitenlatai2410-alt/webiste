@@ -104,6 +104,7 @@
     var intro = $('#intro');
     if (!intro || !html.classList.contains('intro-on')) return;
     var done = false, ctrl = null, timers = [];
+    store('sessionStorage', 'qnf-intro', '1'); // đánh dấu ngay: chuyển trang giữa chừng cũng không chạy lại
     function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
     function finish() {
       if (done) return; done = true;
@@ -158,13 +159,13 @@
     // Nếu Three.js tải quá chậm thì dùng bản chữ HTML để khách không phải chờ
     later(function () { if (!ctrl && !done) { fellBack = true; cssFallback(); } }, 2200);
     var v = html.getAttribute('data-v') || '';
-    import(new URL('assets/js/intro3d.js?v=' + v, doc.baseURI).href)
+    import(new URL('/assets/js/intro3d.js?v=' + v, location.origin).href)
       .then(function (m) {
         if (done || fellBack) return;
         return m.play({
           canvas: $('.intro__canvas', intro),
           hello: $('.intro__hello', intro),
-          fontUrl: new URL('assets/fonts/qnf-3d.typeface.json?v=' + v, doc.baseURI).href,
+          fontUrl: new URL('/assets/fonts/qnf-3d.typeface.json?v=' + v, location.origin).href,
           lowPower: lowPower,
           input: input,
         }).then(function (c) {
@@ -196,21 +197,7 @@
     $$('#nav-menu a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
     doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); burger.focus(); } });
 
-    // Gạch chân mục đang xem
-    var links = $$('.nav__menu ul a');
-    if (!('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var id = en.target.id === 'hoi-dap' ? 'giai-phap' : en.target.id;
-        links.forEach(function (a) {
-          var on = a.getAttribute('href') === '#' + id;
-          a.classList.toggle('is-active', on);
-          if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    ['gioi-thieu', 'san-pham', 'giai-phap', 'hoi-dap', 'lien-he'].forEach(function (id) { var s = doc.getElementById(id); if (s) io.observe(s); });
+    // Mục đang xem được đánh dấu sẵn trong HTML (aria-current="page") khi build từng trang
   }
 
   /* =========================================================
@@ -319,7 +306,7 @@
       desc: '', images: [], video: '',
     };
   }
-  function imgPath(name, w) { return 'assets/img/products/' + name + '-' + w + '.webp'; }
+  function imgPath(name, w) { return '/assets/img/products/' + name + '-' + w + '.webp'; }
   function imgTag(p, name, alt, sizes, lazy) {
     return '<img src="' + imgPath(name, 800) + '" srcset="' + imgPath(name, 400) + ' 400w, ' + imgPath(name, 800) + ' 800w, ' + imgPath(name, 1200) + ' 1200w" sizes="' + sizes + '" width="800" height="1000" alt="' + alt + '"' + (lazy ? ' loading="lazy"' : '') + ' decoding="async">';
   }
@@ -352,7 +339,9 @@
       });
     }
     tabs.forEach(function (t) { t.addEventListener('click', function () { setFilter(t.getAttribute('data-filter')); }); });
-    $$('[data-filter-link]').forEach(function (a) { a.addEventListener('click', function () { setFilter(a.getAttribute('data-filter-link')); }); });
+    // Mở sẵn tab lọc khi đến từ trang Giải pháp: /san-pham/?loai=hoa-theo-dip | tru-hoa-de-ban
+    var loai = { 'hoa-theo-dip': 'occasion', 'tru-hoa-de-ban': 'table' }[new URLSearchParams(location.search).get('loai')];
+    if (loai) setFilter(loai);
 
     // Chạm lần 1 (cảm ứng) hiện thông tin, lần 2 mở popup
     var lastPointer = 'mouse';

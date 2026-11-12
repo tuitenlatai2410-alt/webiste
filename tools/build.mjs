@@ -45,7 +45,7 @@ const FAQ_ITEMS = FAQ.map(([q, a]) =>
 
 /* ---- 20 ô sản phẩm (HTML thật để Google index) ---- */
 const img = (name, alt, eager) =>
-  `<img src="assets/img/products/${name}-800.webp" srcset="assets/img/products/${name}-400.webp 400w, assets/img/products/${name}-800.webp 800w, assets/img/products/${name}-1200.webp 1200w" sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw" width="800" height="1000" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+  `<img src="/assets/img/products/${name}-800.webp" srcset="/assets/img/products/${name}-400.webp 400w, /assets/img/products/${name}-800.webp 800w, /assets/img/products/${name}-1200.webp 1200w" sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw" width="800" height="1000" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
   const media = p.images && p.images.length
     ? img(p.images[0], `${p.name} – ${p.size}`, false)
@@ -54,11 +54,34 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
         <a class="pcard__link" href="#${p.id}">
           <div class="pcard__media">${media}</div>
           <span class="pcard__id" aria-hidden="true">${p.id.toUpperCase().replace('SP-', 'SP ')}</span>
-          <div class="pcard__info"><h3 class="pcard__name">${esc(p.name)}</h3><p class="pcard__size">${esc(p.size)}</p><p class="pcard__price">Liên hệ báo giá</p></div>
+          <div class="pcard__info"><h2 class="pcard__name">${esc(p.name)}</h2><p class="pcard__size">${esc(p.size)}</p><p class="pcard__price">Liên hệ báo giá</p></div>
           <span class="pcard__glare" aria-hidden="true"></span>
         </a>
       </li>`;
 }).join('\n');
+
+/* ---- Các trang ---- */
+const PAGES = [
+  { key: 'home', path: '', name: 'Trang chủ',
+    title: 'Quỳnh Như Florist – Tiệm hoa tươi Thủ Dầu Một, Bình Dương',
+    desc: 'Tiệm hoa tươi tại Thủ Dầu Một – Bình Dương: hoa theo dịp, trụ hoa để bàn decor. Đặt trước 4–5 ngày, mẫu có sẵn nhận trong ngày. Zalo 0857 380 325.' },
+  { key: 'gioi-thieu', path: 'gioi-thieu/', name: 'Giới thiệu',
+    title: 'Giới thiệu – Quỳnh Như Florist, tiệm hoa Thủ Dầu Một',
+    desc: 'Quỳnh Như Florist là tiệm hoa tươi tại khu vực Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh). Trong chưa tới một năm, tiệm đã gửi đi gần 500 bó hoa.' },
+  { key: 'san-pham', path: 'san-pham/', name: 'Sản phẩm',
+    title: 'Sản phẩm – Hoa theo dịp, trụ hoa để bàn | Quỳnh Như Florist',
+    desc: 'Mẫu hoa theo dịp và trụ hoa để bàn decor của Quỳnh Như Florist tại Thủ Dầu Một – Bình Dương. Liên hệ báo giá qua Zalo 0857 380 325.' },
+  { key: 'giai-phap', path: 'giai-phap/', name: 'Giải pháp',
+    title: 'Giải pháp & hỏi đáp – Quỳnh Như Florist',
+    desc: 'Bạn cần hoa cho dịp nào, tiệm có hướng phù hợp cho dịp đó. Quy trình đặt hoa 4 bước và câu hỏi thường gặp tại Quỳnh Như Florist.' },
+  { key: 'lien-he', path: 'lien-he/', name: 'Liên hệ',
+    title: 'Liên hệ đặt hoa – Quỳnh Như Florist, Thủ Dầu Một',
+    desc: 'Liên hệ Quỳnh Như Florist: 324/34, Tổ 3, Khu 4, Phường Phú Lợi, TP. Hồ Chí Minh. Gọi hoặc nhắn Zalo 0857 380 325.' },
+];
+for (const pg of PAGES) {
+  if ([...pg.title].length > 60) console.warn('⚠ Tiêu đề dài hơn 60 ký tự:', pg.title);
+  if ([...pg.desc].length > 160) console.warn('⚠ Mô tả dài hơn 160 ký tự:', pg.desc);
+}
 
 /* ---- JSON-LD ---- */
 const sameAs = [C.TIKTOK_URL, C.FACEBOOK_URL, C.INSTAGRAM_URL];
@@ -82,70 +105,88 @@ const florist = {
   hasMap: MAPS_URL,
 };
 if (!missing(C.EMAIL)) florist.email = C.EMAIL;
-const JSONLD = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    florist,
-    { '@type': 'WebSite', '@id': CANONICAL + '#website', url: CANONICAL, name: C.SHOP_NAME, inLanguage: 'vi', publisher: { '@id': CANONICAL + '#florist' } },
-    {
-      '@type': 'FAQPage', '@id': CANONICAL + '#faq',
-      mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
-    },
-    {
-      '@type': 'ItemList', '@id': CANONICAL + '#san-pham', name: 'Sản phẩm – Quỳnh Như Florist',
-      numberOfItems: PRODUCTS.length,
-      itemListElement: PRODUCTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: CANONICAL + '#' + p.id })),
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Trang chủ', item: CANONICAL }],
-    },
-  ],
-};
+const website = { '@type': 'WebSite', '@id': CANONICAL + '#website', url: CANONICAL, name: C.SHOP_NAME, inLanguage: 'vi', publisher: { '@id': CANONICAL + '#florist' } };
+function jsonld(pg) {
+  const url = CANONICAL + pg.path;
+  const crumbs = [{ '@type': 'ListItem', position: 1, name: 'Trang chủ', item: CANONICAL }];
+  if (pg.path) crumbs.push({ '@type': 'ListItem', position: 2, name: pg.name, item: url });
+  const pageType = { 'gioi-thieu': 'AboutPage', 'lien-he': 'ContactPage' }[pg.key] || 'WebPage';
+  const graph = [
+    florist, website,
+    { '@type': pageType, '@id': url + '#webpage', url, name: pg.title, description: pg.desc, inLanguage: 'vi', isPartOf: { '@id': CANONICAL + '#website' }, about: { '@id': CANONICAL + '#florist' } },
+    { '@type': 'BreadcrumbList', itemListElement: crumbs },
+  ];
+  if (pg.key === 'giai-phap') graph.push({
+    '@type': 'FAQPage', '@id': url + '#faq',
+    mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  });
+  if (pg.key === 'san-pham') graph.push({
+    '@type': 'ItemList', '@id': url + '#danh-sach', name: 'Sản phẩm – Quỳnh Như Florist',
+    numberOfItems: PRODUCTS.length,
+    itemListElement: PRODUCTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: url + '#' + p.id })),
+  });
+  return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+}
 
 /* ---- Ghép trang ---- */
 const critical = read('assets/css/critical.css')
   .replace(/\/\*[\s\S]*?\*\//g, '')
-  .replace(/\.\.\/fonts\//g, 'assets/fonts/')
+  .replace(/\.\.\/fonts\//g, '/assets/fonts/')
   .replace(/\s*\n\s*/g, '')
   .replace(/\s*([{};,>])\s*/g, '$1');
 
 const EMAIL_ROW = missing(C.EMAIL) ? '' : `          <div><dt>EMAIL</dt><dd><a href="mailto:${esc(C.EMAIL)}">${esc(C.EMAIL)}</a></dd></div>`;
+const ver = (p) => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8);
+const v3d = ver('assets/js/intro3d.js') + ver('assets/fonts/qnf-3d.typeface.json').slice(0, 4);
 
-const tokens = {
-  SITE_URL: SITE, CANONICAL,
+const common = {
+  SITE_URL: SITE,
   THREE_URL: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/build/three.module.min.js`,
   THREE_ADDONS: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/examples/jsm/`,
   CRITICAL_CSS: critical,
-  JSONLD: JSON.stringify(JSONLD).replace(/</g, '\\u003c'),
   PRODUCT_CARDS, FAQ_ITEMS, EMAIL_ROW,
   PHONE: C.PHONE, PHONE_DISPLAY: C.PHONE_DISPLAY, ZALO_URL: C.ZALO_URL,
   ADDRESS_FULL: esc(C.ADDRESS_FULL), HOURS: esc(C.HOURS),
   TIKTOK_URL: C.TIKTOK_URL, FACEBOOK_URL: C.FACEBOOK_URL, INSTAGRAM_URL: C.INSTAGRAM_URL,
   MAPS_URL: esc(MAPS_URL),
 };
-let out = read('tools/index.template.html').replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => {
-  if (!(k in tokens)) throw new Error('Thiếu token ' + k);
-  return tokens[k];
-});
-// Gắn ?v=<mã> vào file tĩnh để cache dài hạn mà vẫn cập nhật ngay khi sửa
-const ver = (p) => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8);
-for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js']) {
-  out = out.split(`"${f}"`).join(`"${f}?v=${ver(f)}"`);
+const STYLE_ASYNC = '<link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media=\'all\'">\n<noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>';
+const STYLE_BLOCK = '<link rel="stylesheet" href="/assets/css/style.css">';
+
+for (const pg of PAGES) {
+  const tokens = {
+    ...common,
+    PAGE: pg.key,
+    TITLE: esc(pg.title), DESC: esc(pg.desc), CANONICAL: CANONICAL + pg.path,
+    JSONLD: jsonld(pg),
+    // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
+    STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
+    PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
+  };
+  for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
+  const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + read(`tools/pages/${pg.key}.html`) + read('tools/partials/bottom.html');
+  let out = raw.replace(/\{\{([A-Za-z_-]+)\}\}/g, (m, k) => {
+    if (!(k in tokens)) throw new Error(`Thiếu token ${k} (${pg.key})`);
+    return tokens[k];
+  });
+  // Gắn ?v=<mã> vào file tĩnh để cache dài hạn mà vẫn cập nhật ngay khi sửa
+  for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js']) {
+    out = out.split(`"/${f}"`).join(`"/${f}?v=${ver(f)}"`);
+  }
+  out = out.replace('<html lang="vi" class="no-js">', `<html lang="vi" class="no-js" data-v="${v3d}">`);
+  if (pg.path) fs.mkdirSync(path.join(ROOT, pg.path), { recursive: true });
+  write(pg.path + 'index.html', out);
 }
-const v3d = ver('assets/js/intro3d.js') + ver('assets/fonts/qnf-3d.typeface.json').slice(0, 4);
-out = out.replace('<html lang="vi" class="no-js">', `<html lang="vi" class="no-js" data-v="${v3d}">`);
-write('index.html', out);
 
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${CANONICAL}</loc>
+${PAGES.map((pg) => `  <url>
+    <loc>${CANONICAL + pg.path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+    <priority>${pg.path ? '0.8' : '1.0'}</priority>
+  </url>`).join('\n')}
 </urlset>
 `);
 write('robots.txt', `User-agent: *
