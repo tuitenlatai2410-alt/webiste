@@ -73,7 +73,11 @@ npm run images
 
 > Lưu ý: Turnstile ở đây chạy phía trình duyệt (chặn bot đơn giản). Kèm thêm: trường ẩn honeypot, chặn gửi dưới 3 giây, giới hạn 1 lần/60 giây, chặn lời nhắn có từ 2 link trở lên. Web3Forms cũng tự lọc spam phía máy chủ.
 
-## Deploy lên Cloudflare Pages
+## Deploy lên Cloudflare (đang chạy tại https://webiste.tuitenlatai2410.workers.dev)
+
+Repo đã nối với Cloudflare Workers: mỗi lần push lên nhánh `main`, Cloudflare tự build và cập nhật web (cấu hình trong `wrangler.jsonc`; file nội bộ được loại ra bằng `.assetsignore`).
+
+### Cách cũ: Cloudflare Pages
 
 1. Đẩy thư mục này lên GitHub.
 2. Cloudflare Dashboard → **Workers & Pages** → Create → Pages → Connect to Git → chọn repo.

@@ -4,8 +4,8 @@
    Giá trị bắt đầu bằng "[CHƯA CÓ" nghĩa là chưa có thông tin.
    ========================================================= */
 window.QNF_CONFIG = {
-  // [CHƯA CÓ – tên miền] — thay bằng tên miền thật, ví dụ "https://tenmien.vn"
-  SITE_URL: 'https://example.com',
+  // Tên miền tạm của Cloudflare. Khi có tên miền riêng, thay ở đây, ví dụ "https://tenmien.vn"
+  SITE_URL: 'https://webiste.tuitenlatai2410.workers.dev',
 
   SHOP_NAME: 'Quỳnh Như Florist',
   PHONE: '0857380325',

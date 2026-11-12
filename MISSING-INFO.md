@@ -4,7 +4,7 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 
 | # | Thông tin | Đang để tạm | Sửa ở đâu |
 |---|---|---|---|
-| 1 | **Tên miền** | `https://example.com` (canonical, Open Graph, schema, sitemap, robots đều dùng giá trị này) | `assets/js/config.js` → `SITE_URL` |
+| 1 | **Tên miền riêng** | Đang dùng tên miền tạm `https://webiste.tuitenlatai2410.workers.dev` (canonical, Open Graph, schema, sitemap, robots đều dùng giá trị này) | `assets/js/config.js` → `SITE_URL` |
 | 2 | **Logo** | Chữ "Quỳnh Như *Florist*" font Cormorant + favicon bông hoa SVG tự vẽ | `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, menu trong `tools/index.template.html` |
 | 3 | **Ảnh / video sản phẩm thật, tên, kích thước thật (20 mẫu)** | 20 ô placeholder gradient + "Ảnh sẽ cập nhật"; tên & kích thước là dữ liệu mẫu | `assets/js/products.js` (+ `node tools/images.mjs`) |
 | 4 | **Giờ mở cửa** | `[CHƯA CÓ – giờ mở cửa]` — **đang hiện đúng chữ này trên web** ở khối Liên hệ | `config.js` → `HOURS` |

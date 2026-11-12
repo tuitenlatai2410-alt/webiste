@@ -1,0 +1,14 @@
+# File nội bộ — không đưa lên web công khai
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+node_modules
+tools
+README.md
+MISSING-INFO.md
+package.json
+package-lock.json
+assets/css/critical.css
+assets/img/products/raw
+.wrangler
