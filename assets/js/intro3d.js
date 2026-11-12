@@ -7,9 +7,10 @@
 import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
-const LINES = ['Quỳnh Như', 'Florist'];
+// Dòng chữ 3D: "Welcome to" nhỏ phía trên, tên tiệm 2 dòng lớn — cùng font bong bóng
+const LINES = [{ t: 'Welcome to', s: 0.46 }, { t: 'Quỳnh Như', s: 1 }, { t: 'Florist', s: 1 }];
 const MAX_ROT = THREE.MathUtils.degToRad(15);
-const BG_TOP = '#FDF0F2', BG_BOTTOM = '#F9DFE6';
+const BG_TOP = '#FFFFFF', BG_BOTTOM = '#FFFFFF'; // nền trắng
 
 export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }) {
   const fontJSON = fontData || await fetch(fontUrl).then((r) => {
@@ -69,14 +70,14 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
 
   /* ---- Chất liệu thạch hồng ---- */
   const jelly = keep(new THREE.MeshPhysicalMaterial({
-    color: lowPower ? 0xf27fae : 0xffbcd5,
+    color: lowPower ? 0xf48fb7 : 0xffdce9,
     roughness: 0.03,
     metalness: 0,
-    transmission: lowPower ? 0 : 0.62,
-    thickness: 1.1,
+    transmission: lowPower ? 0 : 0.94,
+    thickness: 1.2,
     ior: 1.5,
-    attenuationColor: new THREE.Color(0xff6fa3),
-    attenuationDistance: 1.3,
+    attenuationColor: new THREE.Color(0xf7a3c4),
+    attenuationDistance: 1.8,
     clearcoat: 1,
     clearcoatRoughness: 0.02,
     iridescence: lowPower ? 0.6 : 1,
@@ -84,6 +85,8 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     iridescenceThicknessRange: [180, 560],
     specularIntensity: 1,
     envMapIntensity: lowPower ? 1.05 : 1.7,
+    transparent: !!lowPower,
+    opacity: lowPower ? 0.88 : 1,
   }));
 
   /* ---- Tạo khối "bơm phồng" như bong bóng từ hình 2D ----
@@ -183,10 +186,11 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
   const root = new THREE.Group();       // xoay theo chuột / nghiêng máy
   scene.add(root);
   const letters = [];
-  const LH = 1.14, TRACK = 0.06, scale = 1;
+  const LH = 1.14, TRACK = 0.06;
   const res = fontJSON.resolution;
   const lineWidths = [];
-  LINES.forEach((line, li) => {
+  const LINE_Y = [LH / 2 + 0.92, LH / 2, -LH / 2].map((y) => y - 0.28);
+  LINES.forEach(({ t: line, s: scale }, li) => {
     const chars = [...line];
     let x = 0;
     const items = [];
@@ -195,7 +199,7 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
       const adv = (g ? g.ha / res : 0.3) * scale;
       if (ch !== ' ') {
         const shapes = font.generateShapes(ch, scale);
-        const geo = keep(inflate(shapes, { R: 0.1, grow: 0.035, zk: 1.2 }));
+        const geo = keep(inflate(shapes, { R: 0.1 * scale, grow: 0.035 * scale, zk: 1.2, ppu: 220 / Math.sqrt(scale) }));
         geo.computeBoundingBox();
         const bb = geo.boundingBox, c = new THREE.Vector3();
         bb.getCenter(c);
@@ -203,11 +207,11 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
         const mesh = new THREE.Mesh(geo, jelly);
         items.push({ mesh, cx: x + c.x, cy: c.y });
       }
-      x += adv + TRACK;
+      x += adv + TRACK * scale;
     });
-    const width = x - TRACK;
+    const width = x - TRACK * scale;
     lineWidths.push(width);
-    const y = ((LINES.length - 1) / 2 - li) * LH;
+    const y = LINE_Y[li];
     items.forEach((it) => {
       const holder = new THREE.Group();
       holder.position.set(it.cx - width / 2, y + it.cy - 0.28, 0);
@@ -217,22 +221,21 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     });
   });
 
-  const w0 = lineWidths[0];
-  const yTop = LH / 2;
+  const w0 = Math.max(lineWidths[1], lineWidths[2]);
   const decos = []; // không dùng icon trang trí — chỉ chữ + cánh hoa
 
   /* ---- Bóng đổ mềm phía sau ---- */
   const shCanvas = document.createElement('canvas'); shCanvas.width = shCanvas.height = 128;
   const sctx = shCanvas.getContext('2d');
   const rg = sctx.createRadialGradient(64, 64, 4, 64, 64, 64);
-  rg.addColorStop(0, 'rgba(214,92,140,0.30)'); rg.addColorStop(0.55, 'rgba(214,92,140,0.12)'); rg.addColorStop(1, 'rgba(214,92,140,0)');
+  rg.addColorStop(0, 'rgba(232,103,154,0.16)'); rg.addColorStop(0.55, 'rgba(232,103,154,0.06)'); rg.addColorStop(1, 'rgba(214,92,140,0)');
   sctx.fillStyle = rg; sctx.fillRect(0, 0, 128, 128);
   const shTex = keep(new THREE.CanvasTexture(shCanvas));
   const shMat = keep(new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false }));
   const shGeo = keep(new THREE.PlaneGeometry(1, 1));
   const shadow = new THREE.Mesh(shGeo, shMat);
-  shadow.scale.set(w0 * 1.25, LH * 2.4, 1);
-  shadow.position.set(0.12, -0.25, -0.6);
+  shadow.scale.set(w0 * 1.25, LH * 2.6, 1);
+  shadow.position.set(0.1, -0.35, -0.6);
   shadow.renderOrder = -1;
   scene.add(shadow);
 
@@ -313,7 +316,7 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
   }
 
   /* ---- Bố cục theo màn hình ---- */
-  const contentW = w0 + 0.15, contentH = LH * 2 + 0.9;
+  const contentW = w0 + 0.15, contentH = LH * 2 + 1.6;
   function layout() {
     const w = canvas.clientWidth || window.innerWidth, h = canvas.clientHeight || window.innerHeight;
     renderer.setSize(w, h, false);
@@ -326,13 +329,6 @@ export async function play({ canvas, hello, fontUrl, fontData, lowPower, input }
     view.hh = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z; view.hw = view.hh * camera.aspect;
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
-    if (hello) { // đặt nhãn "Chào mừng bạn đến với" phía trên chữ
-      const top = new THREE.Vector3(0, yTop + 0.75, 0).project(camera);
-      const y = (1 - (top.y + 1) / 2) * h;
-      hello.style.position = 'absolute';
-      hello.style.left = '50%'; hello.style.transform = 'translateX(-50%)';
-      hello.style.top = Math.max(64, y - 44) + 'px';
-    }
   }
   layout();
   window.addEventListener('resize', layout);
