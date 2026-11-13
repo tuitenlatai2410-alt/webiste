@@ -1,13 +1,6 @@
-<!-- [D] HERO: ảnh hoa tràn góc phải, mờ dần sang trái; chữ đè lên đoạn mờ; tên tiệm góc trái -->
+<!-- [D] HERO: chữ căn giữa ở trên, ảnh ngang rộng bên dưới, dải liên hệ dưới ảnh; chữ FLORIST ẩn phía sau -->
 <section class="hero" aria-labelledby="hero-title">
   <p class="hero__bgword deco" aria-hidden="true" data-depth="0.35" data-text="FLORIST"></p>
-  <p class="hero__vert" aria-hidden="true">THỦ DẦU MỘT · BÌNH DƯƠNG</p>
-  <figure class="hero__photo" data-depth="0.25">
-    <img src="/assets/img/hero/hoa-ly-dinh-da-736.webp"
-         srcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w"
-         sizes="(min-width:1024px) 58vw, 100vw" width="736" height="981"
-         alt="Hoa ly trắng đính đá lấp lánh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
-  </figure>
   <div class="wrap hero__inner">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title"><span class="nw">Tiệm hoa nhỏ tại</span> <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
@@ -17,19 +10,29 @@
         <li><a href="/san-pham/?loai=hoa-theo-dip"><svg aria-hidden="true"><use href="#i-petal"/></svg>Hoa tươi theo dịp</a></li>
         <li><a href="/san-pham/?loai=tru-hoa-de-ban"><svg aria-hidden="true"><use href="#i-petal"/></svg>Trụ hoa để bàn decor</a></li>
       </ul>
-      <ul class="hero__notes">
-        <li>Đặt trước 4–5 ngày</li>
-        <li>Mẫu có sẵn nhận trong ngày</li>
-      </ul>
       <div class="hero__ctas">
         <a class="hero__shop" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
       </div>
-      <a class="hero__card" href="{{ZALO_URL}}" target="_blank" rel="noopener">
-        <span class="hero__phone"><span>Liên hệ báo giá · Zalo</span><b>{{PHONE_DISPLAY}}</b></span>
-      </a>
       <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
     </div>
+    <figure class="hero__banner">
+      <div class="hero__pic" data-depth="0.12">
+        <img src="/assets/img/hero/hoa-ly-ngang-736.webp"
+             srcset="/assets/img/hero/hoa-ly-ngang-480.webp 480w, /assets/img/hero/hoa-ly-ngang-736.webp 736w"
+             sizes="(min-width:1280px) 1176px, calc(100vw - 32px)" width="736" height="460"
+             alt="Hoa ly trắng đính đá lấp lánh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+      </div>
+      <figcaption class="hero__meta">
+        <ul class="hero__notes">
+          <li>Đặt trước 4–5 ngày</li>
+          <li>Mẫu có sẵn nhận trong ngày</li>
+        </ul>
+        <a class="hero__card" href="{{ZALO_URL}}" target="_blank" rel="noopener">
+          <span class="hero__phone"><span>Liên hệ báo giá · Zalo</span><b>{{PHONE_DISPLAY}}</b></span>
+        </a>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
