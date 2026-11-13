@@ -87,30 +87,34 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .nav__zalo{display:inline-flex;margin-left:12px}
 }
 
-/* Hero */
-.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--gray-100) 100%);padding:48px 0 72px}
-.hero__bgword{position:absolute;left:50%;top:50%;font:700 clamp(7rem,30vw,26rem)/.8 var(--serif);letter-spacing:.06em;color:rgba(20,18,20,.045);white-space:nowrap;pointer-events:none;user-select:none;translate:-50% -50%}
-.hero__inner{position:relative;display:grid;gap:40px;align-items:center}
-.eyebrow{font-weight:600;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-deep);margin-bottom:18px}
-.hero__title{font:700 clamp(2.6rem,9.5vw,5.6rem)/1.02 var(--serif);color:var(--black);letter-spacing:-.005em;text-transform:uppercase}
-.hero__title>span{display:block;font-style:italic;font-weight:600;color:var(--pink-deep);text-transform:none;font-size:.82em;margin-top:.12em}
-.hero__sub{margin-top:20px;font-size:clamp(1rem,2.6vw,1.15rem);max-width:34rem}
-.hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.hero__art{position:relative;justify-self:center;width:min(64vw,440px);aspect-ratio:1}
-.bloom{width:100%;height:100%}
-.bloom svg{width:100%;height:100%;filter:drop-shadow(0 30px 40px rgba(194,67,122,.25))}
-.hero__badge{position:absolute;right:-4px;bottom:6%;background:var(--black);color:#fff;border-radius:18px;padding:14px 16px;font-size:.78rem;line-height:1.4;max-width:170px;box-shadow:0 20px 40px -18px rgba(20,18,20,.6)}
-.hero__badge span{display:block;font:700 1.5rem/1.1 var(--serif);color:var(--pink);margin-bottom:4px}
-.hero__decor .petal{position:absolute;fill:var(--pink-soft);opacity:.7;width:28px;height:28px}
-.hero__decor .p1{left:6%;top:14%;fill:var(--pink)}
-.hero__decor .p2{left:46%;top:8%;width:18px;height:18px}
-.hero__decor .p3{right:8%;top:22%;width:22px;height:22px;fill:var(--gray-400);opacity:.35}
-.hero__decor .p4{left:12%;bottom:12%;width:20px;height:20px}
-.hero__decor .p5{right:30%;bottom:8%;fill:var(--pink);opacity:.45}
-.tilt-btn{margin-top:22px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px dashed var(--pink-deep);color:var(--pink-deep);font-size:.85rem;font-weight:600}
+/* Hero: ảnh hoa ly làm nền (trái, mờ dần vào nền), chữ gọn bên phải, chữ ẩn FLORIST phía sau chữ */
+.hero{position:relative;overflow:hidden;background:#F3EFED;isolation:isolate}
+.hero__media{position:relative;height:min(78vw,520px);overflow:hidden}
+.hero__media img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero__bgword{position:absolute;left:50%;bottom:4%;z-index:1;font:700 clamp(5.5rem,26vw,22rem)/.8 var(--serif);letter-spacing:.06em;color:rgba(20,18,20,.05);white-space:nowrap;pointer-events:none;user-select:none;translate:-50% 0}
+.hero__inner{position:relative;z-index:2;margin-top:-56px;padding-bottom:56px}
+.hero__copy{max-width:34rem}
+.eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:14px}
+.hero__title{font:700 clamp(1.9rem,7.4vw,3.4rem)/1.04 var(--serif);color:var(--black);letter-spacing:-.005em;text-transform:uppercase}
+.hero__loc{display:block;font-style:italic;font-weight:600;color:var(--pink-deep);text-transform:none;font-size:.86em;margin-top:.12em}
+.hero__sub{margin-top:16px;font-size:clamp(.98rem,2.4vw,1.08rem);max-width:28rem}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.hero__decor .petal{position:absolute;z-index:1;fill:var(--pink-soft);opacity:.7;width:22px;height:22px}
+.hero__decor .p1{right:8%;top:10%;fill:var(--pink)}
+.hero__decor .p3{right:30%;bottom:16%;width:16px;height:16px;fill:var(--gray-400);opacity:.35}
+.hero__decor .p5{right:4%;bottom:8%;fill:var(--pink);opacity:.45}
+.tilt-btn{margin-top:20px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px dashed var(--pink-ink);color:var(--pink-ink);font-size:.85rem;font-weight:600}
 .tilt-btn[hidden]{display:none}
-@media (min-width:768px){.hero{padding:72px 0 96px}.wrap,.nav__inner{--gut:32px}}
-@media (min-width:1024px){.hero{padding:88px 0 120px;min-height:calc(100svh - 100px);display:flex;align-items:center}.hero__inner{grid-template-columns:1.15fr .85fr;width:100%}}
+@media (min-width:768px){.wrap,.nav__inner{--gut:32px}.hero__media{height:min(70vw,560px)}}
+@media (min-width:1024px){
+  .hero{min-height:calc(100svh - 100px);display:flex;align-items:center}
+  .hero__media{position:absolute;left:0;top:0;bottom:0;width:54%;height:auto}
+  .hero__media img{object-position:50% 40%;-webkit-mask-image:linear-gradient(90deg,#000 58%,transparent 100%);mask-image:linear-gradient(90deg,#000 58%,transparent 100%)}
+  .hero__bgword{left:auto;right:-2%;bottom:auto;top:50%;translate:0 -50%;font-size:clamp(10rem,19vw,20rem)}
+  .hero__inner{margin-top:0;padding-block:72px;display:flex;justify-content:flex-end;width:100%}
+  .hero__copy{width:min(44%,36rem);margin-right:1%}
+  .hero__title{font-size:clamp(2rem,3.2vw,3.4rem)}
+}
 
 /* Màn chào mừng — kiểu chữ thạch hồng (jelly) trên nền hồng phấn */
 .intro{display:none}

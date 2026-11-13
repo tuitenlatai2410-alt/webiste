@@ -1,52 +1,27 @@
-<!-- [D] HERO -->
+<!-- [D] HERO: ảnh hoa làm nền (trái), chữ gọn (phải), chữ ẩn FLORIST phía sau -->
 <section class="hero" aria-labelledby="hero-title">
+  <div class="hero__media">
+    <img src="/assets/img/hero/hoa-ly-dinh-da-736.webp"
+         srcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w"
+         sizes="(min-width:1024px) 52vw, 100vw" width="736" height="981"
+         alt="Hoa ly trắng đính đá lấp lánh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+  </div>
   <p class="hero__bgword deco" aria-hidden="true" data-depth="0.4" data-text="FLORIST"></p>
   <div class="hero__decor" aria-hidden="true">
     <svg class="petal p1" data-depth="1"><use href="#i-petal"/></svg>
-    <svg class="petal p2" data-depth="0.6"><use href="#i-petal"/></svg>
     <svg class="petal p3" data-depth="0.9"><use href="#i-petal"/></svg>
-    <svg class="petal p4" data-depth="0.5"><use href="#i-petal"/></svg>
     <svg class="petal p5" data-depth="0.8"><use href="#i-petal"/></svg>
   </div>
   <div class="wrap hero__inner">
     <div class="hero__copy">
       <p class="eyebrow">✦ Quỳnh Như Florist</p>
-      <h1 id="hero-title" class="hero__title">Tiệm hoa tươi tại <span>Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
+      <h1 id="hero-title" class="hero__title"><span class="nw">Tiệm hoa tươi tại</span> <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
       <p class="hero__sub">Hoa theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm.</p>
       <div class="hero__ctas">
         <a class="btn btn--dark" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
       </div>
       <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
-    </div>
-    <div class="hero__art" aria-hidden="true">
-      <div class="bloom" data-depth="0.7">
-        <svg viewBox="0 0 200 200">
-          <defs>
-            <radialGradient id="gp" cx="50%" cy="85%" r="85%"><stop offset="0" stop-color="#C2437A"/><stop offset=".55" stop-color="#E8679A"/><stop offset="1" stop-color="#F7C9DA"/></radialGradient>
-            <radialGradient id="gw" cx="50%" cy="85%" r="85%"><stop offset="0" stop-color="#F4F2F4"/><stop offset="1" stop-color="#FFFFFF"/></radialGradient>
-            <linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          </defs>
-          <g transform="translate(100 100)">
-            <g class="bloom__outer">
-              <path d="M0-8C-26-30-22-78 0-92 22-78 26-30 0-8z" fill="url(#gw)" stroke="#F7C9DA" transform="rotate(22.5)"/>
-              <path d="M0-8C-26-30-22-78 0-92 22-78 26-30 0-8z" fill="url(#gw)" stroke="#F7C9DA" transform="rotate(112.5)"/>
-              <path d="M0-8C-26-30-22-78 0-92 22-78 26-30 0-8z" fill="url(#gw)" stroke="#F7C9DA" transform="rotate(202.5)"/>
-              <path d="M0-8C-26-30-22-78 0-92 22-78 26-30 0-8z" fill="url(#gw)" stroke="#F7C9DA" transform="rotate(292.5)"/>
-            </g>
-            <g class="bloom__inner">
-              <path d="M0-6C-22-26-18-66 0-80 18-66 22-26 0-6z" fill="url(#gp)"/>
-              <path d="M0-6C-22-26-18-66 0-80 18-66 22-26 0-6z" fill="url(#gp)" transform="rotate(90)"/>
-              <path d="M0-6C-22-26-18-66 0-80 18-66 22-26 0-6z" fill="url(#gp)" transform="rotate(180)"/>
-              <path d="M0-6C-22-26-18-66 0-80 18-66 22-26 0-6z" fill="url(#gp)" transform="rotate(270)"/>
-              <path d="M0-6C-14-24-10-50 0-60 10-50 14-24 0-6z" fill="url(#gs)"/>
-            </g>
-            <circle r="15" fill="#141214"/>
-            <circle r="5" cx="-4" cy="-4" fill="#E8679A"/>
-          </g>
-        </svg>
-      </div>
-      <p class="hero__badge"><span>4–5 ngày</span>thời gian đặt trước cho mẫu theo yêu cầu</p>
     </div>
   </div>
 </section>
