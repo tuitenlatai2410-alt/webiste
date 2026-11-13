@@ -119,7 +119,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 
 /* Hero: tên tiệm nhỏ mép trái + QUỲNH NHƯ FLORIST chữ to kiểu ZARA mép phải; ảnh ngang; nhãn hoa trái – nút phải */
 .hero{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#fff 0%,var(--gray-100) 100%)}
-.hero__bgword{position:absolute;left:50%;bottom:-.08em;z-index:0;translate:-50% 0;font:700 clamp(6rem,30vw,22rem)/.78 var(--serif);letter-spacing:.02em;color:rgba(194,67,122,.06);white-space:nowrap;pointer-events:none;user-select:none}
+.hero__bgword{position:absolute;left:50%;top:clamp(70px,16vw,150px);z-index:0;translate:-50% 0;font:700 clamp(6rem,30vw,22rem)/.78 var(--serif);letter-spacing:.02em;color:rgba(194,67,122,.06);white-space:nowrap;pointer-events:none;user-select:none}
 .hero__inner{position:relative;z-index:1;padding-block:22px 30px}
 .eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:12px}
 .hero__head{display:flex;flex-direction:column-reverse;gap:14px}
@@ -150,7 +150,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .hero__brand{font-size:clamp(3.6rem,9.5vw,9.2rem);text-align:right}
   .hero__title{padding-bottom:.6em}
   .hero__pic{aspect-ratio:21/9}
-  .hero__bar{flex-direction:row;justify-content:space-between;align-items:center}
+  .hero__bar{flex-direction:row;justify-content:flex-end;align-items:center}
 }
 @media (min-width:1024px){
   .hero__inner{padding-block:34px 40px}
