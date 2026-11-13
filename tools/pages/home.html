@@ -1,43 +1,38 @@
-<!-- [D] HERO kiểu tạp chí: chữ FLORIST rất lớn phía sau, khung ảnh hoa (không cắt ảnh), chữ + danh sách bên trái, dải danh mục ở cuối -->
+<!-- [D] HERO: chữ FLORIST rất lớn phía sau, ảnh hoa không khung (hiện trọn), chữ bên trái, khối liên hệ gọn -->
 <section class="hero" aria-labelledby="hero-title">
   <p class="hero__bgword deco" aria-hidden="true" data-depth="0.35" data-text="FLORIST"></p>
   <p class="hero__vert" aria-hidden="true">QUỲNH NHƯ FLORIST · THỦ DẦU MỘT</p>
   <div class="wrap hero__inner">
     <div class="hero__copy">
       <p class="eyebrow">✦ Quỳnh Như Florist</p>
-      <h1 id="hero-title" class="hero__title"><span class="nw">Tiệm hoa tươi tại</span> <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
-      <p class="hero__sub">Hoa theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm.</p>
-      <ul class="hero__list">
-        <li>Hoa theo dịp</li>
-        <li>Trụ hoa để bàn decor</li>
+      <h1 id="hero-title" class="hero__title"><span class="nw">Tiệm hoa nhỏ tại</span> <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
+      <p class="hero__sub">Cung cấp hoa sáp, hoa tươi theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm.</p>
+      <ul class="hero__tags">
+        <li><a href="/lien-he/"><svg aria-hidden="true"><use href="#i-petal"/></svg>Hoa sáp</a></li>
+        <li><a href="/san-pham/?loai=hoa-theo-dip"><svg aria-hidden="true"><use href="#i-petal"/></svg>Hoa tươi theo dịp</a></li>
+        <li><a href="/san-pham/?loai=tru-hoa-de-ban"><svg aria-hidden="true"><use href="#i-petal"/></svg>Trụ hoa để bàn decor</a></li>
+      </ul>
+      <ul class="hero__notes">
         <li>Đặt trước 4–5 ngày</li>
         <li>Mẫu có sẵn nhận trong ngày</li>
-        <li>Thủ Dầu Một – Bình Dương</li>
       </ul>
       <div class="hero__ctas">
         <a class="hero__shop" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
       </div>
+      <a class="hero__card" href="{{ZALO_URL}}" target="_blank" rel="noopener">
+        <span class="hero__brand">Quỳnh Như Florist</span>
+        <span class="hero__phone"><span>Liên hệ báo giá · Zalo</span><b>{{PHONE_DISPLAY}}</b></span>
+      </a>
       <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
     </div>
-    <figure class="hero__frame" data-depth="0.25">
+    <figure class="hero__photo" data-depth="0.25">
       <img src="/assets/img/hero/hoa-ly-dinh-da-736.webp"
            srcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w"
-           sizes="(min-width:1024px) 34vw, 78vw" width="736" height="981"
+           sizes="(min-width:1024px) 36vw, 54vw" width="736" height="981"
            alt="Hoa ly trắng đính đá lấp lánh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
     </figure>
   </div>
-  <nav class="hero__strip" aria-label="Danh mục">
-    <div class="wrap hero__strip-in">
-      <ul class="hero__cats">
-        <li><a href="/san-pham/?loai=hoa-theo-dip">Hoa theo dịp</a></li>
-        <li><a href="/san-pham/?loai=tru-hoa-de-ban">Trụ hoa để bàn decor</a></li>
-        <li><a href="/giai-phap/">Giải pháp</a></li>
-        <li><a href="/lien-he/">Liên hệ</a></li>
-      </ul>
-      <a class="hero__quote" href="{{ZALO_URL}}" target="_blank" rel="noopener"><span>Liên hệ báo giá</span>Zalo {{PHONE_DISPLAY}}</a>
-    </div>
-  </nav>
 </section>
 
 

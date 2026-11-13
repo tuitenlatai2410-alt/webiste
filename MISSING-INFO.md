@@ -32,3 +32,6 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 | P6 | Bật xác thực 2 lớp (2FA) cho Gmail, GitHub, Cloudflare | Mất 1 tài khoản là mất quyền sửa/giữ web | Cao |
 
 > **Form đặt hoa đang tạm ẩn.** Khách liên hệ qua Zalo / gọi điện / mạng xã hội. Khi xong P1–P3 và có khóa Web3Forms: đặt `ORDER_FORM_ENABLED: true` trong `assets/js/config.js` → `node tools/build.mjs` → push.
+
+## Hoa sáp
+- [CHƯA CÓ – ảnh mẫu, tên mẫu hoa sáp]: trang chủ và menu đã ghi "Hoa sáp" nhưng chưa có sản phẩm hoa sáp nào. Hiện link "Hoa sáp" dẫn về trang Liên hệ. Gửi ảnh + tên mẫu để thêm vào trang Sản phẩm.

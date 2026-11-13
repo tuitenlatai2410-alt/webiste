@@ -198,6 +198,29 @@
     doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); burger.focus(); } });
 
     // Mục đang xem được đánh dấu sẵn trong HTML (aria-current="page") khi build từng trang
+
+    // Menu thả xuống kiểu Nike (máy tính): rê chuột / focus vào menu → hạ bảng nhiều cột
+    var mega = $('#mega'), list = $('.nav__list', nav);
+    if (!mega || !list) return;
+    var desk = window.matchMedia('(min-width:1024px)'), cols = $$('.mega__col', mega), t;
+    var dim = doc.createElement('div'); dim.className = 'mega-dim'; dim.setAttribute('aria-hidden', 'true'); doc.body.appendChild(dim);
+    function syncCols() { cols.forEach(function (d) { d.open = desk.matches; d.querySelector('summary').tabIndex = desk.matches ? -1 : 0; }); }
+    syncCols();
+    if (desk.addEventListener) desk.addEventListener('change', function () { syncCols(); showMega(false); });
+    function showMega(on) {
+      clearTimeout(t);
+      if (on && !desk.matches) return;
+      nav.classList.toggle('is-mega', on);
+      html.classList.toggle('mega-on', on);
+    }
+    list.addEventListener('mouseenter', function () { showMega(true); });
+    mega.addEventListener('mouseenter', function () { clearTimeout(t); });
+    nav.addEventListener('mouseleave', function () { t = setTimeout(function () { showMega(false); }, 160); });
+    dim.addEventListener('mouseenter', function () { showMega(false); });
+    nav.addEventListener('focusin', function (e) { if (list.contains(e.target) || mega.contains(e.target)) showMega(true); else showMega(false); });
+    nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) showMega(false); });
+    $$('summary', mega).forEach(function (sm) { sm.addEventListener('click', function (e) { if (desk.matches) e.preventDefault(); }); });
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-mega')) showMega(false); });
   }
 
   /* =========================================================

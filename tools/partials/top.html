@@ -34,15 +34,56 @@
 <!-- [C] MENU -->
 <header class="nav" id="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="/" aria-label="Quỳnh Như Florist – Trang chủ">Quỳnh Như <em>Florist</em></a>
+    <a class="nav__logo" href="/" aria-label="Quỳnh Như Florist – Trang chủ"><span class="nav__logo-name" aria-hidden="true">Quỳnh Như</span><span class="nav__logo-sub" aria-hidden="true">Florist</span></a>
     <nav class="nav__menu" id="nav-menu" aria-label="Menu chính">
-      <ul>
+      <ul class="nav__list">
         <li><a href="/" {{NAV_home}}>Trang chủ</a></li>
         <li><a href="/gioi-thieu/" {{NAV_gioi-thieu}}>Giới thiệu</a></li>
         <li><a href="/san-pham/" {{NAV_san-pham}}>Sản phẩm</a></li>
         <li><a href="/giai-phap/" {{NAV_giai-phap}}>Giải pháp</a></li>
         <li><a href="/lien-he/" {{NAV_lien-he}}>Liên hệ</a></li>
       </ul>
+      <div class="mega" id="mega">
+        <div class="mega__in">
+          <details class="mega__col"><summary>Sản phẩm</summary>
+            <ul>
+              <li><a href="/san-pham/">Tất cả mẫu</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Hoa tươi theo dịp</a></li>
+              <li><a href="/san-pham/?loai=tru-hoa-de-ban">Trụ hoa để bàn decor</a></li>
+              <li><a href="/lien-he/">Hoa sáp</a></li>
+            </ul>
+          </details>
+          <details class="mega__col"><summary>Hoa theo dịp</summary>
+            <ul>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Sinh nhật</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Tốt nghiệp</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Kỷ niệm</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Chúc mừng – Khai trương</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">Lời cảm ơn</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">8/3</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">20/10</a></li>
+              <li><a href="/san-pham/?loai=hoa-theo-dip">20/11</a></li>
+            </ul>
+          </details>
+          <details class="mega__col"><summary>Giải pháp</summary>
+            <ul>
+              <li><a href="/giai-phap/#sol-dip">Hoa theo dịp</a></li>
+              <li><a href="/giai-phap/#sol-tru">Trụ hoa để bàn decor</a></li>
+              <li><a href="/giai-phap/#quy-trinh">Quy trình 4 bước</a></li>
+              <li><a href="/giai-phap/#hoi-dap">Câu hỏi thường gặp</a></li>
+            </ul>
+          </details>
+          <details class="mega__col"><summary>Về tiệm &amp; Liên hệ</summary>
+            <ul>
+              <li><a href="/gioi-thieu/">Giới thiệu</a></li>
+              <li><a href="/gioi-thieu/#triet-ly">Triết lý của chúng tôi</a></li>
+              <li><a href="{{ZALO_URL}}" target="_blank" rel="noopener">Nhắn Zalo {{PHONE_DISPLAY}}</a></li>
+              <li><a href="tel:{{PHONE}}">Gọi điện</a></li>
+              <li><a href="/lien-he/">Địa chỉ tiệm</a></li>
+            </ul>
+          </details>
+        </div>
+      </div>
       <a class="btn btn--pink nav__menu-zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener">Nhắn Zalo {{PHONE_DISPLAY}}</a>
     </nav>
     <a class="btn btn--pink btn--sm nav__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo</a>

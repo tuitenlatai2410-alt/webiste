@@ -90,8 +90,8 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
 /* ---- Các trang ---- */
 const PAGES = [
   { key: 'home', path: '', name: 'Trang chủ',
-    title: 'Quỳnh Như Florist – Tiệm hoa tươi Thủ Dầu Một, Bình Dương',
-    desc: 'Tiệm hoa tươi tại Thủ Dầu Một – Bình Dương: hoa theo dịp, trụ hoa để bàn decor. Đặt trước 4–5 ngày, mẫu có sẵn nhận trong ngày. Zalo 0857 380 325.' },
+    title: 'Quỳnh Như Florist – Hoa sáp, hoa tươi Thủ Dầu Một',
+    desc: 'Tiệm hoa nhỏ tại Thủ Dầu Một – Bình Dương: hoa sáp, hoa tươi theo dịp, trụ hoa để bàn decor. Đặt trước 4–5 ngày, mẫu có sẵn nhận trong ngày. Zalo 0857 380 325.' },
   { key: 'gioi-thieu', path: 'gioi-thieu/', name: 'Giới thiệu',
     title: 'Giới thiệu – Quỳnh Như Florist, tiệm hoa Thủ Dầu Một',
     desc: 'Quỳnh Như Florist là tiệm hoa tươi tại khu vực Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh). Trong chưa tới một năm, tiệm đã gửi đi gần 500 bó hoa.' },
@@ -192,7 +192,7 @@ for (const pg of PAGES) {
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" href="/assets/img/hero/hoa-ly-dinh-da-736.webp" imagesrcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w" imagesizes="(min-width:1024px) 34vw, 78vw" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" href="/assets/img/hero/hoa-ly-dinh-da-736.webp" imagesrcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w" imagesizes="(min-width:1024px) 36vw, 54vw" fetchpriority="high">\n' : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
