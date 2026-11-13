@@ -199,28 +199,44 @@
 
     // Mục đang xem được đánh dấu sẵn trong HTML (aria-current="page") khi build từng trang
 
-    // Menu thả xuống kiểu Nike (máy tính): rê chuột / focus vào menu → hạ bảng nhiều cột
+    // Menu thả xuống kiểu Nike (máy tính): rê chuột / focus vào MỘT mục → chỉ hạ phần của mục đó
     var mega = $('#mega'), list = $('.nav__list', nav);
     if (!mega || !list) return;
-    var desk = window.matchMedia('(min-width:1024px)'), cols = $$('.mega__col', mega), t;
+    var desk = window.matchMedia('(min-width:1024px)'), panels = $$('.mega__panel', mega), inner = $('.mega__in', mega), t;
     var dim = doc.createElement('div'); dim.className = 'mega-dim'; dim.setAttribute('aria-hidden', 'true'); doc.body.appendChild(dim);
-    function syncCols() { cols.forEach(function (d) { d.open = desk.matches; d.querySelector('summary').tabIndex = desk.matches ? -1 : 0; }); }
-    syncCols();
-    if (desk.addEventListener) desk.addEventListener('change', function () { syncCols(); showMega(false); });
-    function showMega(on) {
+    function syncPanels() { panels.forEach(function (d) { d.open = desk.matches; d.querySelector('summary').tabIndex = desk.matches ? -1 : 0; }); }
+    syncPanels();
+    function hide() {
       clearTimeout(t);
-      if (on && !desk.matches) return;
-      nav.classList.toggle('is-mega', on);
-      html.classList.toggle('mega-on', on);
+      nav.classList.remove('is-mega'); html.classList.remove('mega-on');
+      panels.forEach(function (d) { d.classList.remove('is-on'); });
     }
-    list.addEventListener('mouseenter', function () { showMega(true); });
+    function show(li) {
+      clearTimeout(t);
+      var key = li && li.getAttribute('data-mega'), pnl = key && $('.mega__panel[data-panel="' + key + '"]', mega);
+      if (!desk.matches || !pnl) { hide(); return; }
+      panels.forEach(function (d) { d.classList.toggle('is-on', d === pnl); });
+      // canh phần sổ xuống thẳng dưới mục menu, không tràn mép phải
+      pnl.style.setProperty('--mx', '0px');
+      var box = inner.getBoundingClientRect(), pad = parseFloat(getComputedStyle(inner).paddingLeft) || 0;
+      var room = box.width - pad * 2 - pnl.offsetWidth;
+      var x = li.getBoundingClientRect().left - box.left - pad + 12;
+      pnl.style.setProperty('--mx', Math.max(0, Math.min(x, room)) + 'px');
+      nav.classList.add('is-mega'); html.classList.add('mega-on');
+    }
+    if (desk.addEventListener) desk.addEventListener('change', function () { syncPanels(); hide(); });
+    $$('li', list).forEach(function (li) { li.addEventListener('mouseenter', function () { show(li); }); });
     mega.addEventListener('mouseenter', function () { clearTimeout(t); });
-    nav.addEventListener('mouseleave', function () { t = setTimeout(function () { showMega(false); }, 160); });
-    dim.addEventListener('mouseenter', function () { showMega(false); });
-    nav.addEventListener('focusin', function (e) { if (list.contains(e.target) || mega.contains(e.target)) showMega(true); else showMega(false); });
-    nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) showMega(false); });
+    nav.addEventListener('mouseleave', function () { t = setTimeout(hide, 160); });
+    dim.addEventListener('mouseenter', hide);
+    nav.addEventListener('focusin', function (e) {
+      if (mega.contains(e.target)) { clearTimeout(t); return; }
+      var li = e.target.closest && e.target.closest('.nav__list > li');
+      if (li) show(li); else hide();
+    });
+    nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) hide(); });
     $$('summary', mega).forEach(function (sm) { sm.addEventListener('click', function (e) { if (desk.matches) e.preventDefault(); }); });
-    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-mega')) showMega(false); });
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-mega')) hide(); });
   }
 
   /* =========================================================
@@ -334,6 +350,74 @@
     return '<img src="' + imgPath(name, 800) + '" srcset="' + imgPath(name, 400) + ' 400w, ' + imgPath(name, 800) + ' 800w, ' + imgPath(name, 1200) + ' 1200w" sizes="' + sizes + '" width="800" height="1000" alt="' + alt + '"' + (lazy ? ' loading="lazy"' : '') + ' decoding="async">';
   }
 
+  // Bỏ dấu tiếng Việt để tìm "sinh nhat" vẫn ra "Sinh nhật"
+  function fold(s) { return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/\s+/g, ' '); }
+
+  /* =========================================================
+     Ô TÌM KIẾM — gợi ý nhanh từ danh sách mẫu + các mục của tiệm
+     ========================================================= */
+  function initSearch() {
+    var forms = $$('.nav__search');
+    if (!forms.length) return;
+    var dip = '/san-pham/?loai=hoa-theo-dip';
+    var idx = [
+      ['Hoa sáp', '/lien-he/', 'Hoa sáp'], ['Hoa tươi theo dịp', dip, 'Danh mục'], ['Trụ hoa để bàn decor', '/san-pham/?loai=tru-hoa-de-ban', 'Danh mục'],
+      ['Sinh nhật', dip, 'Dịp'], ['Tốt nghiệp', dip, 'Dịp'], ['Kỷ niệm', dip, 'Dịp'], ['Chúc mừng – Khai trương', dip, 'Dịp'], ['Lời cảm ơn', dip, 'Dịp'],
+      ['8/3 – Quốc tế Phụ nữ', dip, 'Dịp'], ['20/10 – Phụ nữ Việt Nam', dip, 'Dịp'], ['20/11 – Nhà giáo Việt Nam', dip, 'Dịp'],
+      ['Quy trình 4 bước', '/giai-phap/#quy-trinh', 'Giải pháp'], ['Câu hỏi thường gặp', '/giai-phap/#hoi-dap', 'Giải pháp'],
+      ['Giới thiệu', '/gioi-thieu/', 'Trang'], ['Liên hệ – địa chỉ tiệm', '/lien-he/', 'Trang']
+    ];
+    PRODUCTS.forEach(function (p) { idx.push([p.name, '/san-pham/#' + p.id, p.category === 'table' ? 'Trụ để bàn' : 'Theo dịp']); });
+    idx.forEach(function (r) { r.push(fold(r[0])); });
+
+    forms.forEach(function (form) {
+      var input = $('input', form), list = doc.createElement('div'), sel = -1;
+      list.className = 'srch__list'; list.hidden = true;
+      form.appendChild(list);
+      function links() { return $$('a', list); }
+      function render() {
+        var v = fold(input.value.trim()); sel = -1;
+        list.textContent = '';
+        if (!v) { list.hidden = true; return; }
+        var words = v.split(' '), hits = idx.filter(function (r) { return words.every(function (w) { return r[3].indexOf(w) !== -1; }); }).slice(0, 7);
+        if (!hits.length) {
+          var e = doc.createElement('p'); e.className = 'srch__empty'; e.textContent = 'Chưa có mẫu khớp — bấm Enter để xem tất cả mẫu';
+          list.appendChild(e);
+        }
+        hits.forEach(function (r) {
+          var a = doc.createElement('a'), t = doc.createElement('span'), s = doc.createElement('small');
+          a.href = r[1]; t.textContent = r[0]; s.textContent = r[2];
+          a.appendChild(t); a.appendChild(s); list.appendChild(a);
+        });
+        list.hidden = false;
+      }
+      input.addEventListener('input', render);
+      input.addEventListener('focus', render);
+      input.addEventListener('keydown', function (e) {
+        var ls = links();
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          if (!ls.length) return;
+          e.preventDefault();
+          sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + ls.length) % ls.length;
+          ls.forEach(function (a, i) { a.classList.toggle('is-sel', i === sel); });
+        } else if (e.key === 'Enter' && sel >= 0 && ls[sel]) {
+          e.preventDefault(); location.href = ls[sel].href;
+        } else if (e.key === 'Escape') { list.hidden = true; }
+      });
+      form.addEventListener('focusout', function (e) { if (!form.contains(e.relatedTarget)) list.hidden = true; });
+      form.addEventListener('submit', function (e) { if (!input.value.trim()) e.preventDefault(); });
+      var q = new URLSearchParams(location.search).get('q');
+      if (q) input.value = q;
+    });
+
+    // Điện thoại: nút kính lúp → mở menu và đặt con trỏ vào ô tìm
+    var btn = $('.nav__search-btn'), burger = $('.nav__burger'), mi = $('.nav__search--menu input');
+    if (btn && burger && mi) btn.addEventListener('click', function () {
+      if (!$('#nav').classList.contains('is-open')) burger.click();
+      setTimeout(function () { mi.focus(); }, 60);
+    });
+  }
+
   function initProducts() {
     var grid = $('#product-grid');
     if (!grid) return;
@@ -365,6 +449,23 @@
     // Mở sẵn tab lọc khi đến từ trang Giải pháp: /san-pham/?loai=hoa-theo-dip | tru-hoa-de-ban
     var loai = { 'hoa-theo-dip': 'occasion', 'tru-hoa-de-ban': 'table' }[new URLSearchParams(location.search).get('loai')];
     if (loai) setFilter(loai);
+
+    // Tìm kiếm từ ô "Tìm kiếm" trên menu: /san-pham/?q=...
+    var q = (new URLSearchParams(location.search).get('q') || '').trim(), note = $('#srch-note');
+    if (q && note) {
+      var nq = fold(q), n = 0;
+      setFilter('all');
+      cards.forEach(function (c) {
+        var hit = fold(c.textContent).indexOf(nq) !== -1;
+        c.classList.toggle('is-hidden', !hit);
+        if (hit) n++;
+      });
+      note.textContent = '';
+      note.appendChild(doc.createTextNode(n ? 'Kết quả cho “' + q + '”: ' + n + ' mẫu · ' : 'Chưa có mẫu khớp “' + q + '” — nhắn Zalo để tiệm tư vấn · '));
+      var all = doc.createElement('a'); all.href = '/san-pham/'; all.textContent = 'Xem tất cả mẫu';
+      note.appendChild(all); note.hidden = false;
+      tabs.forEach(function (t) { t.addEventListener('click', function () { note.hidden = true; }); });
+    }
 
     // Bấm/chạm 1 lần là mở chi tiết (trên điện thoại tên + kích thước đã hiện sẵn trên ô)
     grid.addEventListener('click', function (e) {
@@ -686,6 +787,7 @@
   /* ---------- Khởi động ---------- */
   initIntro();
   initNav();
+  initSearch();
   initReveal();
   initProducts();
   initModal();
