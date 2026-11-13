@@ -29,6 +29,9 @@ const CAT = { occasion: 'Hoa theo dịp', table: 'Trụ hoa để bàn decor' };
 
 if (PRODUCTS.length !== 20) console.warn('⚠ Số sản phẩm hiện là', PRODUCTS.length, '(yêu cầu 20)');
 
+// Form đặt hoa đang bật hay tạm ẩn (config.js → ORDER_FORM_ENABLED)
+const FORM_ON = C.ORDER_FORM_ENABLED === true;
+
 /* ---- FAQ (giữ nguyên nội dung mục 5.5) ---- */
 const FAQ = [
   ['Tôi cần đặt hoa trước bao lâu?', 'Với mẫu thiết kế theo yêu cầu, bạn vui lòng đặt trước 4–5 ngày để tiệm chuẩn bị hoa và vật liệu. Với mẫu có sẵn tại tiệm, bạn có thể nhận ngay trong ngày.'],
@@ -37,7 +40,9 @@ const FAQ = [
   ['Tôi chưa biết chọn hoa gì cho dịp của mình?', 'Bạn chỉ cần cho tiệm biết dịp, người nhận và ngân sách — tiệm sẽ gợi ý vài mẫu phù hợp để bạn chọn.'],
   ['Nếu mẫu tôi chọn không hợp với dịp thì sao?', 'Tiệm sẽ góp ý thẳng thắn và có thể từ chối làm mẫu chưa phù hợp, sau đó đề xuất lựa chọn khác hợp với dịp của bạn hơn.'],
   ['Tiệm ở đâu?', `${C.ADDRESS_FULL} (khu vực Thủ Dầu Một – Bình Dương cũ).`],
-  ['Tôi liên hệ tiệm bằng cách nào?', `Gọi hoặc nhắn Zalo ${C.PHONE_DISPLAY}, gửi form trên website, hoặc nhắn qua TikTok, Facebook, Instagram của tiệm.`],
+  ['Tôi liên hệ tiệm bằng cách nào?', FORM_ON
+    ? `Gọi hoặc nhắn Zalo ${C.PHONE_DISPLAY}, gửi form trên website, hoặc nhắn qua TikTok, Facebook, Instagram của tiệm.`
+    : `Gọi hoặc nhắn Zalo ${C.PHONE_DISPLAY}, hoặc nhắn qua TikTok, Facebook, Instagram của tiệm.`],
 ];
 const FAQ_ITEMS = FAQ.map(([q, a]) =>
   `      <details class="qa reveal"><summary><h3>${esc(q)}</h3><span class="qa__ic" aria-hidden="true"></span></summary><div class="qa__a"><p>${esc(a)}</p></div></details>`
@@ -149,6 +154,8 @@ const common = {
   ADDRESS_FULL: esc(C.ADDRESS_FULL), HOURS: esc(C.HOURS),
   TIKTOK_URL: C.TIKTOK_URL, FACEBOOK_URL: C.FACEBOOK_URL, INSTAGRAM_URL: C.INSTAGRAM_URL,
   MAPS_URL: esc(MAPS_URL),
+  ORDER_FORM: FORM_ON ? read('tools/partials/order-form.html') : '',
+  STEP_ONE_CHANNEL: FORM_ON ? 'qua Zalo hoặc form' : 'qua Zalo',
 };
 const STYLE_ASYNC = '<link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media=\'all\'">\n<noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>';
 const STYLE_BLOCK = '<link rel="stylesheet" href="/assets/css/style.css">';
@@ -165,10 +172,15 @@ for (const pg of PAGES) {
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
   const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + read(`tools/pages/${pg.key}.html`) + read('tools/partials/bottom.html');
-  let out = raw.replace(/\{\{([A-Za-z_-]+)\}\}/g, (m, k) => {
-    if (!(k in tokens)) throw new Error(`Thiếu token ${k} (${pg.key})`);
-    return tokens[k];
-  });
+  // Thay nhiều lượt: phần chèn vào (popup sản phẩm, form) cũng chứa token như {{ZALO_URL}}
+  let out = raw;
+  for (let pass = 0; pass < 3 && /\{\{[A-Za-z_-]+\}\}/.test(out); pass++) {
+    out = out.replace(/\{\{([A-Za-z_-]+)\}\}/g, (m, k) => {
+      if (!(k in tokens)) throw new Error(`Thiếu token ${k} (${pg.key})`);
+      return tokens[k];
+    });
+  }
+  if (out.includes('{{')) throw new Error(`Còn token chưa thay trong trang ${pg.key}: ` + out.match(/\{\{[^}]*\}\}/)[0]);
   // Gắn ?v=<mã> vào file tĩnh để cache dài hạn mà vẫn cập nhật ngay khi sửa
   for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js']) {
     out = out.split(`"/${f}"`).join(`"/${f}?v=${ver(f)}"`);
@@ -199,4 +211,5 @@ Sitemap: ${SITE}/sitemap.xml
 const page404 = read('tools/404.template.html').replace('{{CRITICAL_CSS}}', critical).replace(/\{\{ZALO_URL\}\}/g, C.ZALO_URL).replace(/\{\{PHONE_DISPLAY\}\}/g, C.PHONE_DISPLAY);
 write('404.html', page404);
 
+if (!FORM_ON) console.log('ℹ Form đặt hoa đang TẠM ẨN (ORDER_FORM_ENABLED: false)');
 if (missing(C.SITE_URL) || /example\.com/.test(C.SITE_URL)) console.warn('⚠ Chưa có tên miền thật — đang dùng', C.SITE_URL);

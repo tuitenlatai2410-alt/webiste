@@ -54,51 +54,6 @@
       </div>
     </div>
 
-    <div class="order reveal" id="dat-hoa">
-      <h2 class="order__title">Gửi yêu cầu đặt hoa</h2>
-      <form class="form" id="order-form" novalidate>
-        <div class="form__grid">
-          <div class="field">
-            <label for="f-name">Họ tên <span aria-hidden="true">*</span></label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80">
-            <p class="field__err" id="f-name-err" aria-live="polite"></p>
-          </div>
-          <div class="field">
-            <label for="f-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
-            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="16" placeholder="0xxx xxx xxx">
-            <p class="field__err" id="f-phone-err" aria-live="polite"></p>
-          </div>
-          <div class="field">
-            <label for="f-occasion">Dịp</label>
-            <select id="f-occasion" name="occasion">
-              <option>Sinh nhật</option><option>Kỷ niệm</option><option>Tốt nghiệp</option><option>Chúc mừng</option><option>Trụ hoa để bàn decor</option><option>Khác</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-date">Ngày cần hoa</label>
-            <input id="f-date" name="date" type="date">
-            <p class="field__hint" id="f-date-hint" aria-live="polite"></p>
-          </div>
-          <div class="field field--full">
-            <label for="f-budget">Ngân sách dự kiến (tùy chọn)</label>
-            <input id="f-budget" name="budget" type="text" maxlength="60">
-          </div>
-          <div class="field field--full">
-            <label for="f-msg">Lời nhắn</label>
-            <textarea id="f-msg" name="message" rows="4" maxlength="500" aria-describedby="f-msg-count"></textarea>
-            <p class="field__count" id="f-msg-count"><span>0</span>/500</p>
-            <p class="field__err" id="f-msg-err" aria-live="polite"></p>
-          </div>
-          <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        </div>
-        <div class="turnstile" id="turnstile"></div>
-        <div class="form__foot">
-          <button class="btn btn--pink btn--lg" type="submit" id="f-submit">Gửi yêu cầu<svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <p class="form__note">Thông tin của bạn chỉ dùng để liên hệ tư vấn đơn hoa.</p>
-        </div>
-        <div class="form__status" id="f-status" role="status" aria-live="polite"></div>
-      </form>
-    </div>
-  </div>
+{{ORDER_FORM}}  </div>
 </section>
 

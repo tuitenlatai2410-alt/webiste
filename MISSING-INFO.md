@@ -10,7 +10,7 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 | 4 | **Giờ mở cửa** | `[CHƯA CÓ – giờ mở cửa]` — **đang hiện đúng chữ này trên web** ở khối Liên hệ | `config.js` → `HOURS` |
 | 5 | **Email liên hệ** (nếu có) | `[CHƯA CÓ – email]` → dòng Email đang **ẩn** | `config.js` → `EMAIL` |
 | 6 | **Link Google Maps chính xác** | `[CHƯA CÓ – link Google Maps]` → tạm dùng link tìm kiếm theo địa chỉ | `config.js` → `MAPS_URL` |
-| 7 | **Web3Forms access key** | `[CHƯA CÓ – Web3Forms access key]` → form **chưa gửi được**, khách sẽ thấy thông báo lỗi kèm nút Zalo | `config.js` → `WEB3FORMS_ACCESS_KEY` |
+| 7 | **Web3Forms access key** | `[CHƯA CÓ – Web3Forms access key]`. Form đặt hoa hiện **đang tạm ẩn** (`ORDER_FORM_ENABLED: false`) | `config.js` → `WEB3FORMS_ACCESS_KEY` |
 | 7b | **Cloudflare Turnstile site key** | `[CHƯA CÓ – Turnstile site key]` → ô xác minh chống bot chưa hiện (honeypot, chặn < 3 giây, giới hạn 60 giây, chặn ≥ 2 link vẫn hoạt động) | `config.js` → `TURNSTILE_SITE_KEY` |
 | 8 | **Ảnh chia sẻ mạng xã hội** (og-cover 1200×630) | Ảnh tạm do web tự tạo (nền đen, chữ hồng "Quỳnh Như Florist") | `assets/img/og-cover.jpg` |
 | 9 | **Có giao hoa tận nơi không, phạm vi giao** | Web chỉ ghi "Nhận tại tiệm hoặc trao đổi thêm về giao hoa" | Quy trình bước 4 trong `tools/index.template.html` |
@@ -30,3 +30,5 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 | P4 | Chính sách giao hàng, đổi/hoàn, thanh toán (nếu web bán hàng phải hiển thị) | Thường là điều kiện của hồ sơ P1 | Trung bình |
 | P5 | Tên miền riêng (mua đứng tên chủ tiệm) | Đang dùng tên miền tạm của Cloudflare | Trung bình |
 | P6 | Bật xác thực 2 lớp (2FA) cho Gmail, GitHub, Cloudflare | Mất 1 tài khoản là mất quyền sửa/giữ web | Cao |
+
+> **Form đặt hoa đang tạm ẩn.** Khách liên hệ qua Zalo / gọi điện / mạng xã hội. Khi xong P1–P3 và có khóa Web3Forms: đặt `ORDER_FORM_ENABLED: true` trong `assets/js/config.js` → `node tools/build.mjs` → push.

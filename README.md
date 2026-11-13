@@ -66,6 +66,8 @@ npm run images
 
 ## Form liên hệ (Web3Forms + Cloudflare Turnstile)
 
+> Hiện **đang tạm ẩn** (`ORDER_FORM_ENABLED: false` trong `config.js`). Bật lại sau khi xong thủ tục pháp lý (xem `MISSING-INFO.md`).
+
 1. Vào https://web3forms.com → nhập email nhận đơn → nhận **Access Key** → dán vào `WEB3FORMS_ACCESS_KEY`.
 2. Vào Cloudflare Dashboard → **Turnstile** → Add site (tên miền của bạn) → lấy **Site Key** → dán vào `TURNSTILE_SITE_KEY`.
 3. `npm run build`.
