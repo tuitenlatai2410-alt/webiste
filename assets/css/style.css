@@ -317,11 +317,11 @@ html.modal-open{overflow:hidden}
 .fab__zalo{background:var(--pink-deep)}
 .fab__zalo::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--pink);animation:ripple 1.8s var(--ease) 3 1.5s;opacity:0}
 .fab__call{background:var(--black)}
-.fab__label{position:absolute;right:calc(100% + 12px);top:50%;translate:0 -50%;white-space:nowrap;padding:8px 14px;border-radius:999px;background:#fff;color:var(--pink-ink);font-size:.85rem;font-weight:600;line-height:1.2;box-shadow:0 10px 24px -12px rgba(20,18,20,.45),0 0 0 1px rgba(194,67,122,.14);animation:fabLabel .5s var(--ease) 1.2s both}
+.fab__label{position:absolute;right:calc(100% + 12px);top:50%;translate:0 -50%;white-space:nowrap;padding:8px 14px;border-radius:999px;background:#fff;color:var(--pink-ink);font-size:.85rem;font-weight:600;line-height:1.2;box-shadow:0 10px 24px -12px rgba(20,18,20,.45),0 0 0 1px rgba(194,67,122,.14);animation:fabLabel .5s var(--ease)}
 .fab__label::after{content:"";position:absolute;right:-5px;top:50%;width:10px;height:10px;background:#fff;translate:0 -50%;rotate:45deg;box-shadow:1px -1px 0 rgba(194,67,122,.14);border-radius:2px}
-.fab__zalo:hover .fab__label{background:var(--pink-deep);color:#fff}
-.fab__zalo:hover .fab__label::after{background:var(--pink-deep)}
-@keyframes fabLabel{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.fab__btn:hover .fab__label{background:var(--pink-deep);color:#fff}
+.fab__btn:hover .fab__label::after{background:var(--pink-deep)}
+@keyframes fabLabel{from{transform:translateX(8px)}to{transform:none}}
 @media (min-width:1024px){.fab__call{display:none}}
 @keyframes ripple{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
 

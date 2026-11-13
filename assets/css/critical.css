@@ -87,33 +87,52 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .nav__zalo{display:inline-flex;margin-left:12px}
 }
 
-/* Hero: ảnh hoa ly làm nền (trái, mờ dần vào nền), chữ gọn bên phải, chữ ẩn FLORIST phía sau chữ */
-.hero{position:relative;overflow:hidden;background:#F3EFED;isolation:isolate}
-.hero__media{position:relative;height:min(78vw,520px);overflow:hidden}
-.hero__media img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
-.hero__bgword{position:absolute;left:50%;bottom:4%;z-index:1;font:700 clamp(5.5rem,26vw,22rem)/.8 var(--serif);letter-spacing:.06em;color:rgba(20,18,20,.05);white-space:nowrap;pointer-events:none;user-select:none;translate:-50% 0}
-.hero__inner{position:relative;z-index:2;margin-top:-56px;padding-bottom:56px}
-.hero__copy{max-width:34rem}
-.eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:14px}
+/* Hero kiểu tạp chí: FLORIST rất lớn phía sau, khung ảnh vòm không cắt ảnh, chữ + danh sách bên trái, dải danh mục cuối */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#fff 0%,var(--gray-100) 100%)}
+.hero__bgword{position:absolute;left:50%;top:clamp(110px,34vw,220px);z-index:0;translate:-50% 0;font:700 clamp(6rem,30vw,12rem)/.78 var(--serif);letter-spacing:.02em;color:rgba(194,67,122,.09);white-space:nowrap;pointer-events:none;user-select:none}
+.hero__vert{display:none}
+.hero__inner{position:relative;z-index:1;display:grid;gap:22px;padding-block:24px 28px}
+.eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:12px}
 .hero__title{font:700 clamp(1.9rem,7.4vw,3.4rem)/1.04 var(--serif);color:var(--black);letter-spacing:-.005em;text-transform:uppercase}
 .hero__loc{display:block;font-style:italic;font-weight:600;color:var(--pink-deep);text-transform:none;font-size:.86em;margin-top:.12em}
-.hero__sub{margin-top:16px;font-size:clamp(.98rem,2.4vw,1.08rem);max-width:28rem}
-.hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-.hero__decor .petal{position:absolute;z-index:1;fill:var(--pink-soft);opacity:.7;width:22px;height:22px}
-.hero__decor .p1{right:8%;top:10%;fill:var(--pink)}
-.hero__decor .p3{right:30%;bottom:16%;width:16px;height:16px;fill:var(--gray-400);opacity:.35}
-.hero__decor .p5{right:4%;bottom:8%;fill:var(--pink);opacity:.45}
-.tilt-btn{margin-top:20px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px dashed var(--pink-ink);color:var(--pink-ink);font-size:.85rem;font-weight:600}
+.hero__sub{margin-top:14px;font-size:clamp(.96rem,2.4vw,1.05rem);max-width:28rem}
+.hero__list{display:grid;grid-template-columns:1fr 1fr;margin-top:20px;border-top:1px solid rgba(20,18,20,.18);border-left:1px solid rgba(20,18,20,.18);max-width:26rem}
+.hero__list li{padding:8px 12px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);border-right:1px solid rgba(20,18,20,.18);border-bottom:1px solid rgba(20,18,20,.18)}
+.hero__list li:last-child{grid-column:1/-1}
+.hero__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:22px}
+.hero__shop{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:12px 24px;background:var(--black);color:#fff;font:600 1.15rem/1 var(--serif);letter-spacing:.06em;text-transform:uppercase;transition:background-color .3s}
+.hero__shop svg{width:20px;height:20px}
+.hero__shop:hover{background:var(--pink-deep)}
+.hero__zalo{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:.92rem;color:var(--pink-ink);text-decoration:underline;text-underline-offset:5px}
+.hero__zalo svg{width:20px;height:20px}
+.hero__frame{justify-self:center;width:min(60vw,300px);aspect-ratio:736/981;border-radius:999px 999px 18px 18px;overflow:hidden;background:#e9e4e2;box-shadow:0 30px 60px -34px rgba(20,18,20,.5),0 0 0 6px #fff;order:-1}
+.hero__frame img{width:100%;height:100%;object-fit:contain}
+.hero__copy{order:0}
+.hero__strip{position:relative;z-index:1;border-top:1px solid rgba(20,18,20,.12)}
+.hero__strip-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:12px}
+.hero__cats{display:flex;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.hero__cats::-webkit-scrollbar{display:none}
+.hero__cats li+li{border-left:1px solid rgba(20,18,20,.18)}
+.hero__cats a{display:block;padding:10px 14px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);white-space:nowrap}
+.hero__cats li:first-child a{padding-left:0}
+.hero__cats a:hover{color:var(--pink-ink)}
+.hero__quote{display:flex;flex-direction:column;align-items:flex-end;font:600 1.5rem/1.1 var(--serif);color:var(--black);margin-left:auto}
+.hero__quote span{font:600 .64rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:4px}
+.tilt-btn{margin-top:18px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px dashed var(--pink-ink);color:var(--pink-ink);font-size:.85rem;font-weight:600}
 .tilt-btn[hidden]{display:none}
-@media (min-width:768px){.wrap,.nav__inner{--gut:32px}.hero__media{height:min(70vw,560px)}}
+@media (min-width:768px){.wrap,.nav__inner{--gut:32px}.hero__frame{width:min(46vw,360px)}}
 @media (min-width:1024px){
-  .hero{min-height:calc(100svh - 100px);display:flex;align-items:center}
-  .hero__media{position:absolute;left:0;top:0;bottom:0;width:54%;height:auto}
-  .hero__media img{object-position:50% 40%;-webkit-mask-image:linear-gradient(90deg,#000 58%,transparent 100%);mask-image:linear-gradient(90deg,#000 58%,transparent 100%)}
-  .hero__bgword{left:auto;right:-2%;bottom:auto;top:50%;translate:0 -50%;font-size:clamp(10rem,19vw,20rem)}
-  .hero__inner{margin-top:0;padding-block:72px;display:flex;justify-content:flex-end;width:100%}
-  .hero__copy{width:min(44%,36rem);margin-right:1%}
+  .hero{min-height:calc(100svh - 100px);display:flex;flex-direction:column}
+  .hero__bgword{top:auto;bottom:16%;font-size:clamp(11rem,20vw,22rem)}
+  .hero__vert{display:block;position:absolute;right:max(14px,1.4vw);top:50%;translate:0 -50%;z-index:1;writing-mode:vertical-rl;font-size:.68rem;font-weight:600;letter-spacing:.32em;color:var(--gray-700)}
+  .hero__inner{flex:1;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:48px;padding-block:48px 36px;width:100%}
+  .hero__copy{order:0}
+  .hero__frame{order:0;width:auto;height:min(64svh,600px);justify-self:center}
   .hero__title{font-size:clamp(2rem,3.2vw,3.4rem)}
+  .hero__list{max-width:24rem}
+  .hero__quote{font-size:1.9rem}
+  /* chừa chỗ cho 2 nút nổi ở góc phải dưới */
+  .hero__strip-in{padding-right:max(32px,calc(250px - (100vw - 1240px) / 2))}
 }
 
 /* Màn chào mừng — kiểu chữ thạch hồng (jelly) trên nền hồng phấn */
