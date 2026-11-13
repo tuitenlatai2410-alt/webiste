@@ -412,6 +412,27 @@
     });
   }
 
+  /* =========================================================
+     THẺ ZALO — máy tính: bấm link Zalo → hiện thẻ + QR; điện thoại: mở thẳng Zalo
+     ========================================================= */
+  function initZaloCard() {
+    var dlg = $('#zcard');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    var desk = window.matchMedia('(hover:hover) and (pointer:fine) and (min-width:720px)'), opener = null;
+    doc.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="https://zalo.me/"]');
+      if (!a || dlg.contains(a) || !desk.matches || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault();
+      opener = a;
+      if ($('#nav') && $('#nav').classList.contains('is-mega')) { $('#nav').classList.remove('is-mega'); html.classList.remove('mega-on'); }
+      dlg.showModal();
+      $('.zcard__msg', dlg).focus();
+    });
+    $('.zcard__x', dlg).addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { if (opener) opener.focus(); });
+  }
+
   function initProducts() {
     var grid = $('#product-grid');
     if (!grid) return;
@@ -788,4 +809,5 @@
   initMotion();
   initForm();
   initFab();
+  initZaloCard();
 })();

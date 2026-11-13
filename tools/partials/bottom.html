@@ -37,6 +37,36 @@
 </div>
 
 {{PAGE_EXTRA}}
+<!-- Thẻ liên hệ Zalo (máy tính): bấm biểu tượng Zalo → hiện thẻ + mã QR để quét bằng điện thoại -->
+<dialog class="zcard" id="zcard" aria-labelledby="zcard-name">
+  <div class="zcard__in">
+    <button type="button" class="zcard__x" aria-label="Đóng">×</button>
+    <div class="zcard__main">
+      <div class="zcard__head">
+        <span class="zcard__logo" aria-hidden="true"><b>QN</b><small>Florist</small></span>
+        <div>
+          <p class="zcard__name" id="zcard-name">Quỳnh Như Florist</p>
+          <p class="zcard__cat">Tiệm hoa · Thủ Dầu Một – Bình Dương</p>
+          <a class="zcard__msg" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn tin qua Zalo</a>
+        </div>
+      </div>
+      <p class="zcard__h">Thông tin chi tiết</p>
+      <ul class="zcard__info">
+        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><span>{{ADDRESS_FULL}}</span></li>
+        <li><svg aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:{{PHONE}}">{{PHONE_DISPLAY}}</a></li>
+        <li><svg aria-hidden="true"><use href="#i-flower"/></svg><a href="/">{{SITE_HOST}}</a></li>
+      </ul>
+      <p class="zcard__desc">Cung cấp hoa sáp, hoa tươi theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm. Đặt trước 4–5 ngày; mẫu có sẵn nhận trong ngày.</p>
+    </div>
+    <figure class="zcard__qr">
+      <picture>
+        <source srcset="/assets/img/zalo-qr.webp" type="image/webp">
+        <img src="/assets/img/zalo-qr.png" width="300" height="300" alt="Mã QR Zalo của Quỳnh Như Florist" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Mở Zalo, bấm quét QR để nhắn tin với tiệm trên điện thoại</figcaption>
+    </figure>
+  </div>
+</dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 </body>

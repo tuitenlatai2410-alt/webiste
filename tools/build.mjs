@@ -168,6 +168,7 @@ const v3d = ver('assets/js/intro3d.js') + ver('assets/fonts/qnf-3d.typeface.json
 
 const common = {
   SITE_URL: SITE,
+  SITE_HOST: SITE.replace(/^https?:\/\//, ''),
   THREE_URL: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/build/three.module.min.js`,
   THREE_ADDONS: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/examples/jsm/`,
   CRITICAL_CSS: critical,

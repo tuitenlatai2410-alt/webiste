@@ -35,3 +35,6 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 
 ## Hoa sáp
 - [CHƯA CÓ – ảnh mẫu, tên mẫu hoa sáp]: trang chủ và menu đã ghi "Hoa sáp" nhưng chưa có sản phẩm hoa sáp nào. Hiện link "Hoa sáp" dẫn về trang Liên hệ. Gửi ảnh + tên mẫu để thêm vào trang Sản phẩm.
+
+## Zalo Official Account (OA)
+- [CHƯA CÓ – link Zalo OA]: hiện link Zalo là số cá nhân (zalo.me/0857380325). Khi tiệm đăng ký Zalo OA, thay `ZALO_URL` trong `assets/js/config.js` bằng link OA (dạng zalo.me/<mã OA>) và thay ảnh `assets/img/zalo-qr.png/.webp` bằng mã QR của OA.
