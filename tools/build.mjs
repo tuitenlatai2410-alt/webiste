@@ -192,7 +192,7 @@ for (const pg of PAGES) {
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" href="/assets/img/hero/hoa-ly-dinh-da-736.webp" imagesrcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w" imagesizes="(min-width:1024px) 36vw, 54vw" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" href="/assets/img/hero/hoa-ly-dinh-da-736.webp" imagesrcset="/assets/img/hero/hoa-ly-dinh-da-480.webp 480w, /assets/img/hero/hoa-ly-dinh-da-736.webp 736w" imagesizes="(min-width:1024px) 58vw, 100vw" fetchpriority="high">\n' : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
