@@ -48,7 +48,7 @@
 @media (min-width:1024px){
   .mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid rgba(20,18,20,.08);box-shadow:0 24px 40px -30px rgba(20,18,20,.35);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s .4s}
   .nav.is-mega .mega{opacity:1;visibility:visible;transform:none;transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s}
-  .mega__in{position:relative;max-width:1240px;margin:0 auto;padding:30px 32px 38px}
+  .mega__in{position:relative;max-width:1680px;margin:0 auto;padding:30px clamp(32px,4vw,72px) 38px}
   .mega__panel{display:none;width:max-content}
   .mega__panel.is-on{display:block;margin-left:var(--mx,0px)}
   .mega__panel summary{display:none}

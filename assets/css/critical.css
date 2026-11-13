@@ -76,7 +76,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .nav__search input::-webkit-search-cancel-button{-webkit-appearance:none}
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(20,18,20,.06)}
 .nav__inner{max-width:1240px;margin:0 auto;padding:0 var(--gut);height:var(--nav-h);display:flex;align-items:center;gap:16px}
-.nav__logo{display:inline-flex;flex-direction:column;align-items:center;gap:5px;margin-right:auto;padding:6px 0;color:var(--black);white-space:nowrap}
+.nav__logo{display:inline-flex;flex-direction:column;align-items:center;gap:9px;margin-right:auto;padding:6px 0;color:var(--black);white-space:nowrap}
 .nav__logo-name{font:700 1.6rem/.9 var(--serif);letter-spacing:.02em}
 .nav__logo-sub{display:flex;align-items:center;gap:8px;font:600 .58rem/1 var(--sans);letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:var(--pink-ink)}
 .nav__logo-sub::before,.nav__logo-sub::after{content:"";width:16px;height:1px;background:currentColor;opacity:.6}
@@ -88,21 +88,31 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .nav__burger{width:44px;height:44px;border-radius:50%;display:grid;place-content:center;gap:6px;background:var(--black)}
 .nav__burger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px;transition:transform .4s var(--ease)}
 @media (min-width:1024px){
-  :root{--nav-h:78px}
+  :root{--nav-h:84px}
   .nav__burger{display:none}
-  .nav__logo-name{font-size:2rem}
-  .nav__logo-sub{font-size:.64rem}
+  .nav__logo-name{font-size:2.15rem}
+  .nav__logo-sub{font-size:.66rem}
   .mega{display:block}
   .nav__menu{display:block;position:static}
-  .nav__list{display:flex;gap:2px}
-  .nav__list a{position:relative;display:block;padding:10px 12px;font-weight:500;font-size:.95rem;color:var(--black)}
-  .nav__list a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+  .nav__list{display:flex;gap:clamp(4px,1vw,18px)}
+  .nav__list a{position:relative;display:block;padding:12px 14px;font-weight:500;font-size:1.04rem;letter-spacing:.01em;color:var(--black);white-space:nowrap}
+  .nav__list a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
   .nav__list a:hover::after,.nav__list a.is-active::after,.nav.is-mega .nav__list a:focus-visible::after{transform:scaleX(1)}
   .nav__menu-zalo{display:none}
-  .nav__inner{display:grid;grid-template-columns:1fr auto 1fr;gap:24px}
+  .nav__inner{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;max-width:1680px;padding-inline:clamp(32px,4vw,72px)}
   .nav__logo{justify-self:start;margin-right:0}
   .nav__search-btn,.nav__search--menu{display:none}
-  .nav__search--top{display:flex;justify-self:end}
+  .nav__search--top{display:flex;justify-self:end;height:48px}
+  .nav__search--top input{width:clamp(140px,12vw,220px)}
+}
+@media (min-width:1024px) and (max-width:1279.98px){
+  .nav__inner{gap:12px}
+  .nav__logo-name{font-size:1.8rem}
+  .nav__list{gap:0}
+  .nav__list a{padding:12px 9px;font-size:.95rem}
+  .nav__list a::after{left:9px;right:9px}
+  .nav__search--top{padding:0 14px 0 12px}
+  .nav__search--top input{width:96px}
 }
 
 /* Hero kiểu tạp chí: FLORIST rất lớn phía sau, ảnh hoa không khung (hiện trọn, mép hoà vào nền), chữ bên trái, khối liên hệ gọn */
@@ -128,9 +138,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .hero__shop:hover{background:var(--pink-deep)}
 .hero__zalo{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:.92rem;color:var(--pink-ink);text-decoration:underline;text-underline-offset:5px}
 .hero__zalo svg{width:20px;height:20px}
-.hero__card{display:inline-grid;gap:10px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(20,18,20,.14);color:var(--black)}
-.hero__brand{font:700 1.15rem/1 var(--serif);letter-spacing:.32em;text-transform:uppercase}
-.hero__brand::after{content:"";display:block;width:36px;height:2px;margin-top:10px;background:var(--pink)}
+.hero__card{display:inline-grid;gap:10px;margin-top:26px;padding-top:16px;border-top:2px solid var(--pink);color:var(--black)}
 .hero__phone{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
 .hero__phone span{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-ink)}
 .hero__phone b{font:600 1.7rem/1 var(--serif);letter-spacing:.04em;white-space:nowrap;transition:color .3s}
