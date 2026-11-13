@@ -119,6 +119,15 @@ html.menu-open{overflow:hidden}
 .xcard--dark .xcard__t{color:#fff}
 .xcard--dark .xcard__go{color:#fff}
 .xcard--pink{background:var(--blush)}
+/* Ô vuông gọn, dễ chọn: 2 ô/hàng trên điện thoại, 4 ô/hàng trên máy tính */
+.explore__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.xcard{aspect-ratio:1/1;min-height:0;justify-content:flex-end;gap:8px;padding:18px 18px 20px}
+.xcard .label{position:absolute;top:18px;left:18px;right:50px;font-size:.6rem;line-height:1.5;letter-spacing:.08em;white-space:nowrap}
+.xcard__t{font-size:clamp(1.15rem,5.2vw,2rem);line-height:1.05}
+.xcard__d{display:none;font-size:.86rem;line-height:1.45}
+.xcard__go{top:14px;right:12px;bottom:auto;width:36px;height:36px}
+@media (min-width:600px){.xcard__d{display:block}.xcard{padding:24px}.xcard .label{top:24px;left:24px;right:70px;letter-spacing:.2em;font-size:.66rem}.xcard__go{top:18px;right:18px;width:44px;height:44px}}
+@media (min-width:1024px){.explore__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.xcard__t{font-size:clamp(1.5rem,2.1vw,2.1rem)}}
 
 /* ---------- [E] Giới thiệu ---------- */
 .about__grid{display:grid;gap:28px}
