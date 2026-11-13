@@ -10,8 +10,5 @@
     "font3d": "node tools/make-3d-font.mjs",
     "serve": "python3 -m http.server 8080"
   },
-  "devDependencies": {
-    "opentype.js": "^1.3.4",
-    "sharp": "^0.33.5"
-  }
+  "//": "Bước build chỉ dùng Node có sẵn (không cần cài gì). Muốn chạy npm run images: npm i --no-save sharp. Muốn chạy npm run font3d: npm i --no-save opentype.js"
 }

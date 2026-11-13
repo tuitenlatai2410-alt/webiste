@@ -26,10 +26,10 @@ tools/  (build.mjs, images.mjs, make-3d-font.mjs, pages/, partials/)
 
 ## Cài đặt (1 lần)
 
-Cần [Node.js](https://nodejs.org) 18+.
+Cần [Node.js](https://nodejs.org) 18+. Bước build không cần cài thư viện nào. Chỉ khi tối ưu ảnh hoặc đổi chữ 3D mới cần:
 
 ```bash
-npm install
+npm i --no-save sharp opentype.js
 ```
 
 ## Sửa thông tin → build

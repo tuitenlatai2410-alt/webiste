@@ -19,3 +19,14 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 
 - **Định dạng địa chỉ:** phần Liên hệ, Footer, FAQ dùng chung một chuỗi `324/34, Tổ 3, Khu 4, Phường Phú Lợi, TP. Hồ Chí Minh` (theo mục [I] của prompt). Schema dùng tách trường, `addressRegion` = "Thành phố Hồ Chí Minh". Khi tạo Google Business Profile, nên nhập đúng y chuỗi này.
 - **Trang Facebook** đang là dạng `profile.php?id=…`. Nếu sau này đổi sang tên trang (username), cập nhật `FACEBOOK_URL`.
+
+## Pháp lý & vận hành (chủ web cần làm — web có thể bị phạt/gỡ nếu bỏ qua)
+
+| # | Việc | Vì sao | Ưu tiên |
+|---|---|---|---|
+| P1 | Xác định website có phải **thông báo website TMĐT bán hàng** không (web có form đặt hoa). Nếu có: thông báo trước khi chạy chính thức | Luật Thương mại điện tử 122/2025/QH15 hiệu lực 01/7/2026: web bán hàng có chức năng đặt hàng trực tuyến phải thông báo. Cơ quan tiếp nhận đang chuyển đổi — hỏi Sở Công Thương TP.HCM hoặc luật sư | Cao |
+| P2 | Giấy đăng ký **hộ kinh doanh** (hoặc mã số thuế cá nhân) để làm hồ sơ P1 và hiện trên web | Hồ sơ thông báo web cần giấy tờ kinh doanh | Cao |
+| P3 | Nội dung **chính sách bảo mật dữ liệu** + ô "Tôi đồng ý" ở form | Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15 (hiệu lực 01/01/2026): form thu họ tên, số điện thoại; dữ liệu gửi qua Web3Forms (máy chủ nước ngoài) | Cao |
+| P4 | Chính sách giao hàng, đổi/hoàn, thanh toán (nếu web bán hàng phải hiển thị) | Thường là điều kiện của hồ sơ P1 | Trung bình |
+| P5 | Tên miền riêng (mua đứng tên chủ tiệm) | Đang dùng tên miền tạm của Cloudflare | Trung bình |
+| P6 | Bật xác thực 2 lớp (2FA) cho Gmail, GitHub, Cloudflare | Mất 1 tài khoản là mất quyền sửa/giữ web | Cao |
