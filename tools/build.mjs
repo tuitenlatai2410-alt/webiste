@@ -32,6 +32,28 @@ if (PRODUCTS.length !== 20) console.warn('⚠ Số sản phẩm hiện là', PRO
 // Form đặt hoa đang bật hay tạm ẩn (config.js → ORDER_FORM_ENABLED)
 const FORM_ON = C.ORDER_FORM_ENABLED === true;
 
+/* ---- Dải chữ chạy trên cùng: lưu ý đặt hàng + 10 câu chúc (chủ web sửa / thêm / bớt câu tại đây) ---- */
+const NOTICE_QUOTES = [
+  'Mỗi bó hoa là một lời chưa kịp nói thành câu',
+  'Chúc bạn một ngày dịu dàng như cánh hoa vừa nở',
+  'Gửi một bó hoa, gửi cả sự quan tâm',
+  'Hoa rồi sẽ tàn, yêu thương thì ở lại',
+  'Điều nhẹ nhàng thường là điều được nhớ lâu',
+  'Chúc bạn luôn có một lý do để mỉm cười',
+  'Một nhành hoa nhỏ cũng đủ làm ấm một ngày dài',
+  'Yêu thương không cần lớn lao, chỉ cần đúng lúc',
+  'Chúc mọi dịp đặc biệt của bạn đều trọn vẹn',
+  'Hoa nói thay những điều bạn ngại nói',
+];
+function noticeItems(copy) {
+  const tel = `<a href="tel:${C.PHONE}"${copy ? ' tabindex="-1"' : ''}>${C.PHONE_DISPLAY}</a>`;
+  const notice = `Hoa thiết kế theo yêu cầu vui lòng đặt trước <b>4–5 ngày</b> <i>·</i> Mẫu có sẵn tại tiệm có thể nhận <b>ngay trong ngày</b> <i>·</i> Liên hệ ${tel}`;
+  const quotes = NOTICE_QUOTES.map((q) => `<span class="notice__quote">${esc(q)}</span>`);
+  // Lưu ý đặt hàng xuất hiện 2 lần trong mỗi vòng (đầu vòng và giữa vòng) để khách không phải chờ lâu
+  const half = Math.ceil(quotes.length / 2);
+  return [notice, ...quotes.slice(0, half), notice.replace(`<a href="tel:${C.PHONE}">`, `<a href="tel:${C.PHONE}" tabindex="-1">`), ...quotes.slice(half)].join(' <i class="notice__sep">✦</i> ') + ' <i class="notice__sep">✦</i>';
+}
+
 /* ---- FAQ (giữ nguyên nội dung mục 5.5) ---- */
 const FAQ = [
   ['Tôi cần đặt hoa trước bao lâu?', 'Với mẫu thiết kế theo yêu cầu, bạn vui lòng đặt trước 4–5 ngày để tiệm chuẩn bị hoa và vật liệu. Với mẫu có sẵn tại tiệm, bạn có thể nhận ngay trong ngày.'],
@@ -154,6 +176,8 @@ const common = {
   ADDRESS_FULL: esc(C.ADDRESS_FULL), HOURS: esc(C.HOURS),
   TIKTOK_URL: C.TIKTOK_URL, FACEBOOK_URL: C.FACEBOOK_URL, INSTAGRAM_URL: C.INSTAGRAM_URL,
   MAPS_URL: esc(MAPS_URL),
+  NOTICE_ITEMS: noticeItems(false),
+  NOTICE_ITEMS_COPY: noticeItems(true),
   ORDER_FORM: FORM_ON ? read('tools/partials/order-form.html') : '',
   STEP_ONE_CHANNEL: FORM_ON ? 'qua Zalo hoặc form' : 'qua Zalo',
 };

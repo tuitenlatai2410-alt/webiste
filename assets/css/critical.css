@@ -57,8 +57,10 @@ button{cursor:pointer;background:none;border:0;padding:0}
 
 /* Dải thông báo */
 .notice{background:var(--black);color:#fff;font-size:.8rem;overflow:hidden;white-space:nowrap;position:relative;z-index:60}
-.notice__track{display:flex;width:max-content;animation:marquee 38s linear infinite}
-.notice:hover .notice__track,.notice:focus-within .notice__track{animation-play-state:paused}
+.notice__track{display:flex;width:max-content;animation:marquee 95s linear infinite}
+.notice__quote{font-style:italic;color:#f3eef2}
+.notice__sep{opacity:.9}
+.notice:hover .notice__track,.notice:focus-within .notice__track,.notice:active .notice__track{animation-play-state:paused}
 .notice__item{padding:9px 2.5rem;flex:none}
 .notice b{color:var(--pink);font-weight:600}
 .notice i{color:var(--pink);font-style:normal;margin:0 .6rem}
@@ -129,8 +131,6 @@ button{cursor:pointer;background:none;border:0;padding:0}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .notice__track{animation:none}
-  .notice__item[aria-hidden]{display:none}
-  .notice{white-space:normal;text-align:center}
+  /* Dải chữ vẫn chạy theo yêu cầu chủ web (chậm, dừng khi rê chuột/chạm) */
   .intro__name{animation:fadeUp .6s ease both}
 }
