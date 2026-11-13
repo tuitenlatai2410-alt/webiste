@@ -49,16 +49,22 @@
   .mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid rgba(20,18,20,.08);box-shadow:0 24px 40px -30px rgba(20,18,20,.35);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s .4s}
   .nav.is-mega .mega{opacity:1;visibility:visible;transform:none;transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s}
   .mega__in{position:relative;max-width:1680px;margin:0 auto;padding:30px clamp(32px,4vw,72px) 38px}
-  .mega__panel{display:none;width:max-content}
-  .mega__panel.is-on{display:block;margin-left:var(--mx,0px)}
+  .mega__panel{display:none}
+  .mega__panel.is-on{display:block}
   .mega__panel summary{display:none}
-  .mega__cols{display:flex;gap:64px}
+  /* dàn đều ra giữa, không dồn một bên */
+  .mega__cols{display:flex;justify-content:center;gap:clamp(56px,8vw,140px)}
   .mega__h{margin-bottom:14px;font-weight:600;font-size:1rem;color:var(--black)}
+  .mega__panel:not([data-panel="san-pham"]) .mega__col{text-align:center}
+  .mega__panel:not([data-panel="san-pham"]) .mega__h{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-ink)}
+  .mega__panel:not([data-panel="san-pham"]) .mega__col ul{display:flex;flex-wrap:wrap;justify-content:center;gap:4px clamp(28px,4vw,64px)}
+  .mega__panel:not([data-panel="san-pham"]) .mega__col a{font-size:1.02rem;color:var(--black)}
+  .mega__panel:not([data-panel="san-pham"]) .mega__col a:hover{color:var(--pink-ink)}
   .mega__col ul{display:grid;gap:2px}
   .mega__col--2 ul{grid-template-columns:repeat(2,max-content);column-gap:48px}
   .mega__col a{display:inline-block;padding:5px 0;font-size:.93rem;font-weight:500;color:var(--gray-700);transition:color .2s}
   .mega__col a:hover,.mega__col a:focus-visible{color:var(--black)}
-  .mega-dim{position:fixed;inset:0;z-index:40;background:rgba(20,18,20,.18);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+  .mega-dim{position:fixed;inset:0;z-index:40;background:rgba(20,18,20,.22);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
   html.mega-on .mega-dim{opacity:1;visibility:visible;transition:opacity .3s,visibility 0s}
 }
 

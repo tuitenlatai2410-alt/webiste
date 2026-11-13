@@ -202,7 +202,7 @@
     // Menu thả xuống kiểu Nike (máy tính): rê chuột / focus vào MỘT mục → chỉ hạ phần của mục đó
     var mega = $('#mega'), list = $('.nav__list', nav);
     if (!mega || !list) return;
-    var desk = window.matchMedia('(min-width:1024px)'), panels = $$('.mega__panel', mega), inner = $('.mega__in', mega), t;
+    var desk = window.matchMedia('(min-width:1024px)'), panels = $$('.mega__panel', mega), t;
     var dim = doc.createElement('div'); dim.className = 'mega-dim'; dim.setAttribute('aria-hidden', 'true'); doc.body.appendChild(dim);
     function syncPanels() { panels.forEach(function (d) { d.open = desk.matches; d.querySelector('summary').tabIndex = desk.matches ? -1 : 0; }); }
     syncPanels();
@@ -216,12 +216,6 @@
       var key = li && li.getAttribute('data-mega'), pnl = key && $('.mega__panel[data-panel="' + key + '"]', mega);
       if (!desk.matches || !pnl) { hide(); return; }
       panels.forEach(function (d) { d.classList.toggle('is-on', d === pnl); });
-      // canh phần sổ xuống thẳng dưới mục menu, không tràn mép phải
-      pnl.style.setProperty('--mx', '0px');
-      var box = inner.getBoundingClientRect(), pad = parseFloat(getComputedStyle(inner).paddingLeft) || 0;
-      var room = box.width - pad * 2 - pnl.offsetWidth;
-      var x = li.getBoundingClientRect().left - box.left - pad + 12;
-      pnl.style.setProperty('--mx', Math.max(0, Math.min(x, room)) + 'px');
       nav.classList.add('is-mega'); html.classList.add('mega-on');
     }
     if (desk.addEventListener) desk.addEventListener('change', function () { syncPanels(); hide(); });

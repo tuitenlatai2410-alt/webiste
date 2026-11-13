@@ -57,7 +57,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 
 /* Dải thông báo */
 .notice{background:var(--black);color:#fff;font-size:.8rem;overflow:hidden;white-space:nowrap;position:relative;z-index:60}
-.notice__track{display:flex;width:max-content;animation:marquee 95s linear infinite}
+.notice__track{display:flex;width:max-content;animation:marquee 95s linear infinite;will-change:transform;backface-visibility:hidden}
 .notice__quote{font-style:italic;color:#f3eef2}
 .notice__sep{opacity:.9}
 .notice:hover .notice__track,.notice:focus-within .notice__track,.notice:active .notice__track{animation-play-state:paused}
