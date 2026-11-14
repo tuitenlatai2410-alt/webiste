@@ -117,42 +117,42 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .nav__search--top input{width:96px}
 }
 
-/* Hero: ảnh bó hoa thấy đầu tiên; QUỲNH NHƯ FLORIST rất to, mờ phía sau ảnh, lộ ra hai bên; dưới ảnh: tên tiệm trái – nút phải */
-.hero{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#fff 0%,var(--gray-100) 100%)}
-.hero__stage{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:14px 12px;width:min(100% - 2 * var(--gut),1240px);margin-inline:auto;padding-block:22px 6px}
-.hero__name{margin:0;font:600 clamp(1rem,4.6vw,1.9rem)/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--black);white-space:nowrap}
-.hero__name--l{grid-row:1;grid-column:1;justify-self:start}
-.hero__name--r{grid-row:1;grid-column:2;justify-self:end;margin-right:-.32em}
-.eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:12px}
-.hero__pic{position:relative;z-index:1;grid-column:1/-1;justify-self:center;width:100%;max-width:440px;aspect-ratio:1/1;overflow:hidden;border-radius:18px;background:#3b3d40;box-shadow:0 34px 60px -34px rgba(20,18,20,.6)}
-.hero__pic img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
-.hero__bar{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px;width:min(100% - 2 * var(--gut),900px);margin:18px auto 0;padding-bottom:34px;text-align:center}
-.hero__title{font:600 .78rem/1.6 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--black)}
-.hero__loc{display:block;font:italic 600 1.4rem/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--pink-deep);margin-top:2px}
+/* Hero kiểu GAZU: bó hoa tách nền ở giữa, QUỲNH NHƯ FLORIST xám nhạt rất to phía sau, hộp chữ nhỏ góc trái trên */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:#ECEAE7}
+.hero__stage{position:relative;height:clamp(470px,128vw,640px);max-width:1240px;margin:0 auto}
+.hero__box{position:absolute;z-index:3;top:22px;left:var(--gut);font:600 .7rem/1.85 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--black)}
+.hero__box span{display:block}
+.hero__box::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
+.hero__big{position:absolute;z-index:0;left:50%;top:44%;translate:-50% -50%;margin:0;font:600 clamp(3.4rem,17vw,13.5rem)/.9 var(--sans);letter-spacing:-.03em;text-transform:uppercase;text-align:center;color:#CFCAC6;white-space:nowrap;pointer-events:none;user-select:none}
+.hero__big span{display:block}
+.hero__cut{position:absolute;z-index:1;left:50%;bottom:0;translate:-50% 0;height:80%;margin:0}
+.hero__cut img{height:100%;width:auto;max-width:none;filter:drop-shadow(0 26px 24px rgba(20,18,20,.22));-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%);mask-image:linear-gradient(90deg,transparent 0,#000 6%)}
+.hero__foot{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px var(--gut) 34px;text-align:center}
 .hero__ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 22px}
-.hero__shop{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:12px 24px;background:var(--black);color:#fff;font:600 1.15rem/1 var(--serif);letter-spacing:.06em;text-transform:uppercase;transition:background-color .3s}
-.hero__shop svg{width:20px;height:20px}
+.hero__shop{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:12px 24px;background:var(--black);color:#fff;font:600 .82rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:background-color .3s}
+.hero__shop svg{width:18px;height:18px}
 .hero__shop:hover{background:var(--pink-deep)}
-.hero__zalo{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:.92rem;color:var(--pink-ink);text-decoration:underline;text-underline-offset:5px}
-.hero__zalo svg{width:20px;height:20px}
+.hero__zalo{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--black);text-decoration:underline;text-underline-offset:6px}
+.hero__zalo svg{width:18px;height:18px}
+.hero__note{font:600 .66rem/1.85 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--black)}
+.hero__note span{display:block}
+.eyebrow{font-weight:600;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink-ink);margin-bottom:12px}
 .tilt-btn{display:block;margin:0 auto 24px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px dashed var(--pink-ink);color:var(--pink-ink);font-size:.85rem;font-weight:600}
 .tilt-btn[hidden]{display:none}
 @media (min-width:768px){
   .wrap,.nav__inner{--gut:32px}
-  .hero__stage{grid-template-columns:1fr auto 1fr;gap:0 clamp(20px,3vw,48px);padding-block:40px 8px}
-  .hero__name--l,.hero__name--r{grid-row:1}
-  .hero__name--l{grid-column:1}
-  .hero__pic{grid-column:2;grid-row:1;max-width:none}
-  .hero__name--r{grid-column:3}
-  .hero__name{font-size:clamp(1.05rem,1.9vw,2rem)}
-  .hero__pic{width:min(46vw,720px);aspect-ratio:4/3}
-  .hero__pic img{object-position:50% 60%}
-  .hero__bar{flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;width:max(min(46vw,720px),min(100% - 64px,600px));text-align:left;margin-top:22px;padding-bottom:44px}
-  .hero__ctas{justify-content:flex-end}
+  .hero__stage{height:clamp(560px,78vw,700px)}
+  .hero__box{top:40px;font-size:.74rem}
 }
 @media (min-width:1024px){
-  .hero__title{font-size:.84rem}
-  .hero__loc{font-size:1.7rem}
+  .hero__stage{height:min(calc(100svh - 128px),820px);min-height:600px}
+  .hero__big{top:48%;font-size:clamp(8rem,15vw,15rem)}
+  .hero__cut{height:90%}
+  .hero__foot{position:absolute;left:0;right:0;bottom:44px;max-width:1240px;margin:0 auto;padding:0 var(--gut);flex-direction:row;justify-content:space-between;align-items:flex-end;text-align:left;pointer-events:none}
+  .hero__foot>*{pointer-events:auto}
+  .hero__note::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
+  .hero__note{margin-bottom:112px}
+  .hero__ctas{flex-direction:column;align-items:flex-start;gap:14px}
 }
 
 /* Màn chào mừng — kiểu chữ thạch hồng (jelly) trên nền hồng phấn */

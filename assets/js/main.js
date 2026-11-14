@@ -355,7 +355,7 @@
     if (!forms.length) return;
     var dip = '/san-pham/?loai=hoa-theo-dip';
     var idx = [
-      ['Hoa sáp', '/lien-he/', 'Hoa sáp'], ['Hoa tươi theo dịp', dip, 'Danh mục'], ['Trụ hoa để bàn decor', '/san-pham/?loai=tru-hoa-de-ban', 'Danh mục'],
+      ['Hoa sáp', '/san-pham/', 'Danh mục'], ['Hoa sáp theo dịp', dip, 'Danh mục'], ['Trụ hoa để bàn decor', '/san-pham/?loai=tru-hoa-de-ban', 'Danh mục'],
       ['Sinh nhật', dip, 'Dịp'], ['Tốt nghiệp', dip, 'Dịp'], ['Kỷ niệm', dip, 'Dịp'], ['Chúc mừng – Khai trương', dip, 'Dịp'], ['Lời cảm ơn', dip, 'Dịp'],
       ['8/3 – Quốc tế Phụ nữ', dip, 'Dịp'], ['20/10 – Phụ nữ Việt Nam', dip, 'Dịp'], ['20/11 – Nhà giáo Việt Nam', dip, 'Dịp'],
       ['Quy trình 4 bước', '/giai-phap/#quy-trinh', 'Giải pháp'], ['Câu hỏi thường gặp', '/giai-phap/#hoi-dap', 'Giải pháp'],

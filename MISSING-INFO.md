@@ -34,7 +34,7 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 > **Form đặt hoa đang tạm ẩn.** Khách liên hệ qua Zalo / gọi điện / mạng xã hội. Khi xong P1–P3 và có khóa Web3Forms: đặt `ORDER_FORM_ENABLED: true` trong `assets/js/config.js` → `node tools/build.mjs` → push.
 
 ## Hoa sáp
-- [CHƯA CÓ – ảnh mẫu, tên mẫu hoa sáp]: trang chủ và menu đã ghi "Hoa sáp" nhưng chưa có sản phẩm hoa sáp nào. Hiện link "Hoa sáp" dẫn về trang Liên hệ. Gửi ảnh + tên mẫu để thêm vào trang Sản phẩm.
+- Toàn bộ web đã chuyển sang hoa sáp (không còn cụm "hoa tươi"). [CHƯA CÓ – ảnh và tên các mẫu hoa sáp thật]: trang Sản phẩm vẫn đang dùng 20 mẫu tham khảo.
 
 ## Zalo Official Account (OA)
 - [CHƯA CÓ – link Zalo OA]: hiện link Zalo là số cá nhân (zalo.me/0857380325). Khi tiệm đăng ký Zalo OA, thay `ZALO_URL` trong `assets/js/config.js` bằng link OA (dạng zalo.me/<mã OA>) và thay ảnh `assets/img/zalo-qr.png/.webp` bằng mã QR của OA.

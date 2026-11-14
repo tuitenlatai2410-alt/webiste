@@ -90,11 +90,11 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
 /* ---- Các trang ---- */
 const PAGES = [
   { key: 'home', path: '', name: 'Trang chủ',
-    title: 'Quỳnh Như Florist – Hoa sáp, hoa tươi Thủ Dầu Một',
-    desc: 'Tiệm hoa nhỏ tại Thủ Dầu Một – Bình Dương: hoa sáp, hoa tươi theo dịp, trụ hoa để bàn decor. Đặt trước 4–5 ngày, mẫu có sẵn nhận trong ngày. Zalo 0857 380 325.' },
+    title: 'Quỳnh Như Florist – Tiệm hoa sáp Thủ Dầu Một',
+    desc: 'Tiệm hoa nhỏ tại Thủ Dầu Một – Bình Dương: hoa sáp theo dịp, trụ hoa để bàn decor. Đặt trước 4–5 ngày, mẫu có sẵn nhận trong ngày. Zalo 0857 380 325.' },
   { key: 'gioi-thieu', path: 'gioi-thieu/', name: 'Giới thiệu',
     title: 'Giới thiệu – Quỳnh Như Florist, tiệm hoa Thủ Dầu Một',
-    desc: 'Quỳnh Như Florist là tiệm hoa tươi tại khu vực Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh). Trong chưa tới một năm, tiệm đã gửi đi gần 500 bó hoa.' },
+    desc: 'Quỳnh Như Florist là tiệm hoa sáp tại khu vực Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh). Trong chưa tới một năm, tiệm đã gửi đi gần 500 bó hoa.' },
   { key: 'san-pham', path: 'san-pham/', name: 'Sản phẩm',
     title: 'Sản phẩm – Hoa theo dịp, trụ hoa để bàn | Quỳnh Như Florist',
     desc: 'Mẫu hoa theo dịp và trụ hoa để bàn decor của Quỳnh Như Florist tại Thủ Dầu Một – Bình Dương. Liên hệ báo giá qua Zalo 0857 380 325.' },
@@ -193,7 +193,7 @@ for (const pg of PAGES) {
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" media="(max-width:767.98px)" imagesrcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-600.webp 600w, /assets/img/hero/hoa-bo-hong-doc-720.webp 720w" imagesizes="min(78vw, 420px)" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width:768px)" imagesrcset="/assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" imagesizes="min(46vw, 720px)" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" imagesrcset="/assets/img/hero/bo-hoa-tach-nen-520.webp 520w, /assets/img/hero/bo-hoa-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-tach-nen-780.webp 780w, /assets/img/hero/bo-hoa-tach-nen-1100.webp 1100w" imagesizes="(min-width:1024px) min(46vw, 640px), 78vw" fetchpriority="high">\n' : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';

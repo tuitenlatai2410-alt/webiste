@@ -1,18 +1,32 @@
 </main>
 
-<!-- [J] FOOTER -->
+<!-- [J] DẢI TIỆN ÍCH + FOOTER -->
+<section class="perks" aria-label="Thông tin đặt hoa">
+  <ul class="wrap perks__list">
+    <li><svg aria-hidden="true"><use href="#i-clock"/></svg><p><strong>Đặt trước 4–5 ngày</strong><span>Mẫu theo yêu cầu</span></p></li>
+    <li><svg aria-hidden="true"><use href="#i-gift"/></svg><p><strong>Mẫu có sẵn</strong><span>Nhận trong ngày</span></p></li>
+    <li><svg aria-hidden="true"><use href="#i-chat"/></svg><p><strong>Tư vấn qua Zalo</strong><span>{{PHONE_DISPLAY}}</span></p></li>
+    <li><svg aria-hidden="true"><use href="#i-pin"/></svg><p><strong>Thủ Dầu Một</strong><span>Bình Dương</span></p></li>
+  </ul>
+</section>
+
 <footer class="footer">
   <div class="wrap footer__grid">
-    <div>
+    <div class="footer__brand">
       <p class="footer__name">Quỳnh Như <em>Florist</em></p>
-      <p class="footer__tag">Tiệm hoa tươi tại Thủ Dầu Một – Bình Dương</p>
+      <p class="footer__tag">Tiệm hoa sáp tại Thủ Dầu Một – Bình Dương</p>
+      <p class="footer__quote">“Mỗi bó hoa là một lời chưa kịp nói thành câu.”</p>
     </div>
-    <address class="footer__nap">
-      <strong>Quỳnh Như Florist</strong><br>
-      {{ADDRESS_FULL}}<br>
-      <a href="tel:{{PHONE}}">{{PHONE_DISPLAY}}</a>
-    </address>
+    <div>
+      <p class="footer__h">Liên hệ</p>
+      <address class="footer__nap">
+        <span class="footer__row"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>{{ADDRESS_FULL}}</span></span>
+        <a class="footer__row" href="tel:{{PHONE}}"><svg aria-hidden="true"><use href="#i-phone"/></svg><span>{{PHONE_DISPLAY}}</span></a>
+        <a class="footer__row" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg><span>Nhắn Zalo cho tiệm</span></a>
+      </address>
+    </div>
     <nav aria-label="Menu cuối trang">
+      <p class="footer__h">Khám phá</p>
       <ul class="footer__menu">
         <li><a href="/">Trang chủ</a></li>
         <li><a href="/gioi-thieu/">Giới thiệu</a></li>
@@ -22,13 +36,16 @@
       </ul>
     </nav>
   </div>
-  <div class="follow">
-    <p>Theo dõi chúng tôi:</p>
-    <ul>
-      <li><a class="follow__fb" href="{{FACEBOOK_URL}}" target="_blank" rel="noopener" aria-label="Facebook của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
-      <li><a class="follow__tt" href="{{TIKTOK_URL}}" target="_blank" rel="noopener" aria-label="TikTok của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
-      <li><a class="follow__zl" href="{{ZALO_URL}}" target="_blank" rel="noopener" aria-label="Zalo của Quỳnh Như Florist"><span aria-hidden="true">Zalo</span></a></li>
-      <li><a class="follow__ig" href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener" aria-label="Instagram của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+  <div class="wrap follow">
+    <div class="follow__head">
+      <p class="follow__k">— ✦ Theo dõi chúng tôi</p>
+      <p class="follow__t">Xem thêm mẫu hoa của tiệm <em>trên mạng xã hội</em></p>
+    </div>
+    <ul class="follow__list">
+      <li><a class="follow__item follow__fb" href="{{FACEBOOK_URL}}" target="_blank" rel="noopener"><span class="follow__ic"><svg aria-hidden="true"><use href="#i-facebook"/></svg></span><span class="follow__tx"><b>Facebook</b><small>Quỳnh Như Florist</small></span></a></li>
+      <li><a class="follow__item follow__tt" href="{{TIKTOK_URL}}" target="_blank" rel="noopener"><span class="follow__ic"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span><span class="follow__tx"><b>TikTok</b><small>@tiemhoanhonee</small></span></a></li>
+      <li><a class="follow__item follow__ig" href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener"><span class="follow__ic"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span><span class="follow__tx"><b>Instagram</b><small>@tiemhoanhoxinhdayy</small></span></a></li>
+      <li><a class="follow__item follow__zl" href="{{ZALO_URL}}" target="_blank" rel="noopener"><span class="follow__ic"><span aria-hidden="true">Zalo</span></span><span class="follow__tx"><b>Zalo</b><small>{{PHONE_DISPLAY}}</small></span></a></li>
     </ul>
   </div>
   <p class="footer__copy">© 2026 Quỳnh Như Florist</p>
@@ -50,7 +67,7 @@
         <span class="zcard__logo" aria-hidden="true"><b>QN</b><small>Florist</small></span>
         <div>
           <p class="zcard__name" id="zcard-name">Quỳnh Như Florist</p>
-          <p class="zcard__cat">Tiệm hoa · Thủ Dầu Một – Bình Dương</p>
+          <p class="zcard__cat">Tiệm hoa sáp · Thủ Dầu Một – Bình Dương</p>
           <a class="zcard__msg" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn tin qua Zalo</a>
         </div>
       </div>
@@ -60,7 +77,7 @@
         <li><svg aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:{{PHONE}}">{{PHONE_DISPLAY}}</a></li>
         <li><svg aria-hidden="true"><use href="#i-flower"/></svg><a href="/">{{SITE_HOST}}</a></li>
       </ul>
-      <p class="zcard__desc">Cung cấp hoa sáp, hoa tươi theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm. Đặt trước 4–5 ngày; mẫu có sẵn nhận trong ngày.</p>
+      <p class="zcard__desc">Cung cấp hoa sáp theo dịp và trụ hoa để bàn decor — làm đúng như hình, tư vấn tận tâm. Đặt trước 4–5 ngày; mẫu có sẵn nhận trong ngày.</p>
     </div>
     <figure class="zcard__qr">
       <picture>

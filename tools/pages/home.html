@@ -1,26 +1,44 @@
-<!-- [D] HERO tối giản: ảnh hoa chính giữa; QUỲNH NHƯ bên trái, FLORIST bên phải (chữ đậm, giãn rộng); dưới ảnh: tên tiệm trái – nút phải -->
+<!-- [D] HERO: bó hoa tách nền ở giữa; QUỲNH NHƯ FLORIST rất to, xám nhạt phía sau; hộp chữ nhỏ góc trái trên; nút góc trái dưới; ghi chú góc phải dưới -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__stage">
-    <p class="hero__name hero__name--l" aria-hidden="true">Quỳnh Như</p>
-    <figure class="hero__pic">
-      <picture>
-        <source media="(max-width:767.98px)" srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-600.webp 600w, /assets/img/hero/hoa-bo-hong-doc-720.webp 720w" sizes="min(78vw, 420px)" width="720" height="900">
-        <img src="/assets/img/hero/hoa-bo-hong-960.webp"
-             srcset="/assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w"
-             sizes="min(46vw, 720px)" width="1500" height="1000"
-             alt="Hai bó hoa tông hồng – xanh pastel của Quỳnh Như Florist, một bó đặt trong túi giấy kraft" fetchpriority="high" decoding="async">
-      </picture>
+    <h1 id="hero-title" class="hero__box">Tiệm hoa nhỏ <span>tại Thủ Dầu Một –</span> <span>Bình Dương</span></h1>
+    <p class="hero__big" aria-hidden="true"><span class="deco" data-text="QUỲNH NHƯ"></span><span class="deco" data-text="FLORIST"></span></p>
+    <figure class="hero__cut">
+      <img src="/assets/img/hero/bo-hoa-tach-nen-780.webp"
+           srcset="/assets/img/hero/bo-hoa-tach-nen-520.webp 520w, /assets/img/hero/bo-hoa-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-tach-nen-780.webp 780w, /assets/img/hero/bo-hoa-tach-nen-1100.webp 1100w"
+           sizes="(min-width:1024px) min(46vw, 640px), 78vw" width="1500" height="1897"
+           alt="Hai bó hoa sáp tông hồng – xanh pastel của Quỳnh Như Florist, một bó đặt trong túi giấy kraft" fetchpriority="high" decoding="async">
     </figure>
-    <p class="hero__name hero__name--r" aria-hidden="true">Florist</p>
   </div>
-  <div class="hero__bar">
-    <h1 id="hero-title" class="hero__title">Tiệm hoa nhỏ tại <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
+  <div class="hero__foot">
     <div class="hero__ctas">
-      <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
       <a class="hero__shop" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
     </div>
+    <p class="hero__note">Hoa sáp <span>theo yêu cầu</span> <span>đặt trước 4–5 ngày</span></p>
   </div>
   <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
+</section>
+
+<!-- VỀ QUỲNH NHƯ FLORIST: châm ngôn + giới thiệu ngắn → trang Giới thiệu -->
+<section class="section story" aria-labelledby="story-title">
+  <div class="wrap story__grid">
+    <div class="story__text reveal">
+      <p class="label">— ✦ Về Quỳnh Như Florist</p>
+      <h2 id="story-title" class="story__title">Mỗi bó hoa là một lời <em>chưa kịp nói thành câu</em></h2>
+      <p>Quỳnh Như Florist là tiệm hoa sáp nhỏ tại Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh), chuyên hoa sáp theo dịp và trụ hoa để bàn decor.</p>
+      <p>Hoa sáp giữ được dáng và màu lâu, nên món quà có thể ở lại bên người nhận thật lâu sau ngày trao. Tiệm còn mới, nhưng mỗi bó hoa đều được làm đúng như hình và tư vấn tận tâm — từ lúc bạn nhắn tin đến khi hoa được trao tận tay.</p>
+      <p class="story__sign">Quỳnh Như Florist</p>
+      <p class="story__role">Tiệm hoa sáp · Thủ Dầu Một – Bình Dương</p>
+      <a class="story__btn" href="/gioi-thieu/">Tìm hiểu về Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <figure class="story__pic reveal">
+      <img src="/assets/img/hero/hoa-bo-hong-960.webp"
+           srcset="/assets/img/hero/hoa-bo-hong-640.webp 640w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w"
+           sizes="(min-width:1024px) 600px, calc(100vw - 32px)" width="1500" height="1000"
+           alt="Hai bó hoa sáp tông hồng – xanh pastel đặt trên mặt đường" loading="lazy" decoding="async">
+    </figure>
+  </div>
 </section>
 
 

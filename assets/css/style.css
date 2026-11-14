@@ -351,34 +351,66 @@ html.modal-open{overflow:hidden}
 .form__msg--err{background:#fdecec;color:#7a1c16}
 
 /* ---------- [J] Footer ---------- */
-.footer{background:var(--black);color:#c8c4c9;padding:64px 0 calc(28px + env(safe-area-inset-bottom))}
-.footer__grid{display:grid;gap:32px}
-@media (min-width:768px){.footer__grid{grid-template-columns:1.3fr 1fr auto}}
+/* Dải tiện ích (trên chân trang) */
+.perks{background:#ECEAE7;border-top:1px solid rgba(20,18,20,.06)}
+.perks__list{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;padding-block:30px}
+.perks li{display:flex;align-items:center;gap:12px}
+.perks svg{flex:none;width:34px;height:34px;color:var(--black)}
+.perks strong{display:block;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+.perks span{display:block;font-size:.84rem;color:var(--gray-700)}
+@media (min-width:1024px){.perks__list{grid-template-columns:repeat(4,1fr);padding-block:36px}}
+
+/* Chân trang */
+.footer{background:var(--black);color:#c8c4c9;padding:60px 0 calc(24px + env(safe-area-inset-bottom))}
+.footer__grid{display:grid;gap:36px}
+@media (min-width:768px){.footer__grid{grid-template-columns:1.2fr 1.2fr auto;gap:48px}}
 .footer__name{font:700 1.9rem/1 var(--serif);color:#fff}
 .footer__name em{color:var(--pink);font-weight:600}
 .footer__tag{margin-top:10px}
-.footer__social{display:flex;gap:10px;margin-top:20px}
-.footer__social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);color:#fff;transition:background-color .3s,border-color .3s,transform .35s var(--ease)}
-.footer__social a:hover{background:var(--pink-deep);border-color:var(--pink-deep);transform:translateY(-3px)}
-.footer__social svg{width:20px;height:20px}
-.footer__nap{font-style:normal;line-height:1.9}
-.footer__nap strong{color:#fff}
-.footer__nap a{color:var(--pink);font-weight:600;display:inline-block;padding:4px 0}
+.footer__quote{margin-top:18px;padding-left:14px;border-left:2px solid var(--pink);font:italic 600 1.15rem/1.4 var(--serif);color:#efe9ee;max-width:22rem}
+.footer__h{margin-bottom:14px;font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--pink)}
+.footer__nap{font-style:normal;display:grid;gap:4px}
+.footer__row{display:flex;align-items:flex-start;gap:12px;padding:6px 0;line-height:1.55;color:#e6e2e7}
+.footer__row svg{flex:none;width:20px;height:20px;margin-top:2px;color:var(--pink)}
+a.footer__row:hover{color:#fff}
+a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .footer__menu{display:grid;gap:2px}
-.footer__menu a{display:inline-block;padding:8px 0;color:#fff}
+.footer__menu a{display:inline-block;padding:7px 0;color:#fff}
 .footer__menu a:hover{color:var(--pink)}
-.footer__copy{text-align:center;font-size:.8rem;padding-top:20px;color:var(--gray-400)}
-/* Thanh "Theo dõi chúng tôi" */
-.follow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;margin-top:48px;padding:16px var(--gut);background:#000;border-block:1px solid rgba(255,255,255,.08)}
-.follow p{font-weight:600;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;color:#fff}
-.follow ul{display:flex;gap:10px}
-.follow a{width:44px;height:44px;border-radius:7px;display:grid;place-items:center;color:#fff;transition:transform .25s var(--ease),filter .25s}
-.follow a:hover,.follow a:focus-visible{transform:translateY(-3px);filter:brightness(1.12)}
-.follow svg{width:22px;height:22px}
-.follow__fb{background:#1877F2}
-.follow__tt{background:#111;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
-.follow__zl{background:#0068FF;font:800 .76rem/1 var(--sans);letter-spacing:.02em}
-.follow__ig{background:radial-gradient(circle at 30% 107%,#fdd56a 0%,#fd6a4f 40%,#d6249f 62%,#5b4bd6 95%)}
+.footer__copy{text-align:center;font-size:.8rem;margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);color:var(--gray-400)}
+/* Khối "Theo dõi chúng tôi" */
+.follow{display:grid;gap:22px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1)}
+.follow__k{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--pink)}
+.follow__t{margin-top:8px;font:600 clamp(1.5rem,3.4vw,1.9rem)/1.2 var(--serif);color:#fff}
+.follow__t em{display:block;font-style:italic;color:var(--pink)}
+.follow__list{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:520px){.follow__list{grid-template-columns:1fr 1fr}}
+.follow__item{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border:1px solid rgba(255,255,255,.14);border-radius:14px;color:#fff;transition:background-color .3s,border-color .3s,transform .35s var(--ease)}
+.follow__item:hover,.follow__item:focus-visible{transform:translateY(-3px);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.35)}
+.follow__ic{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 .68rem/1 var(--sans)}
+.follow__ic svg{width:20px;height:20px}
+.follow__tx{display:grid;min-width:0}
+.follow__tx b{font-size:.92rem;font-weight:600}
+.follow__tx small{font-size:.76rem;color:#b9b4ba;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.follow__fb .follow__ic{background:#1877F2}
+.follow__tt .follow__ic{background:#111;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
+.follow__ig .follow__ic{background:radial-gradient(circle at 30% 107%,#fdd56a 0%,#fd6a4f 40%,#d6249f 62%,#5b4bd6 95%)}
+.follow__zl .follow__ic{background:#0068FF}
+@media (min-width:1024px){.follow{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:center;gap:56px}}
+
+/* Về Quỳnh Như Florist (trang chủ) */
+.story__grid{display:grid;gap:36px;align-items:center}
+.story__title{font:500 clamp(2rem,6vw,3.4rem)/1.1 var(--serif);color:var(--black);margin-bottom:18px}
+.story__title em{display:block;font-style:italic;color:var(--pink-deep)}
+.story__text>p:not(.label):not(.story__sign):not(.story__role){margin-top:12px;max-width:34rem;line-height:1.8}
+.story__sign{margin-top:26px;padding-top:20px;border-top:1px solid rgba(20,18,20,.14);width:min(100%,240px);font:600 1.5rem/1.2 var(--serif);color:var(--black)}
+.story__role{margin-top:4px;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-ink)}
+.story__btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;margin-top:28px;padding:12px 26px;border:1.5px solid var(--pink-ink);border-radius:999px;font-weight:600;color:var(--pink-ink);transition:background-color .3s,color .3s}
+.story__btn svg{width:18px;height:18px;transition:transform .35s var(--ease)}
+.story__btn:hover{background:var(--pink-ink);color:#fff}
+.story__btn:hover svg{transform:translateX(4px)}
+.story__pic img{width:100%;height:auto;border-radius:18px;box-shadow:0 30px 60px -36px rgba(20,18,20,.55)}
+@media (min-width:1024px){.story__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:72px}}
 
 /* ---------- Nút nổi ---------- */
 .fab{position:fixed;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;display:flex;flex-direction:column;gap:10px;transition:opacity .4s var(--ease),transform .4s var(--ease)}
