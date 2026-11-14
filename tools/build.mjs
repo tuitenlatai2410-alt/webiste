@@ -193,7 +193,7 @@ for (const pg of PAGES) {
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" media="(max-width:767.98px)" imagesrcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-600.webp 600w, /assets/img/hero/hoa-bo-hong-doc-720.webp 720w" imagesizes="min(78vw, 420px)" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width:768px)" imagesrcset="/assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" imagesizes="min(64vw, 900px)" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" media="(max-width:767.98px)" imagesrcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-600.webp 600w, /assets/img/hero/hoa-bo-hong-doc-720.webp 720w" imagesizes="min(78vw, 420px)" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width:768px)" imagesrcset="/assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" imagesizes="min(46vw, 720px)" fetchpriority="high">\n' : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
