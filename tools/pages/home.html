@@ -1,27 +1,25 @@
-<!-- [D] HERO: hàng đầu — tên tiệm nhỏ mép trái, QUỲNH NHƯ FLORIST chữ to kiểu ZARA mép phải; ảnh ngang; hàng dưới — nhãn hoa trái, nút phải -->
+<!-- [D] HERO: ảnh bó hoa thấy đầu tiên; QUỲNH NHƯ FLORIST chữ rất to, mờ phía sau ảnh, lộ ra hai bên; dưới ảnh: tên tiệm trái – nút phải -->
 <section class="hero" aria-labelledby="hero-title">
-  <p class="hero__bgword deco" aria-hidden="true" data-depth="0.35" data-text="FLORIST"></p>
-  <div class="wrap hero__inner">
-    <div class="hero__head">
-      <h1 id="hero-title" class="hero__title">Tiệm hoa nhỏ tại <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
-      <p class="hero__brand"><span>Quỳnh Như</span> <span>Florist</span></p>
-    </div>
-    <figure class="hero__banner">
-      <div class="hero__pic" data-depth="0.12">
+  <div class="hero__stage">
+    <p class="hero__bgword" aria-hidden="true" data-depth="0.2"><span class="deco" data-text="QUỲNH NHƯ"></span><span class="deco" data-text="FLORIST"></span></p>
+    <figure class="hero__pic" data-depth="0.08">
+      <picture>
+        <source media="(max-width:767.98px)" srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-600.webp 600w, /assets/img/hero/hoa-bo-hong-doc-720.webp 720w" sizes="min(78vw, 420px)" width="720" height="900">
         <img src="/assets/img/hero/hoa-bo-hong-960.webp"
-             srcset="/assets/img/hero/hoa-bo-hong-640.webp 640w, /assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w"
-             sizes="(min-width:1280px) 1176px, calc(100vw - 32px)" width="1500" height="1000"
+             srcset="/assets/img/hero/hoa-bo-hong-720.webp 720w, /assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w"
+             sizes="min(64vw, 900px)" width="1500" height="1000"
              alt="Hai bó hoa tông hồng – xanh pastel của Quỳnh Như Florist, một bó đặt trong túi giấy kraft" fetchpriority="high" decoding="async">
-      </div>
+      </picture>
     </figure>
-    <div class="hero__bar">
-      <div class="hero__ctas">
-        <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
-        <a class="hero__shop" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-    </div>
-    <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
   </div>
+  <div class="hero__bar">
+    <h1 id="hero-title" class="hero__title">Tiệm hoa nhỏ tại <span class="hero__loc">Thủ Dầu Một – <span class="nw">Bình Dương</span></span></h1>
+    <div class="hero__ctas">
+      <a class="hero__zalo" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo đặt hoa</a>
+      <a class="hero__shop" href="/san-pham/">Xem sản phẩm<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
 </section>
 
 
