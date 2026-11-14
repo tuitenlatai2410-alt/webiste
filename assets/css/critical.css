@@ -125,9 +125,9 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .hero__box::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
 .hero__big{position:absolute;z-index:0;left:50%;top:44%;translate:-50% -50%;margin:0;font:600 clamp(3.4rem,17vw,13.5rem)/.9 var(--sans);letter-spacing:-.03em;text-transform:uppercase;text-align:center;color:#CFCAC6;white-space:nowrap;pointer-events:none;user-select:none}
 .hero__big span{display:block}
-.hero__cut{position:absolute;z-index:1;left:50%;bottom:0;translate:-50% 0;height:80%;margin:0}
-.hero__cut img{height:100%;width:auto;max-width:none;filter:drop-shadow(0 26px 24px rgba(20,18,20,.22));-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%);mask-image:linear-gradient(90deg,transparent 0,#000 6%)}
-.hero__foot{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px var(--gut) 34px;text-align:center}
+.hero__cut{position:absolute;z-index:1;left:50%;bottom:4%;translate:-50% 0;height:76%;margin:0}
+.hero__cut img{height:100%;width:auto;max-width:none;filter:drop-shadow(0 26px 24px rgba(20,18,20,.25))}
+.hero__foot{position:relative;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:18px var(--gut) 30px;text-align:left}
 .hero__ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 22px}
 .hero__shop{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:12px 24px;background:var(--black);color:#fff;font:600 .82rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:background-color .3s}
 .hero__shop svg{width:18px;height:18px}
@@ -147,8 +147,8 @@ button{cursor:pointer;background:none;border:0;padding:0}
 @media (min-width:1024px){
   .hero__stage{height:min(calc(100svh - 128px),820px);min-height:600px}
   .hero__big{top:48%;font-size:clamp(8rem,15vw,15rem)}
-  .hero__cut{height:90%}
-  .hero__foot{position:absolute;left:0;right:0;bottom:44px;max-width:1240px;margin:0 auto;padding:0 var(--gut);flex-direction:row;justify-content:space-between;align-items:flex-end;text-align:left;pointer-events:none}
+  .hero__cut{height:86%;bottom:3%}
+  .hero__foot{position:absolute;left:0;right:0;bottom:44px;max-width:1240px;margin:0 auto;padding:0 var(--gut);flex-direction:row;justify-content:flex-end;align-items:flex-end;text-align:left;pointer-events:none}
   .hero__foot>*{pointer-events:auto}
   .hero__note::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
   .hero__note{margin-bottom:112px}

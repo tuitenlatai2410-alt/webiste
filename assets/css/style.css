@@ -409,7 +409,8 @@ a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .story__btn svg{width:18px;height:18px;transition:transform .35s var(--ease)}
 .story__btn:hover{background:var(--pink-ink);color:#fff}
 .story__btn:hover svg{transform:translateX(4px)}
-.story__pic img{width:100%;height:auto;border-radius:18px;box-shadow:0 30px 60px -36px rgba(20,18,20,.55)}
+.story__pic{justify-self:center;width:100%;max-width:520px}
+.story__pic img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:0 30px 60px -36px rgba(20,18,20,.55)}
 @media (min-width:1024px){.story__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:72px}}
 
 /* ---------- Nút nổi ---------- */

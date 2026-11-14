@@ -193,7 +193,7 @@ for (const pg of PAGES) {
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" imagesrcset="/assets/img/hero/bo-hoa-tach-nen-520.webp 520w, /assets/img/hero/bo-hoa-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-tach-nen-780.webp 780w, /assets/img/hero/bo-hoa-tach-nen-1100.webp 1100w" imagesizes="(min-width:1024px) min(46vw, 640px), 78vw" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" imagesrcset="/assets/img/hero/bo-hoa-xanh-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-xanh-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-xanh-tach-nen-820.webp 820w" imagesizes="(min-width:1024px) min(40vw, 560px), 70vw" fetchpriority="high">\n' : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
