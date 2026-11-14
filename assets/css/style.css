@@ -428,6 +428,8 @@ a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .fab__btn:hover .fab__label{background:var(--pink-deep);color:#fff}
 .fab__btn:hover .fab__label::after{background:var(--pink-deep)}
 @keyframes fabLabel{from{transform:translateX(8px)}to{transform:none}}
+/* Máy tính: đã có 2 nút dọc sát mép (Mẫu hoa · Kết nối Zalo) → ẩn 2 nút tròn góc phải dưới */
+@media (min-width:1024px) and (hover:hover){.fab{display:none}}
 /* nút "Gọi ngay" hiện trên mọi màn hình (máy tính bấm vào sẽ mở ứng dụng gọi: Zalo/Skype/điện thoại liên kết) */
 @keyframes ripple{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
 
