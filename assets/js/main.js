@@ -446,6 +446,40 @@
     dlg.addEventListener('close', function () { if (opener) opener.focus(); });
   }
 
+  /* =========================================================
+     BĂNG ẢNH NGANG (mục Về Quỳnh Như Florist) — vuốt / nút ‹ › / chấm tròn
+     ========================================================= */
+  function initStorySlider() {
+    var box = $('.story__slider');
+    if (!box) return;
+    var track = $('.story__track', box), slides = $$('.story__slide', box), dots = $$('.story__dot', box);
+    function current() {
+      var mid = track.scrollLeft + track.clientWidth / 2, best = 0, d = Infinity;
+      slides.forEach(function (sl, i) { var c = sl.offsetLeft + sl.offsetWidth / 2, k = Math.abs(c - mid); if (k < d) { d = k; best = i; } });
+      return best;
+    }
+    function go(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      var sl = slides[i];
+      track.scrollTo({ left: sl.offsetLeft - (track.clientWidth - sl.offsetWidth) / 2, behavior: reduced ? 'auto' : 'smooth' });
+    }
+    var raf = 0;
+    track.addEventListener('scroll', function () {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0; var c = current();
+        dots.forEach(function (d, i) { if (i === c) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      });
+    }, { passive: true });
+    $('.story__nav--prev', box).addEventListener('click', function () { go(current() - 1); });
+    $('.story__nav--next', box).addEventListener('click', function () { go(current() + 1); });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+  }
+
   function initProducts() {
     var grid = $('#product-grid');
     if (!grid) return;
@@ -819,6 +853,7 @@
   initSearch();
   initReveal();
   initProducts();
+  initStorySlider();
   initModal();
   initMotion();
   initForm();

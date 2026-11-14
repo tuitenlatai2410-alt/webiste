@@ -24,11 +24,11 @@
   <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
 </section>
 
-<!-- VỀ QUỲNH NHƯ FLORIST: châm ngôn + giới thiệu ngắn → trang Giới thiệu -->
+<!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
 <section class="section story" aria-labelledby="story-title">
-  <div class="wrap story__grid">
+  <div class="wrap">
     <div class="story__text reveal">
-      <p class="label">— ✦ Về Quỳnh Như Florist</p>
+      <p class="label">— ✦ Về Quỳnh Như Florist ✦ —</p>
       <h2 id="story-title" class="story__title">Mỗi bó hoa là một lời <em>chưa kịp nói thành câu</em></h2>
       <p>Quỳnh Như Florist là tiệm hoa sáp nhỏ tại Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh), chuyên hoa sáp theo dịp và trụ hoa để bàn decor.</p>
       <p>Hoa sáp giữ được dáng và màu lâu, nên món quà có thể ở lại bên người nhận thật lâu sau ngày trao. Tiệm còn mới, nhưng mỗi bó hoa đều được làm đúng như hình và tư vấn tận tâm — từ lúc bạn nhắn tin đến khi hoa được trao tận tay.</p>
@@ -36,12 +36,17 @@
       <p class="story__role">Tiệm hoa sáp · Thủ Dầu Một – Bình Dương</p>
       <a class="story__btn" href="/gioi-thieu/">Tìm hiểu về Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-    <figure class="story__pic reveal">
-      <img src="/assets/img/hero/hoa-bo-hong-doc-840.webp"
-           srcset="/assets/img/hero/hoa-bo-hong-doc-560.webp 560w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w"
-           sizes="(min-width:1024px) 520px, calc(100vw - 32px)" width="840" height="1050"
-           alt="Hai bó hoa sáp tông hồng – xanh pastel, một bó đặt trong túi giấy kraft" loading="lazy" decoding="async">
-    </figure>
+  </div>
+  <div class="story__slider reveal" role="region" aria-label="Ảnh hoa của tiệm – vuốt ngang để xem thêm">
+    <button type="button" class="story__nav story__nav--prev" aria-label="Ảnh trước"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <ul class="story__track" tabindex="0">
+        <li class="story__slide"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Hai bó hoa sáp tông hồng – xanh pastel, một bó đặt trong túi giấy kraft" loading="lazy" decoding="async"></li>
+        <li class="story__slide"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Bó hoa sáp tông xanh dương gói giấy đen đặt cạnh túi giấy kraft" loading="lazy" decoding="async"></li>
+        <li class="story__slide"><img src="/assets/img/hero/gallery-3-1100.webp" srcset="/assets/img/hero/gallery-3-640.webp 640w, /assets/img/hero/gallery-3-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Cận cảnh bó hoa sáp xanh dương: hoa ly, hồng xanh, cẩm tú cầu và hồng trắng" loading="lazy" decoding="async"></li>
+        <li class="story__slide"><img src="/assets/img/hero/gallery-4-1100.webp" srcset="/assets/img/hero/gallery-4-640.webp 640w, /assets/img/hero/gallery-4-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh" loading="lazy" decoding="async"></li>
+    </ul>
+    <button type="button" class="story__nav story__nav--next" aria-label="Ảnh sau"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="story__dots"><button type="button" class="story__dot" aria-label="Xem ảnh 1" aria-current="true"></button><button type="button" class="story__dot" aria-label="Xem ảnh 2"></button><button type="button" class="story__dot" aria-label="Xem ảnh 3"></button><button type="button" class="story__dot" aria-label="Xem ảnh 4"></button></div>
   </div>
 </section>
 
