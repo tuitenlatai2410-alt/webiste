@@ -501,3 +501,15 @@ a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .zcard__qr figcaption{margin-top:10px;font-size:.8rem;line-height:1.45;color:var(--gray-700)}
 @media (max-width:719.98px){.zcard__in{grid-template-columns:1fr;padding:32px 22px}.zcard__qr{max-width:240px;justify-self:center}}
 @media (prefers-reduced-motion:reduce){.zcard[open]{animation:none}}
+
+/* ---------- 2 nút dọc sát mép màn hình (chỉ máy tính) ---------- */
+.sidetab{display:none}
+@media (min-width:1024px) and (hover:hover){
+  .sidetab{position:fixed;top:50%;z-index:45;display:flex;align-items:center;gap:10px;padding:18px 11px;writing-mode:vertical-rl;font:700 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#fff;box-shadow:0 10px 24px -12px rgba(20,18,20,.55);transition:padding .3s var(--ease),background-color .3s}
+  .sidetab svg{width:16px;height:16px;flex:none}
+  .sidetab--l{left:0;translate:0 -50%;rotate:180deg;background:var(--black);border-radius:10px 0 0 10px}
+  .sidetab--r{right:0;translate:0 -50%;background:var(--pink-ink);border-radius:10px 0 0 10px}
+  .sidetab--l:hover,.sidetab--l:focus-visible{padding-inline:15px;background:#2b2629}
+  .sidetab--r:hover,.sidetab--r:focus-visible{padding-inline:15px;background:#8e2a59}
+  .sidetab--l svg{rotate:90deg}
+}
