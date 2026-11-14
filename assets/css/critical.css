@@ -152,14 +152,10 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .hero__cut{height:86%;bottom:3%}
   .hero__foot{position:absolute;left:0;right:0;bottom:44px;max-width:1240px;margin:0 auto;padding:0 var(--gut);flex-direction:row;justify-content:flex-end;align-items:flex-end;text-align:left;pointer-events:none}
   .hero__foot>*{pointer-events:auto}
-  .hero__social{display:flex;gap:10px;margin-top:20px}
-  .hero__social a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 .62rem/1 var(--sans);box-shadow:0 8px 18px -10px rgba(20,18,20,.6);transition:transform .3s var(--ease)}
-  .hero__social a:hover,.hero__social a:focus-visible{transform:translateY(-3px)}
-  .hero__social svg{width:19px;height:19px}
-  .hero__social .follow__fb{background:#1877F2}
-  .hero__social .follow__tt{background:#111}
-  .hero__social .follow__ig{background:radial-gradient(circle at 30% 107%,#fdd56a 0%,#fd6a4f 40%,#d6249f 62%,#5b4bd6 95%)}
-  .hero__social .follow__zl{background:#0068FF}
+  .hero__social{display:flex;gap:4px;margin-top:16px;margin-left:-10px}
+  .hero__social a{width:40px;height:40px;display:grid;place-items:center;color:var(--black);transition:color .25s,transform .3s var(--ease)}
+  .hero__social a:hover,.hero__social a:focus-visible{color:var(--pink-ink);transform:translateY(-2px)}
+  .hero__social svg{width:20px;height:20px}
   .hero__note::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
   .hero__aside{margin-bottom:84px}
   .hero__ctas{flex-direction:column;align-items:flex-start;gap:14px}
