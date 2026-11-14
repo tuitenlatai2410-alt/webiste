@@ -152,12 +152,12 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .hero__cut{height:86%;bottom:3%}
   .hero__foot{position:absolute;left:0;right:0;bottom:44px;max-width:1240px;margin:0 auto;padding:0 var(--gut);flex-direction:row;justify-content:flex-end;align-items:flex-end;text-align:left;pointer-events:none}
   .hero__foot>*{pointer-events:auto}
-  .hero__social{display:flex;gap:4px;margin-top:16px;margin-left:-10px}
+  .hero__social{position:absolute;right:calc(var(--gut) - 10px);bottom:-30px;display:flex;gap:2px}
   .hero__social a{width:40px;height:40px;display:grid;place-items:center;color:var(--black);transition:color .25s,transform .3s var(--ease)}
   .hero__social a:hover,.hero__social a:focus-visible{color:var(--pink-ink);transform:translateY(-2px)}
-  .hero__social svg{width:20px;height:20px}
+  .hero__social svg{width:18px;height:18px}
   .hero__note::after{content:"";display:block;width:34px;height:1.5px;margin-top:8px;background:var(--black)}
-  .hero__aside{margin-bottom:84px}
+  .hero__aside{margin-bottom:56px}
   .hero__ctas{flex-direction:column;align-items:flex-start;gap:14px}
 }
 
