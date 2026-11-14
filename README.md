@@ -111,3 +111,8 @@ npm run font3d -- duong-dan/Baloo2-ExtraBold.ttf "Chữ mới" assets/fonts/qnf-
 ```
 
 - **Three.js** nạp từ CDN jsDelivr phiên bản cố định `0.160.0` (khai báo trong `tools/build.mjs`).
+
+## Lời chúc mỗi ngày (dòng chữ chạy màu đen)
+- Kho 100 câu nằm ở `assets/data/loi-chuc.json` (mỗi dòng một câu, giữ dấu ngoặc kép và dấu phẩy).
+- Mỗi ngày (theo giờ Việt Nam) web tự hiện 1 câu, xoay vòng hết 100 câu rồi lặp lại. Không cần đẩy web lại mỗi ngày.
+- Muốn thêm/sửa câu: sửa file trên rồi đẩy lên GitHub như bình thường.

@@ -182,6 +182,19 @@
   }
 
   /* =========================================================
+     DÒNG CHỮ CHẠY — mỗi ngày (giờ Việt Nam) một lời chúc từ kho 100 câu
+     ========================================================= */
+  function initNotice() {
+    var bar = $('.notice'), src = bar && bar.getAttribute('data-src');
+    if (!src || !window.fetch) return;
+    fetch(src).then(function (r) { return r.ok ? r.json() : null; }).then(function (list) {
+      if (!list || !list.length) return;
+      var q = list[Math.floor((Date.now() + 7 * 3600e3) / 864e5) % list.length];
+      $$('.notice__quote', bar).forEach(function (el) { if (el.textContent !== q) el.textContent = q; });
+    }).catch(function () {});
+  }
+
+  /* =========================================================
      [C] MENU
      ========================================================= */
   function initNav() {
@@ -802,6 +815,7 @@
   /* ---------- Khởi động ---------- */
   initIntro();
   initNav();
+  initNotice();
   initSearch();
   initReveal();
   initProducts();

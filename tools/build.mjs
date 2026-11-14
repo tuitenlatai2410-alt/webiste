@@ -33,25 +33,16 @@ if (PRODUCTS.length !== 20) console.warn('⚠ Số sản phẩm hiện là', PRO
 const FORM_ON = C.ORDER_FORM_ENABLED === true;
 
 /* ---- Dải chữ chạy trên cùng: lưu ý đặt hàng + 10 câu chúc (chủ web sửa / thêm / bớt câu tại đây) ---- */
-const NOTICE_QUOTES = [
-  'Mỗi bó hoa là một lời chưa kịp nói thành câu',
-  'Chúc bạn một ngày dịu dàng như cánh hoa vừa nở',
-  'Gửi một bó hoa, gửi cả sự quan tâm',
-  'Hoa rồi sẽ tàn, yêu thương thì ở lại',
-  'Điều nhẹ nhàng thường là điều được nhớ lâu',
-  'Chúc bạn luôn có một lý do để mỉm cười',
-  'Một nhành hoa nhỏ cũng đủ làm ấm một ngày dài',
-  'Yêu thương không cần lớn lao, chỉ cần đúng lúc',
-  'Chúc mọi dịp đặc biệt của bạn đều trọn vẹn',
-  'Hoa nói thay những điều bạn ngại nói',
-];
+// Kho 100 lời chúc: assets/data/loi-chuc.json. Mỗi ngày (theo giờ Việt Nam) hiện 1 câu.
+// Lúc build ghi sẵn câu của ngày build; trình duyệt tự đổi sang câu của ngày hôm nay (main.js → initNotice).
+const LOI_CHUC = JSON.parse(read('assets/data/loi-chuc.json'));
+const dayIndex = (ms) => Math.floor((ms + 7 * 3600e3) / 864e5) % LOI_CHUC.length;
+const TODAY_QUOTE = LOI_CHUC[dayIndex(Date.now())];
 function noticeItems(copy) {
   const tel = `<a href="tel:${C.PHONE}"${copy ? ' tabindex="-1"' : ''}>${C.PHONE_DISPLAY}</a>`;
   const notice = `Hoa thiết kế theo yêu cầu vui lòng đặt trước <b>4–5 ngày</b> <i>·</i> Mẫu có sẵn tại tiệm có thể nhận <b>ngay trong ngày</b> <i>·</i> Liên hệ ${tel}`;
-  const quotes = NOTICE_QUOTES.map((q) => `<span class="notice__quote">${esc(q)}</span>`);
-  // Lưu ý đặt hàng xuất hiện 2 lần trong mỗi vòng (đầu vòng và giữa vòng) để khách không phải chờ lâu
-  const half = Math.ceil(quotes.length / 2);
-  return [notice, ...quotes.slice(0, half), notice.replace(`<a href="tel:${C.PHONE}">`, `<a href="tel:${C.PHONE}" tabindex="-1">`), ...quotes.slice(half)].join(' <i class="notice__sep">✦</i> ') + ' <i class="notice__sep">✦</i>';
+  const quote = `<span class="notice__lead">Lời chúc hôm nay:</span> <span class="notice__quote">${esc(TODAY_QUOTE)}</span>`;
+  return [notice, quote].join(' <i class="notice__sep">✦</i> ') + ' <i class="notice__sep">✦</i>';
 }
 
 /* ---- FAQ (giữ nguyên nội dung mục 5.5) ---- */
@@ -208,7 +199,7 @@ for (const pg of PAGES) {
   }
   if (out.includes('{{')) throw new Error(`Còn token chưa thay trong trang ${pg.key}: ` + out.match(/\{\{[^}]*\}\}/)[0]);
   // Gắn ?v=<mã> vào file tĩnh để cache dài hạn mà vẫn cập nhật ngay khi sửa
-  for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js']) {
+  for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js', 'assets/data/loi-chuc.json']) {
     out = out.split(`"/${f}"`).join(`"/${f}?v=${ver(f)}"`);
   }
   out = out.replace('<html lang="vi" class="no-js">', `<html lang="vi" class="no-js" data-v="${v3d}">`);
