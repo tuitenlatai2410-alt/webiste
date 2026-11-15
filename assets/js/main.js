@@ -449,6 +449,64 @@
   /* =========================================================
      BĂNG ẢNH NGANG (mục Về Quỳnh Như Florist) — vuốt / nút ‹ › / chấm tròn
      ========================================================= */
+  /* =========================================================
+     HERO 3 MẪU — tự chuyển 6 giây, nút ‹ ›, chấm, phím ← →, vuốt ngang
+     ========================================================= */
+  function initHeroSlider() {
+    var hero = $('.hero'), stage = hero && $('.hero__stage', hero);
+    if (!stage) return;
+    var slides = $$('.hero__slide', stage), dots = $$('.hero__dot', stage);
+    if (slides.length < 2) return;
+    var cur = 0, timer = 0, hover = false, focus = false, DELAY = 6000;
+    function show(i) {
+      cur = (i + slides.length) % slides.length;
+      slides.forEach(function (sl, k) {
+        var on = k === cur;
+        sl.classList.toggle('is-active', on);
+        if (on) sl.removeAttribute('aria-hidden'); else sl.setAttribute('aria-hidden', 'true');
+      });
+      dots.forEach(function (d, k) { if (k === cur) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      hero.setAttribute('data-theme', slides[cur].getAttribute('data-theme'));
+    }
+    function stop() { clearTimeout(timer); timer = 0; }
+    function play() {
+      stop();
+      if (reduced || hover || focus || document.hidden) return;
+      timer = setTimeout(function () { show(cur + 1); play(); }, DELAY);
+    }
+    function go(i) { show(i); play(); }
+    // Ảnh 2–3 chỉ tải sau khi trang đã tải xong (không giành băng thông của ảnh đầu)
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        slides.forEach(function (sl) {
+          var im = $('img[data-src]', sl); if (!im) return;
+          im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src');
+          im.removeAttribute('data-srcset'); im.removeAttribute('data-src');
+        });
+      }, 300);
+    });
+    $('.hero__nav--prev', stage).addEventListener('click', function () { go(cur - 1); });
+    $('.hero__nav--next', stage).addEventListener('click', function () { go(cur + 1); });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    });
+    hero.addEventListener('mouseenter', function () { hover = true; stop(); });
+    hero.addEventListener('mouseleave', function () { hover = false; play(); });
+    hero.addEventListener('focusin', function () { focus = true; stop(); });
+    hero.addEventListener('focusout', function () { focus = false; play(); });
+    document.addEventListener('visibilitychange', play);
+    var x0 = null, y0 = 0;
+    stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    play();
+  }
+
   function initStorySlider() {
     var box = $('.story__slider');
     if (!box) return;
@@ -854,6 +912,7 @@
   initReveal();
   initProducts();
   initStorySlider();
+  initHeroSlider();
   initModal();
   initMotion();
   initForm();

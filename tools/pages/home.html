@@ -1,14 +1,37 @@
 <!-- [D] HERO: bó hoa tách nền ở giữa; QUỲNH NHƯ FLORIST rất to, xám nhạt phía sau; hộp chữ nhỏ góc trái trên; nút góc trái dưới; ghi chú góc phải dưới -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero__stage">
+<section class="hero" data-theme="xam" aria-labelledby="hero-title">
+  <div class="hero__stage" aria-roledescription="carousel" aria-label="Mẫu hoa sáp nổi bật">
     <h1 id="hero-title" class="hero__box">Tiệm hoa nhỏ <span>tại Thủ Dầu Một –</span> <span>Bình Dương</span></h1>
-    <p class="hero__big" aria-hidden="true"><span class="deco" data-text="QUỲNH NHƯ"></span><span class="deco" data-text="FLORIST"></span></p>
-    <figure class="hero__cut">
-      <img src="/assets/img/hero/bo-hoa-xanh-tach-nen-620.webp"
-           srcset="/assets/img/hero/bo-hoa-xanh-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-xanh-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-xanh-tach-nen-820.webp 820w"
-           sizes="(min-width:1024px) min(40vw, 560px), 70vw" width="1030" height="1095"
-           alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
-    </figure>
+    <div class="hero__slide hero__slide--xam is-active" data-theme="xam" role="group" aria-roledescription="slide" aria-label="1 / 3">
+      <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
+      <figure class="hero__cut">
+        <img src="/assets/img/hero/bo-hoa-xanh-tach-nen-620.webp"
+             srcset="/assets/img/hero/bo-hoa-xanh-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-xanh-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-xanh-tach-nen-820.webp 820w"
+             sizes="(min-width:1024px) min(40vw, 560px), 70vw" width="1030" height="1095"
+             alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
+    <div class="hero__slide hero__slide--hong" data-theme="hong" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
+      <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
+      <figure class="hero__cut">
+        <img data-src="/assets/img/hero/bo-hoa-hong-tach-nen-620.webp"
+             data-srcset="/assets/img/hero/bo-hoa-hong-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-hong-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-hong-tach-nen-820.webp 820w"
+             sizes="(min-width:1024px) min(40vw, 560px), 70vw" width="1259" height="1479"
+             alt="Bó hoa sáp tông hồng phấn gói giấy trắng, thắt nơ lụa trắng – Quỳnh Như Florist" decoding="async">
+      </figure>
+    </div>
+    <div class="hero__slide hero__slide--do" data-theme="do" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
+      <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
+      <figure class="hero__cut">
+        <img data-src="/assets/img/hero/hop-hoa-do-tach-nen-620.webp"
+             data-srcset="/assets/img/hero/hop-hoa-do-tach-nen-480.webp 480w, /assets/img/hero/hop-hoa-do-tach-nen-620.webp 620w, /assets/img/hero/hop-hoa-do-tach-nen-820.webp 820w"
+             sizes="(min-width:1024px) min(40vw, 560px), 70vw" width="1058" height="1636"
+             alt="Hộp hoa hồng sáp đỏ thắt nơ lụa đỏ rượu – Quỳnh Như Florist" decoding="async">
+      </figure>
+    </div>
+    <button type="button" class="hero__nav hero__nav--prev" aria-label="Mẫu trước"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <button type="button" class="hero__nav hero__nav--next" aria-label="Mẫu sau"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="hero__dots"><button type="button" class="hero__dot" aria-label="Xem mẫu 1" aria-current="true"></button><button type="button" class="hero__dot" aria-label="Xem mẫu 2"></button><button type="button" class="hero__dot" aria-label="Xem mẫu 3"></button></div>
   </div>
   <div class="hero__foot">
     <div class="hero__aside">
