@@ -236,6 +236,62 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
       </li>`;
 }).join('\n');
 
+/* ---- Blog (tools/posts/*.json). Bài có "draft": true thì chưa xuất ---- */
+const POSTS_ALL = fs.readdirSync(path.join(ROOT, 'tools/posts')).filter((f) => f.endsWith('.json')).sort()
+  .map((f) => JSON.parse(read('tools/posts/' + f)));
+for (const p of POSTS_ALL) if (p.draft) HIDDEN.push(`Blog › bản nháp chờ duyệt: ${p.title}`);
+const POSTS = POSTS_ALL.filter((p) => !p.draft && !hasPlaceholder(JSON.stringify(p)));
+const BLOG_ON = POSTS.length > 0;
+if (!BLOG_ON) HIDDEN.push('Trang /blog/ (chưa có bài nào được duyệt)');
+if (POSTS.length < 2) HIDDEN.push('Khối "Câu chuyện từ tiệm" ở trang chủ (cần ít nhất 2 bài đã duyệt)');
+// Ảnh blog: tools/posts/img → assets/img/blog (chỉ ảnh của bài đã duyệt)
+fs.mkdirSync(path.join(ROOT, 'assets/img/blog'), { recursive: true });
+for (const p of POSTS) for (const im of p.images) for (const w of [400, 800, 1200]) {
+  const src = path.join(ROOT, `tools/posts/img/${im.name}-${w}.webp`);
+  if (fs.existsSync(src)) fs.copyFileSync(src, path.join(ROOT, `assets/img/blog/${im.name}-${w}.webp`));
+}
+const blogImg = (name, alt, sizes, lazy) => {
+  const ws = [400, 800, 1200].filter((w) => fs.existsSync(path.join(ROOT, `tools/posts/img/${name}-${w}.webp`)));
+  const big = ws[ws.length - 1];
+  return `<img src="/assets/img/blog/${name}-${Math.min(800, big)}.webp" srcset="${ws.map((w) => `/assets/img/blog/${name}-${w}.webp ${w}w`).join(', ')}" sizes="${sizes}" width="800" height="1000" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ' fetchpriority="high"'} decoding="async">`;
+};
+const altOf = (p, n) => (p.images.find((i) => i.name === n) || {}).alt || '';
+function postHTML(p) {
+  const body = p.body.map(([k, v]) => k === 'p' ? `      <p>${esc(v)}</p>`
+    : k === 'h2' ? `      <h2>${esc(v)}</h2>`
+    : k === 'ul' ? `      <ul>${v.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`
+    : k === 'img' ? `      <figure class="post__fig">${blogImg(v, altOf(p, v), '(min-width:800px) 720px, 100vw', true)}</figure>` : '').join('\n');
+  return `<article class="section post page-first" aria-labelledby="post-title">
+  <div class="wrap post__wrap">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="/">Trang chủ</a><span aria-hidden="true">/</span><a href="/blog/">Câu chuyện từ tiệm</a></nav>
+    <h1 id="post-title" class="post__title">${esc(p.h1)}</h1>
+    <figure class="post__fig">${blogImg(p.cover, altOf(p, p.cover), '(min-width:800px) 720px, 100vw', false)}</figure>
+    <div class="post__body">
+${body}
+    </div>
+    <p class="post__cta"><a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo hỏi mẫu này</a></p>
+  </div>
+</article>
+`;
+}
+const blogCard = (p) => `<li><a class="bcard reveal" href="/blog/${p.slug}/"><span class="bcard__img">${blogImg(p.cover, altOf(p, p.cover), '(min-width:1024px) 380px, (min-width:768px) 45vw, 100vw', true)}</span><span class="bcard__t">${esc(p.h1)}</span></a></li>`;
+const BLOG_LIST = `<section class="section blog page-first" aria-labelledby="blog-title">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="/">Trang chủ</a><span aria-hidden="true">/</span><span aria-current="page">Câu chuyện từ tiệm</span></nav>
+    <div class="sec-head reveal"><p class="label">— ✦ BLOG</p><h1 id="blog-title" class="h2">Câu chuyện từ tiệm hoa sáp</h1></div>
+    <ul class="bgrid">${POSTS.map(blogCard).join('')}</ul>
+  </div>
+</section>
+`;
+// Khối trang chủ: chỉ khi có ít nhất 2 bài đã duyệt
+const HOME_STORIES = POSTS.length >= 2 ? `<section class="section stories" aria-labelledby="stories-title">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="label">— ✦ BLOG</p><h2 id="stories-title" class="h2">Câu chuyện từ tiệm</h2></div>
+    <ul class="bgrid">${POSTS.slice(0, 3).map(blogCard).join('')}</ul>
+  </div>
+</section>
+` : '';
+
 /* ---- Các trang (tiêu đề, mô tả lấy từ tools/i18n/<lang>.json) ---- */
 const PAGE_DEFS = [
   { key: 'home', path: '' },
@@ -256,7 +312,11 @@ const PAGE_DEFS_EN = [
   { key: 'lien-he', path: 'en/contact/', tpl: 'en/lien-he' },
 ];
 const mkPages = (L, defs) => defs.map((d) => ({ ...d, lang: L, tpl: d.tpl || d.key, name: I18N[L][`page_${d.key}_name`], title: I18N[L][`page_${d.key}_title`], desc: I18N[L][`page_${d.key}_desc`] }));
-const PAGES_BY_LANG = { vi: mkPages('vi', PAGE_DEFS), en: mkPages('en', PAGE_DEFS_EN) };
+const BLOG_PAGES = BLOG_ON ? [
+  { key: 'blog', path: 'blog/', lang: 'vi', name: 'Câu chuyện từ tiệm', title: 'Câu chuyện từ tiệm hoa sáp – Quỳnh Như Florist', desc: 'Câu chuyện từ tiệm hoa sáp Quỳnh Như Florist tại Thủ Dầu Một: cận cảnh từng mẫu hoa sáp thật, cách phối màu, cách gói và cách đặt mẫu tương tự.', content: BLOG_LIST },
+  ...POSTS.map((p) => ({ key: 'blog-' + p.slug, path: `blog/${p.slug}/`, lang: 'vi', name: p.title, title: p.title, desc: p.desc, content: postHTML(p), post: p })),
+] : [];
+const PAGES_BY_LANG = { vi: [...mkPages('vi', PAGE_DEFS), ...BLOG_PAGES], en: mkPages('en', PAGE_DEFS_EN) };
 const PAGES = PAGES_BY_LANG.vi;
 const ALL_PAGES = LANGS.flatMap((L) => PAGES_BY_LANG[L]);
 const VI_PATH = { feedback: 'feedback/', ...Object.fromEntries(PAGE_DEFS.map((d) => [d.key, d.path])) };
@@ -312,6 +372,12 @@ function jsonld(pg) {
     { '@type': pageType, '@id': url + '#webpage', url, name: pg.title, description: pg.desc, inLanguage: pg.lang, isPartOf: { '@id': CANONICAL + '#website' }, about: { '@id': CANONICAL + '#florist' } },
     { '@type': 'BreadcrumbList', itemListElement: crumbs },
   ];
+  if (pg.post) graph.push({
+    '@type': 'BlogPosting', '@id': url + '#post', headline: pg.post.title, description: pg.post.desc, inLanguage: 'vi',
+    image: `${SITE}/assets/img/blog/${pg.post.cover}-800.webp`, mainEntityOfPage: { '@id': url + '#webpage' },
+    author: { '@id': CANONICAL + '#florist' }, publisher: { '@id': CANONICAL + '#florist' },
+    ...(pg.post.date ? { datePublished: pg.post.date } : {}),
+  });
   // FAQPage chỉ gồm các câu đang hiện trên trang
   if (pg.key === 'tro-giup' && FAQ.length) graph.push({
     '@type': 'FAQPage', '@id': url + '#faq',
@@ -402,9 +468,10 @@ for (const pg of ALL_PAGES) {
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
     HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">\n` : '',
+    HOME_STORIES: pg.key === 'home' ? HOME_STORIES : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
-  const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + read(`tools/pages/${pg.tpl}.html`) + read('tools/partials/bottom.html');
+  const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + (pg.content || read(`tools/pages/${pg.tpl}.html`)) + read('tools/partials/bottom.html');
   // Thay nhiều lượt: phần chèn vào (popup sản phẩm, form) cũng chứa token như {{ZALO_URL}}
   let out = raw;
   for (let pass = 0; pass < 3 && /\{\{[A-Za-z0-9_-]+\}\}/.test(out); pass++) {
