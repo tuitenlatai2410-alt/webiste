@@ -19,7 +19,9 @@ const PRODUCTS = sandbox.window.QNF_PRODUCTS;
 const missing = (v) => !v || String(v).startsWith('[CHƯA CÓ');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-const THREE_VERSION = '0.160.0';
+// Ảnh bó hoa xanh ở hero (dùng chung cho thẻ preload và thẻ img); sizes khớp bề rộng hiển thị thật
+const HERO_SRCSET = ['480', '620', '820', '1030'].map((w) => `/assets/img/hero/bo-hoa-xanh-tach-nen-${w}.webp ${w}w`).join(', ');
+const HERO_SIZES = '(min-width:1024px) 660px, (min-width:768px) 440px, 92vw';
 const SITE = C.SITE_URL.replace(/\/+$/, '');
 const CANONICAL = SITE + '/';
 const MAPS_URL = missing(C.MAPS_URL)
@@ -65,14 +67,16 @@ const FAQ_ITEMS = FAQ.map(([q, a]) =>
 const img = (name, alt, eager) =>
   `<img src="/assets/img/products/${name}-800.webp" srcset="/assets/img/products/${name}-400.webp 400w, /assets/img/products/${name}-800.webp 800w, /assets/img/products/${name}-1200.webp 1200w" sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw" width="800" height="1000" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
-  const media = p.images && p.images.length
+  // Mẫu tham khảo (chưa có ảnh thật): không hiện kích thước, không hiện chữ chờ ảnh
+  const real = p.images && p.images.length;
+  const media = real
     ? img(p.images[0], `${p.name} – ${p.size}`, false)
-    : `<div class="ph${i % 3 ? ' ph--' + ((i % 3) + 1) : ''}"><svg aria-hidden="true"><use href="#i-flower"/></svg><span>Ảnh sẽ cập nhật</span></div>`;
+    : `<div class="ph${i % 3 ? ' ph--' + ((i % 3) + 1) : ''}"><svg aria-hidden="true"><use href="#i-flower"/></svg></div>`;
   return `      <li class="pcard" id="${p.id}" data-cat="${p.category}">
         <a class="pcard__link" href="#${p.id}">
           <div class="pcard__media">${media}</div>
           <span class="pcard__id" aria-hidden="true">${p.id.toUpperCase().replace('SP-', 'SP ')}</span>
-          <div class="pcard__info"><h2 class="pcard__name">${esc(p.name)}</h2><p class="pcard__size">${esc(p.size)}</p><p class="pcard__price">Liên hệ báo giá</p></div>
+          <div class="pcard__info"><h2 class="pcard__name">${esc(p.name)}</h2>${real ? `<p class="pcard__size">${esc(p.size)}</p>` : ''}<p class="pcard__price">Liên hệ báo giá</p></div>
           <span class="pcard__glare" aria-hidden="true"></span>
         </a>
       </li>`;
@@ -100,6 +104,10 @@ for (const pg of PAGES) {
   if ([...pg.title].length > 60) console.warn('⚠ Tiêu đề dài hơn 60 ký tự:', pg.title);
   if ([...pg.desc].length > 160) console.warn('⚠ Mô tả dài hơn 160 ký tự:', pg.desc);
 }
+
+// /san-pham/ để noindex cho tới khi có mẫu thật (đang là 20 mẫu tham khảo)
+const HAS_REAL_PRODUCTS = PRODUCTS.some((p) => p.images && p.images.length);
+const noindex = (pg) => pg.key === 'san-pham' && !HAS_REAL_PRODUCTS;
 
 /* ---- JSON-LD ---- */
 const sameAs = [C.TIKTOK_URL, C.FACEBOOK_URL, C.INSTAGRAM_URL];
@@ -138,10 +146,12 @@ function jsonld(pg) {
     '@type': 'FAQPage', '@id': url + '#faq',
     mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
   });
-  if (pg.key === 'san-pham') graph.push({
+  // Danh sách sản phẩm chỉ gồm mẫu thật (có ảnh)
+  const REAL = PRODUCTS.filter((p) => p.images && p.images.length);
+  if (pg.key === 'san-pham' && REAL.length) graph.push({
     '@type': 'ItemList', '@id': url + '#danh-sach', name: 'Sản phẩm – Quỳnh Như Florist',
-    numberOfItems: PRODUCTS.length,
-    itemListElement: PRODUCTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: url + '#' + p.id })),
+    numberOfItems: REAL.length,
+    itemListElement: REAL.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: url + '#' + p.id })),
   });
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
 }
@@ -155,13 +165,11 @@ const critical = read('assets/css/critical.css')
 
 const EMAIL_ROW = missing(C.EMAIL) ? '' : `          <div><dt>EMAIL</dt><dd><a href="mailto:${esc(C.EMAIL)}">${esc(C.EMAIL)}</a></dd></div>`;
 const ver = (p) => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8);
-const v3d = ver('assets/js/intro3d.js') + ver('assets/fonts/qnf-3d.typeface.json').slice(0, 4);
 
 const common = {
   SITE_URL: SITE,
   SITE_HOST: SITE.replace(/^https?:\/\//, ''),
-  THREE_URL: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/build/three.module.min.js`,
-  THREE_ADDONS: `https://cdn.jsdelivr.net/npm/three@${THREE_VERSION}/examples/jsm/`,
+  HERO_SRCSET, HERO_SIZES,
   CRITICAL_CSS: critical,
   PRODUCT_CARDS, FAQ_ITEMS, EMAIL_ROW,
   PHONE: C.PHONE, PHONE_DISPLAY: C.PHONE_DISPLAY, ZALO_URL: C.ZALO_URL,
@@ -180,11 +188,12 @@ for (const pg of PAGES) {
   const tokens = {
     ...common,
     PAGE: pg.key,
+    ROBOTS: noindex(pg) ? 'noindex, follow' : 'index, follow, max-image-preview:large',
     TITLE: esc(pg.title), DESC: esc(pg.desc), CANONICAL: CANONICAL + pg.path,
     JSONLD: jsonld(pg),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" imagesrcset="/assets/img/hero/bo-hoa-xanh-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-xanh-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-xanh-tach-nen-820.webp 820w" imagesizes="(min-width:1024px) min(40vw, 560px), 70vw" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">\n` : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   for (const p of PAGES) tokens['NAV_' + p.key] = p.key === pg.key ? 'class="is-active" aria-current="page"' : '';
@@ -202,7 +211,6 @@ for (const pg of PAGES) {
   for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js', 'assets/data/loi-chuc.json']) {
     out = out.split(`"/${f}"`).join(`"/${f}?v=${ver(f)}"`);
   }
-  out = out.replace('<html lang="vi" class="no-js">', `<html lang="vi" class="no-js" data-v="${v3d}">`);
   if (pg.path) fs.mkdirSync(path.join(ROOT, pg.path), { recursive: true });
   write(pg.path + 'index.html', out);
 }
@@ -210,7 +218,7 @@ for (const pg of PAGES) {
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PAGES.map((pg) => `  <url>
+${PAGES.filter((pg) => !noindex(pg)).map((pg) => `  <url>
     <loc>${CANONICAL + pg.path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>

@@ -103,82 +103,16 @@
   function initIntro() {
     var intro = $('#intro');
     if (!intro || !html.classList.contains('intro-on')) return;
-    var done = false, ctrl = null, timers = [];
-    store('sessionStorage', 'qnf-intro', '1'); // đánh dấu ngay: chuyển trang giữa chừng cũng không chạy lại
-    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    var done = false;
+    store('sessionStorage', 'qnf-intro', '1');
     function finish() {
       if (done) return; done = true;
-      timers.forEach(clearTimeout);
-      store('sessionStorage', 'qnf-intro', '1');
       intro.classList.add('is-out');
-      setTimeout(function () {
-        html.classList.remove('intro-on');
-        if (ctrl) { try { ctrl.dispose(); } catch (e) {} ctrl = null; }
-        intro.remove();
-      }, 650);
+      setTimeout(function () { html.classList.remove('intro-on'); intro.remove(); }, 300);
     }
     intro.addEventListener('click', finish);
-    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') finish(); });
-    later(finish, 6000); // giới hạn an toàn
-
-    function cssFallback() {
-      if (!reduced) {
-        var box = $('.intro__petals', intro);
-        var n = lowPower ? 18 : 36;
-        for (var i = 0; i < n; i++) {
-          var p = doc.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * .3, d = 120 + Math.random() * 220;
-          p.className = 'cpetal cpetal--' + (i % 3);
-          p.style.setProperty('--dx', Math.cos(a) * d + 'px');
-          p.style.setProperty('--dy', Math.sin(a) * d * .8 + 'px');
-          p.style.setProperty('--sx', (Math.random() * 60 - 30) + 'px');
-          p.style.setProperty('--rot', (Math.random() * 540 - 270) + 'deg');
-          p.style.animationDelay = (.25 + Math.random() * .15) + 's';
-          box.appendChild(p);
-        }
-      }
-      later(finish, 1500 + 500);
-    }
-
-    // Chỉ chạy 3D khi máy có GPU thật; máy dùng WebGL giả lập bằng CPU (rất chậm) sẽ dùng bản chữ HTML
-    var canWebGL = (function () {
-      try {
-        if (!window.WebGLRenderingContext) return false;
-        var c = doc.createElement('canvas'), o = { failIfMajorPerformanceCaveat: !/intro3d=force/.test(location.search) };
-        var gl = c.getContext('webgl2', o) || c.getContext('webgl', o);
-        if (!gl) return false;
-        var dbg = gl.getExtension('WEBGL_debug_renderer_info');
-        var r = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
-        var lose = gl.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
-        return /intro3d=force/.test(location.search) || !/swiftshader|llvmpipe|software|basic render/i.test(r);
-      } catch (e) { return false; }
-    })();
-    var importMapOK = window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('importmap');
-    if (reduced || !canWebGL || !importMapOK) { cssFallback(); return; }
-
-    var t0 = performance.now(), fellBack = false;
-    // Nếu Three.js tải quá chậm thì dùng bản chữ HTML để khách không phải chờ
-    later(function () { if (!ctrl && !done) { fellBack = true; cssFallback(); } }, 2200);
-    var v = html.getAttribute('data-v') || '';
-    import(new URL('/assets/js/intro3d.js?v=' + v, location.origin).href)
-      .then(function (m) {
-        if (done || fellBack) return;
-        return m.play({
-          canvas: $('.intro__canvas', intro),
-          hello: $('.intro__hello', intro),
-          fontUrl: new URL('/assets/fonts/qnf-3d.typeface.json?v=' + v, location.origin).href,
-          lowPower: lowPower,
-          input: input,
-        }).then(function (c) {
-          if (done || fellBack) { c.dispose(); return; }
-          ctrl = c; intro.classList.add('is-3d');
-          later(finish, 3400);
-        });
-      })
-      .catch(function (err) {
-        if (window.console) console.warn('[intro3d]', err);
-        if (!done && !fellBack) { fellBack = true; cssFallback(); }
-      });
-    void t0;
+    // Tính từ lúc trang bắt đầu hiện: 0,7 giây hiện + 0,3 giây mờ dần = tối đa 1 giây
+    setTimeout(finish, Math.max(150, 700 - (window.performance ? performance.now() : 0)));
   }
 
   /* =========================================================
@@ -320,21 +254,9 @@
       if (base === null) base = e.beta;
       setInput(e.gamma / 25, (e.beta - base) / 25, 'tilt');
     }
+    // Điện thoại chỉ nghiêng theo máy khi trình duyệt cho phép sẵn (không hiện nút xin quyền)
     var DOE = window.DeviceOrientationEvent;
-    if (!DOE) return;
-    if (typeof DOE.requestPermission === 'function') {
-      var btn = $('.tilt-btn');
-      if (!btn) return;
-      btn.hidden = false;
-      btn.addEventListener('click', function () {
-        DOE.requestPermission().then(function (state) {
-          btn.hidden = true;
-          if (state === 'granted') window.addEventListener('deviceorientation', onOrient);
-        }).catch(function () { btn.hidden = true; });
-      });
-    } else {
-      window.addEventListener('deviceorientation', onOrient);
-    }
+    if (DOE && typeof DOE.requestPermission !== 'function') window.addEventListener('deviceorientation', onOrient);
   }
 
   /* =========================================================
@@ -479,6 +401,7 @@
     window.addEventListener('load', function () {
       setTimeout(function () {
         slides.forEach(function (sl) {
+          $$('source[data-srcset]', sl).forEach(function (so) { so.srcset = so.getAttribute('data-srcset'); so.removeAttribute('data-srcset'); });
           var im = $('img[data-src]', sl); if (!im) return;
           im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src');
           im.removeAttribute('data-srcset'); im.removeAttribute('data-src');
@@ -634,7 +557,7 @@
   function mediaHTML(p, m, big) {
     if (m.type === 'video') return '<video src="' + m.src + '" autoplay muted loop playsinline preload="metadata" aria-label="Video ' + p.name + '"></video>';
     if (m.type === 'img') return imgTag(p, m.name, p.name + ' – ' + p.size, big ? '(min-width:1024px) 900px, 100vw' : '96px', !big);
-    return '<div class="ph' + m.v + '"><svg aria-hidden="true"><use href="#i-flower"/></svg>' + (big ? '<span>Ảnh sẽ cập nhật</span>' : '') + '</div>';
+    return '<div class="ph' + m.v + '"><svg aria-hidden="true"><use href="#i-flower"/></svg></div>';
   }
 
   function showSlide(i) {
@@ -653,7 +576,8 @@
     lastFocus = from || doc.activeElement;
     $('#pm-cat').textContent = CAT_LABEL[p.category] || '';
     $('#pm-name').textContent = p.name;
-    $('#pm-size').textContent = p.size;
+    // Mẫu tham khảo chưa có ảnh thật: không hiện kích thước
+    $('#pm-size').textContent = p.images && p.images.length ? p.size : '';
     $('#pm-desc').textContent = p.desc || '';
     var media = buildMedia(p);
     pmFrame.innerHTML = media.map(function (m, i) { return '<div class="pm__slide' + (i === 0 ? ' is-on' : '') + '"><div class="pm__kb">' + mediaHTML(p, m, true) + '</div></div>'; }).join('');

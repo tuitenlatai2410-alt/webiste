@@ -1,13 +1,13 @@
 <!-- [D] HERO: bó hoa tách nền ở giữa; QUỲNH NHƯ FLORIST rất to, xám nhạt phía sau; hộp chữ nhỏ góc trái trên; nút góc trái dưới; ghi chú góc phải dưới -->
 <section class="hero" data-theme="xam" aria-labelledby="hero-title">
   <div class="hero__stage" aria-roledescription="carousel" aria-label="Mẫu hoa sáp nổi bật">
-    <h1 id="hero-title" class="hero__box">Tiệm hoa nhỏ <span>tại Thủ Dầu Một –</span> <span>Bình Dương</span></h1>
+    <h1 id="hero-title" class="hero__box">Tiệm hoa sáp nhỏ <span>tại Thủ Dầu Một – Bình Dương</span></h1>
     <div class="hero__slide hero__slide--xam is-active" data-theme="xam" role="group" aria-roledescription="slide" aria-label="1 / 3">
       <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
       <figure class="hero__cut">
         <img src="/assets/img/hero/bo-hoa-xanh-tach-nen-620.webp"
-             srcset="/assets/img/hero/bo-hoa-xanh-tach-nen-480.webp 480w, /assets/img/hero/bo-hoa-xanh-tach-nen-620.webp 620w, /assets/img/hero/bo-hoa-xanh-tach-nen-820.webp 820w"
-             sizes="(min-width:1024px) min(40vw, 560px), 70vw" width="1030" height="1095"
+             srcset="{{HERO_SRCSET}}"
+             sizes="{{HERO_SIZES}}" width="1030" height="1095"
              alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
       </figure>
     </div>
@@ -22,12 +22,15 @@
     </div>
     <div class="hero__slide hero__slide--photo hero__slide--do" data-theme="do" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
       <figure class="hero__photo">
-        <img data-src="/assets/img/hero/hop-hoa-do-that-1500.webp"
-             data-srcset="/assets/img/hero/hop-hoa-do-that-800.webp 800w, /assets/img/hero/hop-hoa-do-that-1500.webp 1500w"
-             sizes="100vw" width="1500" height="2000" style="object-position:50% 34%"
-             alt="Hộp hoa hồng sáp đỏ thắt nơ lụa đỏ rượu, đặt trên khăn ren trắng – Quỳnh Như Florist" decoding="async">
+        <picture>
+          <source media="(min-width:768px)" data-srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw" width="1500" height="1000">
+          <img data-src="/assets/img/hero/hoa-bo-hong-doc-840.webp"
+               data-srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w"
+               sizes="100vw" width="840" height="1050" style="object-position:50% 50%"
+               alt="Hai bó hoa sáp tông hồng pastel điểm hoa cúc trắng và hoa nhỏ màu xanh, một bó đặt trong túi giấy kraft – Quỳnh Như Florist" decoding="async">
+        </picture>
       </figure>
-      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.03 — Đỏ rượu</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
+      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.03 — Hồng pastel</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
     </div>
     <button type="button" class="hero__nav hero__nav--prev" aria-label="Mẫu trước"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
     <button type="button" class="hero__nav hero__nav--next" aria-label="Mẫu sau"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -44,7 +47,6 @@
       <li><a class="follow__ig" href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener" aria-label="Instagram của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
       <li><a class="follow__zl" href="{{ZALO_URL}}" target="_blank" rel="noopener" aria-label="Zalo của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-chat"/></svg></a></li>
     </ul>
-  <button type="button" class="tilt-btn" hidden>✦ Bật hiệu ứng nghiêng</button>
 </section>
 
 <!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
@@ -54,7 +56,7 @@
       <p class="label">— ✦ Về Quỳnh Như Florist ✦ —</p>
       <h2 id="story-title" class="story__title">Mỗi bó hoa là một lời <em>chưa kịp nói thành câu</em></h2>
       <p>Quỳnh Như Florist là tiệm hoa sáp nhỏ tại Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh), chuyên hoa sáp theo dịp và trụ hoa để bàn decor.</p>
-      <p>Hoa sáp giữ được dáng và màu lâu, nên món quà có thể ở lại bên người nhận thật lâu sau ngày trao. Tiệm còn mới, nhưng mỗi bó hoa đều được làm đúng như hình và tư vấn tận tâm — từ lúc bạn nhắn tin đến khi hoa được trao tận tay.</p>
+      <p>Hoa sáp giữ được dáng và màu lâu, nên món quà có thể ở lại bên người nhận thật lâu sau ngày trao. Tiệm còn mới. Tiệm làm sát với mẫu bạn đã chọn; nếu phải đổi màu hay loại hoa, tiệm báo trước. Tiệm tư vấn tận tâm từ lúc bạn nhắn tin đến khi hoa được trao tận tay.</p>
       <p class="story__sign">Quỳnh Như Florist</p>
       <p class="story__role">Tiệm hoa sáp · Thủ Dầu Một – Bình Dương</p>
       <a class="story__btn" href="/gioi-thieu/">Tìm hiểu về Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -81,7 +83,7 @@
       <li><a class="xcard reveal" href="/gioi-thieu/"><span class="label">— ✦ GIỚI THIỆU</span><span class="xcard__t">Về Quỳnh Như <em>Florist</em></span><span class="xcard__d">Đúng như hình · Dám nói “chưa phù hợp” · Hỗ trợ tận tâm</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
       <li><a class="xcard xcard--dark reveal" href="/san-pham/"><span class="label label--light">— ✦ SẢN PHẨM</span><span class="xcard__t">Sản phẩm</span><span class="xcard__d">Hoa theo dịp · Trụ hoa để bàn decor</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
       <li><a class="xcard reveal" href="/giai-phap/"><span class="label">— ✦ GIẢI PHÁP</span><span class="xcard__t">Giải pháp</span><span class="xcard__d">Bạn cần hoa cho dịp nào, tiệm có hướng phù hợp cho dịp đó.</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-      <li><a class="xcard xcard--pink reveal" href="/lien-he/"><span class="label">— ✦ LIÊN HỆ</span><span class="xcard__t">LET'S TALK <em>WITH ME</em></span><span class="xcard__d">Hotline · Zalo {{PHONE_DISPLAY}}</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+      <li><a class="xcard xcard--pink reveal" href="/lien-he/"><span class="label">— ✦ LIÊN HỆ</span><span class="xcard__t">Nhắn cho <em>tiệm</em></span><span class="xcard__d">Hotline · Zalo {{PHONE_DISPLAY}}</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
     </ul>
   </div>
 </section>

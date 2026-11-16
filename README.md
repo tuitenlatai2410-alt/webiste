@@ -1,6 +1,6 @@
 # Website Quỳnh Như Florist
 
-Website tĩnh (HTML + CSS + JavaScript thuần, Three.js chỉ cho màn chào mừng 3D) cho tiệm hoa **Quỳnh Như Florist** – Thủ Dầu Một, Bình Dương.
+Website tĩnh (HTML + CSS + JavaScript thuần) cho tiệm hoa **Quỳnh Như Florist** – Thủ Dầu Một, Bình Dương.
 
 ## Cấu trúc
 
@@ -26,10 +26,10 @@ tools/  (build.mjs, images.mjs, make-3d-font.mjs, pages/, partials/)
 
 ## Cài đặt (1 lần)
 
-Cần [Node.js](https://nodejs.org) 18+. Bước build không cần cài thư viện nào. Chỉ khi tối ưu ảnh hoặc đổi chữ 3D mới cần:
+Cần [Node.js](https://nodejs.org) 18+. Bước build không cần cài thư viện nào. Chỉ khi tối ưu ảnh mới cần:
 
 ```bash
-npm i --no-save sharp opentype.js
+npm i --no-save sharp
 ```
 
 ## Sửa thông tin → build
@@ -103,14 +103,8 @@ File `_headers` đã cấu hình: cache 1 năm cho `/assets/*` (an toàn vì m�
 ## Ghi chú kỹ thuật
 
 - **Lọc sản phẩm qua link:** `/san-pham/?loai=hoa-theo-dip` hoặc `/san-pham/?loai=tru-hoa-de-ban`; mở thẳng 1 mẫu: `/san-pham/#sp-05`.
-- **Màn chào mừng 3D:** hiện 1 lần mỗi phiên (ở bất kỳ trang nào khách vào đầu tiên). Tự chuyển sang bản chữ HTML (nhẹ) khi: khách bật giảm chuyển động, máy không có WebGL, trình duyệt không hỗ trợ import map, máy chỉ có WebGL giả lập bằng CPU (không có GPU), hoặc Three.js tải quá 2,2 giây. Muốn xem bản 3D trên máy không có GPU, mở `/?intro3d=force`.
-- **Chữ 3D kiểu bong bóng:** font Baloo 2 ExtraBold (Google Fonts, có đủ dấu tiếng Việt). Mỗi chữ được "bơm phồng" từ trường khoảng cách (SDF) nên mép mềm, góc bo tròn. File `assets/fonts/qnf-3d.typeface.json` chỉ chứa các ký tự `Quỳnh Như Florist` (9KB). Nếu đổi chữ, chạy:
-
-```bash
-npm run font3d -- duong-dan/Baloo2-ExtraBold.ttf "Chữ mới" assets/fonts/qnf-3d.typeface.json
-```
-
-- **Three.js** nạp từ CDN jsDelivr phiên bản cố định `0.160.0` (khai báo trong `tools/build.mjs`).
+- **Màn chào mừng:** chữ "Quỳnh Như Florist", hiện 1 lần mỗi phiên, tổng cộng tối đa 1 giây; không hiện khi máy bật giảm chuyển động.
+- **Font:** 2 họ chữ, 5 tệp trong `assets/fonts/` (Be Vietnam Pro 400 · 600; Cormorant Garamond 600 · 700 · nghiêng 600). Mỗi tệp gồm cả chữ Latin và tiếng Việt.
 
 ## Lời chúc mỗi ngày (dòng chữ chạy màu đen)
 - Kho 100 câu nằm ở `assets/data/loi-chuc.json` (mỗi dòng một câu, giữ dấu ngoặc kép và dấu phẩy).

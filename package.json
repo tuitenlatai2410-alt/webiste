@@ -2,13 +2,12 @@
   "name": "quynh-nhu-florist",
   "private": true,
   "version": "1.0.0",
-  "description": "Website tĩnh của Quỳnh Như Florist – tiệm hoa tươi Thủ Dầu Một, Bình Dương",
+  "description": "Website tĩnh của Quỳnh Như Florist – tiệm hoa sáp Thủ Dầu Một, Bình Dương",
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
     "images": "node tools/images.mjs",
-    "font3d": "node tools/make-3d-font.mjs",
     "serve": "python3 -m http.server 8080"
   },
-  "//": "Bước build chỉ dùng Node có sẵn (không cần cài gì). Muốn chạy npm run images: npm i --no-save sharp. Muốn chạy npm run font3d: npm i --no-save opentype.js"
+  "//": "Bước build chỉ dùng Node có sẵn (không cần cài gì). Muốn chạy npm run images: npm i --no-save sharp."
 }
