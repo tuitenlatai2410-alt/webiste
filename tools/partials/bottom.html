@@ -18,21 +18,17 @@
       <p class="footer__quote">“Mỗi bó hoa là một lời chưa kịp nói thành câu.”</p>
     </div>
     <div>
-      <p class="footer__h">Liên hệ</p>
+      <p class="footer__h">{{T_foot_contact}}</p>
       <address class="footer__nap">
         <span class="footer__row"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>{{ADDRESS_FULL}}</span></span>
-        <a class="footer__row" href="tel:{{PHONE}}"><svg aria-hidden="true"><use href="#i-phone"/></svg><span>{{PHONE_DISPLAY}}</span></a>
+{{FOOT_HOURS}}        <a class="footer__row" href="tel:{{PHONE}}"><svg aria-hidden="true"><use href="#i-phone"/></svg><span>{{PHONE_DISPLAY}}</span></a>
         <a class="footer__row" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg><span>Nhắn Zalo cho tiệm</span></a>
       </address>
     </div>
     <nav aria-label="Menu cuối trang">
-      <p class="footer__h">Khám phá</p>
+      <p class="footer__h">{{T_foot_explore}}</p>
       <ul class="footer__menu">
-        <li><a href="/">Trang chủ</a></li>
-        <li><a href="/gioi-thieu/">Giới thiệu</a></li>
-        <li><a href="/san-pham/">Sản phẩm</a></li>
-        <li><a href="/giai-phap/">Giải pháp</a></li>
-        <li><a href="/lien-he/">Liên hệ</a></li>
+{{FOOT_MENU}}
       </ul>
     </nav>
   </div>
@@ -83,6 +79,7 @@
     </figure>
   </div>
 </dialog>
+{{WISH_PANEL}}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 </body>

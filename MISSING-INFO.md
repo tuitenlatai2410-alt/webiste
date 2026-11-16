@@ -6,8 +6,8 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 |---|---|---|---|
 | 1 | **Tên miền riêng** | Đang dùng tên miền tạm `https://webiste.tuitenlatai2410.workers.dev` (canonical, Open Graph, schema, sitemap, robots đều dùng giá trị này) | `assets/js/config.js` → `SITE_URL` |
 | 2 | **Logo** | Chữ "Quỳnh Như *Florist*" font Cormorant + favicon bông hoa SVG tự vẽ | `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, menu trong `tools/index.template.html` |
-| 3 | **Ảnh / video sản phẩm thật, tên, kích thước thật (20 mẫu)** | 20 ô placeholder gradient + "Ảnh sẽ cập nhật"; tên & kích thước là dữ liệu mẫu | `assets/js/products.js` (+ `node tools/images.mjs`) |
-| 4 | **Giờ mở cửa** | `[CHƯA CÓ – giờ mở cửa]` — **đang hiện đúng chữ này trên web** ở khối Liên hệ | `config.js` → `HOURS` |
+| 3 | **Ảnh / video sản phẩm thật, tên, kích thước thật (20 mẫu)** | 20 mẫu tham khảo (ô hình bông hoa, tên mẫu; **kích thước đang ẩn**). `/san-pham/` đang **noindex** | `assets/js/products.js` (+ `node tools/images.mjs`) |
+| 4 | **Giờ mở cửa** | ✅ `07:00 – 22:00` (chủ web xác nhận 16/11/2026). **Còn hỏi:** giờ này áp dụng cả cuối tuần và ngày lễ không? (schema đang ghi đủ 7 ngày) | `config.js` → `HOURS` |
 | 5 | **Email liên hệ** (nếu có) | `[CHƯA CÓ – email]` → dòng Email đang **ẩn** | `config.js` → `EMAIL` |
 | 6 | **Link Google Maps chính xác** | `[CHƯA CÓ – link Google Maps]` → tạm dùng link tìm kiếm theo địa chỉ | `config.js` → `MAPS_URL` |
 | 7 | **Web3Forms access key** | `[CHƯA CÓ – Web3Forms access key]`. Form đặt hoa hiện **đang tạm ẩn** (`ORDER_FORM_ENABLED: false`) | `config.js` → `WEB3FORMS_ACCESS_KEY` |
@@ -38,3 +38,31 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 
 ## Zalo Official Account (OA)
 - [CHƯA CÓ – link Zalo OA]: hiện link Zalo là số cá nhân (zalo.me/0857380325). Khi tiệm đăng ký Zalo OA, thay `ZALO_URL` trong `assets/js/config.js` bằng link OA (dạng zalo.me/<mã OA>) và thay ảnh `assets/img/zalo-qr.png/.webp` bằng mã QR của OA.
+
+## Thông tin đang ẩn trên web (chờ chủ web trả lời)
+
+Mỗi câu trả lời mở khóa một phần đang ẩn. Trả lời xong: sửa chữ `[CHƯA CÓ – …]` tương ứng trong `tools/content/tro-giup.mjs` hoặc `tools/content/chinh-sach.mjs`, rồi `node tools/build.mjs`.
+
+| # | Câu hỏi | Mở khóa |
+|---|---|---|
+| 1 | Hoa sáp của tiệm giữ dáng và màu bao lâu, trong điều kiện nào? Ảnh hưởng của máy lạnh, nắng? Cách lau bụi, bảo quản? Có mùi không? | 4 câu nhóm "Hoa sáp và bảo quản"; phần bảo quản trong blog |
+| 2 | Có đặt cọc không, bao nhiêu phần trăm? | Trợ giúp › Thanh toán; Chính sách › Thanh toán |
+| 3 | Giao ở khu vực nào, phí bao nhiêu? Có nhận tại tiệm không? | Trợ giúp › Giao nhận; Chính sách › Giao nhận |
+| 4 | Quy cách đóng gói khi giao? | Như trên |
+| 5 | Chính sách đổi hoặc sửa mẫu sau khi chốt? Nhận rồi chưa ưng thì sao? | Trợ giúp › Đổi, sửa mẫu; Chính sách › Đổi, sửa mẫu |
+| 6 | Giờ 07:00 – 22:00 áp dụng cả cuối tuần và ngày lễ? | Chỉnh schema giờ mở cửa |
+| 7 | Ruy băng in chữ CHANEL: tiệm đang dùng cho khách hay chỉ có trong ảnh đó? | Ảnh hộp hoa đỏ (đang thay tạm ở hero mẫu 3) |
+| 8 | Khách trong các ảnh chụp tin nhắn đã đồng ý cho đăng chưa? | Trang Feedback (đợt 2) |
+| 9 | Tiệm trả lời tin nhắn được bằng những thứ tiếng nào? | Đợt 3 (5 ngôn ngữ) |
+| 10 | 中文 dùng giản thể hay phồn thể? | Đợt 3 |
+| 11 | Giá khoảng bao nhiêu cho từng loại? Có mức cho sinh viên không? | Trợ giúp › Giá |
+| 12 | Có nhận làm gấp mẫu theo yêu cầu không? | Trợ giúp › Làm gấp |
+| 13 | Có viết thiệp, kèm gấu bông hay quà tặng không? | Trợ giúp › Thiệp, quà |
+| 14 | Có xuất hóa đơn không? Khách ghé xem trực tiếp được không? | 2 câu Trợ giúp |
+| 15 | Cách thanh toán (chuyển khoản, tiền mặt…) và cách gửi thông tin chuyển khoản? Đề xuất: không in số tài khoản lên web, gửi qua Zalo khi chốt mẫu | Trợ giúp › Thanh toán; Chính sách › Thanh toán |
+| 16 | Ảnh trong Drive "Hình hoa" đều do tiệm tự chụp sản phẩm của tiệm? | Sản phẩm thật, blog (đợt 2) |
+| 17 | Tên kênh: web "Quỳnh Như Florist", TikTok @tiemhoanhonee, Instagram @tiemhoanhoxinhdayy — giữ hai tên hay thống nhất? | — |
+| 18 | Khi nào mua tên miền thật? | Đợt 3 chờ việc này |
+| 19 | Gợi ý của tiệm khi tặng thầy cô dịp 20/11? | Trợ giúp › 20/11 |
+
+**Chờ ảnh (đợt 2):** thư mục Drive "Hình hoa" hiện trống. Khi có ảnh: sản phẩm thật (bật lại index `/san-pham/`, nút tim, lọc Màu / Hot trend / Bán chạy), blog 3 bài, trang Feedback (cần ≥ 3 ảnh tin nhắn đạt, đã che thông tin khách).

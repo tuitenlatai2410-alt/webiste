@@ -24,7 +24,7 @@ window.QNF_CONFIG = {
 
   MAPS_URL: '[CHƯA CÓ – link Google Maps]', // chưa có thì web tự dùng link tìm kiếm theo địa chỉ
   EMAIL: '[CHƯA CÓ – email]',                // chưa có thì dòng email được ẩn
-  HOURS: '[CHƯA CÓ – giờ mở cửa]',
+  HOURS: '07:00 – 22:00',            // chủ tiệm xác nhận 16/11/2026 (chưa rõ cuối tuần, ngày lễ)
 
   // Form "Gửi yêu cầu đặt hoa" — TẠM ẨN (false) cho tới khi xong thủ tục:
   //   thông báo website bán hàng + chính sách bảo mật dữ liệu (xem MISSING-INFO.md, mục P1–P3).

@@ -75,15 +75,20 @@
 </section>
 
 
-<!-- KHÁM PHÁ: dẫn sang các trang -->
-<section class="section explore" aria-labelledby="explore-title">
+<!-- KHÁM PHÁ: một hàng liên kết gọn -->
+<nav class="section explore" aria-label="Các trang của Quỳnh Như Florist">
+  <ul class="wrap explore__row">
+    <li><a class="xlink" href="/gioi-thieu/">Về Quỳnh Như <em>Florist</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/san-pham/">Xem mẫu hoa<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/tro-giup/">Trợ giúp &amp; hỏi đáp<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/lien-he/">Nhắn cho <em>tiệm</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+  </ul>
+</nav>
+
+<!-- LỜI CHÚC HÔM NAY: mỗi ngày (giờ Việt Nam) một câu từ kho assets/data/loi-chuc.json -->
+<section class="loichuc" aria-labelledby="loichuc-title" data-src="/assets/data/loi-chuc.json">
   <div class="wrap">
-    <h2 id="explore-title" class="sr-only">Các trang của Quỳnh Như Florist</h2>
-    <ul class="explore__grid">
-      <li><a class="xcard reveal" href="/gioi-thieu/"><span class="label">— ✦ GIỚI THIỆU</span><span class="xcard__t">Về Quỳnh Như <em>Florist</em></span><span class="xcard__d">Đúng như hình · Dám nói “chưa phù hợp” · Hỗ trợ tận tâm</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-      <li><a class="xcard xcard--dark reveal" href="/san-pham/"><span class="label label--light">— ✦ SẢN PHẨM</span><span class="xcard__t">Sản phẩm</span><span class="xcard__d">Hoa theo dịp · Trụ hoa để bàn decor</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-      <li><a class="xcard reveal" href="/giai-phap/"><span class="label">— ✦ GIẢI PHÁP</span><span class="xcard__t">Giải pháp</span><span class="xcard__d">Bạn cần hoa cho dịp nào, tiệm có hướng phù hợp cho dịp đó.</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-      <li><a class="xcard xcard--pink reveal" href="/lien-he/"><span class="label">— ✦ LIÊN HỆ</span><span class="xcard__t">Nhắn cho <em>tiệm</em></span><span class="xcard__d">Hotline · Zalo {{PHONE_DISPLAY}}</span><span class="xcard__go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-    </ul>
+    <h2 class="loichuc__lead" id="loichuc-title">Lời chúc hôm nay</h2>
+    <p class="loichuc__q">{{TODAY_QUOTE}}</p>
   </div>
 </section>

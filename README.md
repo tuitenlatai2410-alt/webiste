@@ -4,24 +4,27 @@ Website tĩnh (HTML + CSS + JavaScript thuần) cho tiệm hoa **Quỳnh Như Fl
 
 ## Cấu trúc
 
-Website có 5 trang riêng, trang nào cũng có thanh menu:
-
 | Trang | Đường dẫn | File nội dung (sửa ở đây) |
 |---|---|---|
 | Trang chủ | `/` | `tools/pages/home.html` |
 | Giới thiệu | `/gioi-thieu/` | `tools/pages/gioi-thieu.html` |
-| Sản phẩm | `/san-pham/` | `tools/pages/san-pham.html` (20 ô lấy từ `products.js`) |
-| Giải pháp + Hỏi đáp | `/giai-phap/` | `tools/pages/giai-phap.html` (câu hỏi đáp nằm trong `tools/build.mjs`) |
+| Sản phẩm | `/san-pham/` | `tools/pages/san-pham.html` (ô sản phẩm, bộ lọc lấy từ `products.js`) |
+| Trợ giúp (quy trình + 30 câu hỏi) | `/tro-giup/` | `tools/pages/tro-giup.html` + câu hỏi ở `tools/content/tro-giup.mjs` |
+| Chính sách | `/chinh-sach/` | `tools/pages/chinh-sach.html` + nội dung ở `tools/content/chinh-sach.mjs` |
 | Liên hệ | `/lien-he/` | `tools/pages/lien-he.html` |
 
-Phần dùng chung: `tools/partials/head.html` (thẻ SEO), `top.html` (màn chào mừng, dải thông báo, menu), `bottom.html` (chân trang, nút nổi). Tiêu đề và mô tả SEO từng trang nằm trong `PAGES` ở `tools/build.mjs`.
+- `/giai-phap/` (trang cũ) tự chuyển sang `/tro-giup/` (tệp `_redirects`, chuyển hướng 301).
+- Phần dùng chung: `tools/partials/head.html` (thẻ SEO), `top.html` (màn chào, thanh tiện ích, menu), `bottom.html` (chân trang, nút nổi).
+- **Chữ dùng chung** (menu, thanh tiện ích, nút, tiêu đề và mô tả SEO từng trang): `tools/i18n/vi.json`. Sau này thêm thứ tiếng: tạo `en.json` cùng khóa.
+- **Thông tin còn thiếu tự ẩn:** câu hỏi, mục chính sách nào còn chữ `[CHƯA CÓ – …]` thì web không hiện. Mỗi lần build, cuối màn hình in danh sách khối đang ẩn. Trả lời xong: thay chữ đó bằng câu trả lời thật, build lại.
+- **Build tự kiểm:** nếu trang có chữ `[CHƯA CÓ`, "Đang cập nhật", "hoa tươi" hoặc từ cấm, build dừng và báo lỗi.
 
 ```
-index.html, gioi-thieu/, san-pham/, giai-phap/, lien-he/   ← TẠO TỰ ĐỘNG, đừng sửa tay
-404.html, robots.txt, sitemap.xml                           ← cũng tạo tự động
-wrangler.jsonc, .assetsignore                               ← cấu hình Cloudflare
+index.html, gioi-thieu/, san-pham/, tro-giup/, chinh-sach/, lien-he/, giai-phap/   ← TẠO TỰ ĐỘNG, đừng sửa tay
+404.html, robots.txt, sitemap.xml, _redirects                                     ← cũng tạo tự động
+wrangler.jsonc, .assetsignore                                                     ← cấu hình Cloudflare
 assets/css, assets/js, assets/fonts, assets/img
-tools/  (build.mjs, images.mjs, make-3d-font.mjs, pages/, partials/)
+tools/  (build.mjs, images.mjs, pages/, partials/, content/, i18n/)
 ```
 
 ## Cài đặt (1 lần)
@@ -102,11 +105,15 @@ File `_headers` đã cấu hình: cache 1 năm cho `/assets/*` (an toàn vì m�
 
 ## Ghi chú kỹ thuật
 
-- **Lọc sản phẩm qua link:** `/san-pham/?loai=hoa-theo-dip` hoặc `/san-pham/?loai=tru-hoa-de-ban`; mở thẳng 1 mẫu: `/san-pham/#sp-05`.
+- **Lọc sản phẩm qua link:** `?loai=hoa-theo-dip | tru-hoa-de-ban`, `?dip=sinh-nhat`, `?mau=hong`, `?nb=hot | ban-chay`, `?q=tulip` (ghép được: `/san-pham/?loai=hoa-theo-dip&dip=sinh-nhat`); mở thẳng 1 mẫu: `/san-pham/#sp-05`.
+- **Nút lọc chỉ hiện khi có dữ liệu:** "Dịp" lấy từ trường `occasions`; "Màu", "Hot trend", "Bán chạy" chỉ hiện khi có mẫu thật (có ảnh) mang giá trị đó. Nhãn `hot`, `ban-chay` do chủ tiệm gắn.
+- **Tìm kiếm:** theo tên hoa (`flowers`), màu (`colors`), dịp, tên mẫu, `keywords`, có bảng từ đồng nghĩa (ví dụ "thầy cô" → 20/11, "valentine" → kỷ niệm) trong `assets/js/main.js` (`SYN`).
+- **Tim yêu thích:** chỉ hiện khi có mẫu thật; danh sách lưu trên trình duyệt của khách (localStorage), nút "Sao chép danh sách" để dán vào Zalo.
+- **`/san-pham/` đang noindex** (chưa có mẫu thật). Có mẫu thật có ảnh thì tự bật index lại.
 - **Màn chào mừng:** chữ "Quỳnh Như Florist", hiện 1 lần mỗi phiên, tổng cộng tối đa 1 giây; không hiện khi máy bật giảm chuyển động.
 - **Font:** 2 họ chữ, 5 tệp trong `assets/fonts/` (Be Vietnam Pro 400 · 600; Cormorant Garamond 600 · 700 · nghiêng 600). Mỗi tệp gồm cả chữ Latin và tiếng Việt.
 
-## Lời chúc mỗi ngày (dòng chữ chạy màu đen)
+## Lời chúc mỗi ngày (khối "Lời chúc hôm nay" cuối trang chủ)
 - Kho 100 câu nằm ở `assets/data/loi-chuc.json` (mỗi dòng một câu, giữ dấu ngoặc kép và dấu phẩy).
 - Mỗi ngày (theo giờ Việt Nam) web tự hiện 1 câu, xoay vòng hết 100 câu rồi lặp lại. Không cần đẩy web lại mỗi ngày.
 - Muốn thêm/sửa câu: sửa file trên rồi đẩy lên GitHub như bình thường.
