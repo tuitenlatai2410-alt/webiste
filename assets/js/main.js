@@ -656,7 +656,7 @@
     cards.forEach(function (card) {
       var p = productById(card.id), media = $('.pcard__media', card);
       if (p && p.images && p.images.length && media && $('.ph', media)) {
-        media.innerHTML = imgTag(p, p.images[0], p.name + ' – ' + p.size, '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', true);
+        media.innerHTML = imgTag(p, p.images[0], p.name + ': ' + (p.look || ''), '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', true);
       }
     });
 
@@ -765,7 +765,7 @@
   }
   function mediaHTML(p, m, big) {
     if (m.type === 'video') return '<video src="' + m.src + '" autoplay muted loop playsinline preload="metadata" aria-label="Video ' + p.name + '"></video>';
-    if (m.type === 'img') return imgTag(p, m.name, p.name + ' – ' + p.size, big ? '(min-width:1024px) 900px, 100vw' : '96px', !big);
+    if (m.type === 'img') return imgTag(p, m.name, p.name + ': ' + (p.look || ''), big ? '(min-width:1024px) 900px, 100vw' : '96px', !big);
     return '<div class="ph' + m.v + '"><svg aria-hidden="true"><use href="#i-flower"/></svg></div>';
   }
 
@@ -786,7 +786,8 @@
     $('#pm-cat').textContent = CAT_LABEL[p.category] || '';
     $('#pm-name').textContent = p.name;
     // Mẫu tham khảo chưa có ảnh thật: không hiện kích thước
-    $('#pm-size').textContent = p.images && p.images.length ? p.size : '';
+    // Kích thước chưa có (chữ giữ chỗ) thì không hiện
+    $('#pm-size').textContent = p.images && p.images.length && !missing(p.size) ? p.size : '';
     $('#pm-desc').textContent = p.desc || '';
     var pw = $('#pm-wish');
     if (pw) {

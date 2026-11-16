@@ -108,7 +108,9 @@ const occUsed = Object.keys(OCC).filter((k) => PRODUCTS.some((p) => (p.occasions
 const colorsReal = [...new Set(REAL.flatMap((p) => p.colors || []))];
 const tagLabel = { hot: T.tag_hot, 'ban-chay': T.tag_ban_chay };
 const tagsReal = Object.keys(tagLabel).filter((k) => REAL.some((p) => (p.tags || []).includes(k)));
-const LOAI = [['hoa-theo-dip', 'occasion', 'Hoa theo dịp'], ['tru-hoa-de-ban', 'table', 'Trụ hoa để bàn decor']];
+const LOAI = [['hoa-theo-dip', 'occasion', 'Hoa theo dịp'], ['tru-hoa-de-ban', 'table', 'Trụ hoa để bàn decor']]
+  .filter(([, cat]) => PRODUCTS.some((p) => p.category === cat));
+const TYPES_USED = PRODUCTS.map((p) => p.category);
 const cap = (c) => c.charAt(0).toUpperCase() + c.slice(1);
 function chipGroup(key, title, allLabel, items) {
   return `      <div class="chips" role="group" aria-label="${esc(title)}">
@@ -119,7 +121,7 @@ ${items.map(([v, label]) => `        <button type="button" class="chip" data-k="
 }
 const FILTERS = `    <div class="filters" id="filters">
 ${[
-  chipGroup('loai', 'Loại', 'Tất cả', LOAI.map(([v, , l]) => [v, l])),
+  LOAI.length > 1 ? chipGroup('loai', 'Loại', 'Tất cả', LOAI.map(([v, , l]) => [v, l])) : '',
   occUsed.length ? chipGroup('dip', 'Dịp', 'Mọi dịp', occUsed.map((k) => [k, OCC[k]])) : '',
   colorsReal.length ? chipGroup('mau', 'Màu', 'Mọi màu', colorsReal.map((c) => [slug(c), cap(c)])) : '',
   tagsReal.length ? chipGroup('nb', 'Nổi bật', 'Tất cả', tagsReal.map((k) => [k, tagLabel[k]])) : '',
@@ -170,7 +172,7 @@ ${megaCol(T.mega_about_h, [[U('gioi-thieu'), T.mega_about_1], [U('gioi-thieu') +
           <details class="mega__panel" data-panel="san-pham"><summary>${esc(T.nav_products)}</summary>
             <div class="mega__cols">
 ${[
-  megaCol(T.mega_type_h, [['/san-pham/', T.mega_type_all], ['/san-pham/?loai=hoa-theo-dip', T.mega_type_occasion], ['/san-pham/?loai=tru-hoa-de-ban', T.mega_type_table]]),
+  megaCol(T.mega_type_h, [['/san-pham/', T.mega_type_all], ...(TYPES_USED.includes('occasion') ? [['/san-pham/?loai=hoa-theo-dip', T.mega_type_occasion]] : []), ...(TYPES_USED.includes('table') ? [['/san-pham/?loai=tru-hoa-de-ban', T.mega_type_table]] : [])]),
   occUsed.length ? megaCol(T.mega_occ_h, occUsed.map((k) => [`/san-pham/?dip=${k}`, OCC[k]]), occUsed.length > 4) : '',
   colorsReal.length ? megaCol(T.mega_color_h, colorsReal.map((c) => [`/san-pham/?mau=${slug(c)}`, cap(c)])) : '',
   tagsReal.length ? megaCol(T.mega_tag_h, tagsReal.map((k) => [`/san-pham/?nb=${k}`, tagLabel[k]])) : '',
@@ -210,12 +212,13 @@ return { T, U, UBAR, NAV_UTIL, navItems, MEGA_PANELS, WISH_BTN, WISH_PANEL, FOOT
 
 /* ---- Ô sản phẩm (HTML thật để Google index) ---- */
 const img = (name, alt, eager) =>
-  `<img src="/assets/img/products/${name}-800.webp" srcset="/assets/img/products/${name}-400.webp 400w, /assets/img/products/${name}-800.webp 800w, /assets/img/products/${name}-1200.webp 1200w" sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw" width="800" height="1000" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+  `<img src="/assets/img/products/${name}-800.webp" srcset="${[400, 800, 1200].filter((w) => fs.existsSync(path.join(ROOT, `assets/img/products/${name}-${w}.webp`))).map((w) => `/assets/img/products/${name}-${w}.webp ${w}w`).join(', ')}" sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw" width="800" height="1000" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+for (const p of REAL) if (missing(p.size)) HIDDEN.push(`Sản phẩm ${p.id.toUpperCase()}: kích thước (tên "${p.name}" là tên tạm)`);
 const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
   // Mẫu tham khảo (chưa có ảnh thật): không hiện kích thước, không có nút tim
   const real = isReal(p);
   const media = real
-    ? img(p.images[0], `${p.name} – ${p.size}`, false)
+    ? img(p.images[0], `${p.name}: ${p.look || ''} – Quỳnh Như Florist`, false)
     : `<div class="ph${i % 3 ? ' ph--' + ((i % 3) + 1) : ''}"><svg aria-hidden="true"><use href="#i-flower"/></svg></div>`;
   const data = [
     `data-cat="${p.category}"`,
@@ -230,7 +233,7 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
         <a class="pcard__link" href="#${p.id}">
           <div class="pcard__media">${media}</div>
           <span class="pcard__id" aria-hidden="true">${p.id.toUpperCase().replace('SP-', 'SP ')}</span>
-          <div class="pcard__info"><h2 class="pcard__name">${esc(p.name)}</h2>${real ? `<p class="pcard__size">${esc(p.size)}</p>` : ''}<p class="pcard__price">Liên hệ báo giá</p></div>
+          <div class="pcard__info"><h2 class="pcard__name">${esc(p.name)}</h2>${real && !missing(p.size) ? `<p class="pcard__size">${esc(p.size)}</p>` : ''}<p class="pcard__price">Liên hệ báo giá</p></div>
           <span class="pcard__glare" aria-hidden="true"></span>
         </a>${wish}
       </li>`;

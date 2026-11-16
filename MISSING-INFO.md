@@ -6,7 +6,7 @@ Các mục dưới đây đang để placeholder `[CHƯA CÓ – …]` hoặc gi
 |---|---|---|---|
 | 1 | **Tên miền riêng** | Đang dùng tên miền tạm `https://webiste.tuitenlatai2410.workers.dev` (canonical, Open Graph, schema, sitemap, robots đều dùng giá trị này) | `assets/js/config.js` → `SITE_URL` |
 | 2 | **Logo** | Chữ "Quỳnh Như *Florist*" font Cormorant + favicon bông hoa SVG tự vẽ | `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, menu trong `tools/index.template.html` |
-| 3 | **Ảnh / video sản phẩm thật, tên, kích thước thật (20 mẫu)** | 20 mẫu tham khảo (ô hình bông hoa, tên mẫu; **kích thước đang ẩn**). `/san-pham/` đang **noindex** | `assets/js/products.js` (+ `node tools/images.mjs`) |
+| 3 | **Tên và kích thước 20 mẫu** | ✅ Đã có ảnh thật từ Drive "Hình hoa" (17/11/2026). **Tên mẫu là tên tạm** đặt theo màu và kiểu gói; **kích thước** đang `[CHƯA CÓ – kích thước]` nên web ẩn | `assets/js/products.js` (trường `name`, `size`) |
 | 4 | **Giờ mở cửa** | ✅ `07:00 – 22:00` (chủ web xác nhận 16/11/2026). **Còn hỏi:** giờ này áp dụng cả cuối tuần và ngày lễ không? (schema đang ghi đủ 7 ngày) | `config.js` → `HOURS` |
 | 5 | **Email liên hệ** (nếu có) | `[CHƯA CÓ – email]` → dòng Email đang **ẩn** | `config.js` → `EMAIL` |
 | 6 | **Link Google Maps chính xác** | `[CHƯA CÓ – link Google Maps]` → tạm dùng link tìm kiếm theo địa chỉ | `config.js` → `MAPS_URL` |
@@ -66,3 +66,9 @@ Mỗi câu trả lời mở khóa một phần đang ẩn. Trả lời xong: s�
 | 19 | Gợi ý của tiệm khi tặng thầy cô dịp 20/11? | Trợ giúp › 20/11 |
 
 **Chờ ảnh (đợt 2):** thư mục Drive "Hình hoa" hiện trống. Khi có ảnh: sản phẩm thật (bật lại index `/san-pham/`, nút tim, lọc Màu / Hot trend / Bán chạy), blog 3 bài, trang Feedback (cần ≥ 3 ảnh tin nhắn đạt, đã che thông tin khách).
+
+## Ảnh trong Drive "Hình hoa" (cập nhật 17/11/2026)
+- Mình đã xem khoảng 40/270 ảnh, chọn 20 mẫu khác nhau cho trang Sản phẩm. Đã làm mờ thiệp, lời nhắn riêng của khách và cắt bỏ phần có người, biển số, đồng hồ xe.
+- **Đã loại vì có dấu hiệu là ảnh của tiệm khác:** ảnh có logo + số điện thoại "Như Thảo Flower & Gift – Hải Phòng"; ảnh có thẻ "Favorite Flowers"; ảnh có thẻ "Floral Sense"; ảnh gắn số "385" chụp cạnh hộp CHANEL.
+- **Cần chủ web xác nhận:** 20 ảnh đang dùng đều là hoa do tiệm làm và tiệm tự chụp. Ảnh nào không phải, báo để gỡ.
+- Chưa thấy ảnh chụp tin nhắn khách → trang Feedback chưa mở. Đề xuất để ảnh tin nhắn vào thư mục con "Feedback".
