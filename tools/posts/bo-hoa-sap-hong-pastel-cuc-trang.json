@@ -1,23 +1,61 @@
 {
-  "draft": true,
-  "_ghi_chu": "BẢN NHÁP — chờ chủ web duyệt. Đổi draft thành false để đăng. Ảnh gốc: Drive 'Hình hoa' (71ff0034…, 55f26e3e…). Tên các loại hoa là mô tả theo ảnh, chủ web kiểm lại.",
+  "draft": false,
+  "_ghi_chu": "Chủ web duyệt đăng 17/11/2026 (\"triển khai nhé\"). Đổi draft thành false để đăng. Ảnh gốc: Drive 'Hình hoa' (71ff0034…, 55f26e3e…). Tên các loại hoa là mô tả theo ảnh, chủ web kiểm lại.",
   "slug": "bo-hoa-sap-hong-pastel-cuc-trang",
   "title": "Bó hoa sáp hồng pastel điểm cúc trắng trong túi kraft",
   "desc": "Cận cảnh bó hoa sáp hồng pastel của Quỳnh Như Florist: hồng, cẩm chướng, cúc trắng, hoa xanh nhỏ, lót giấy ren trong túi kraft. Đặt trước 4–5 ngày.",
   "h1": "Nhìn gần bó hoa sáp hồng pastel: trong một bó có những loại hoa nào?",
   "cover": "hong-pastel-cuc-1",
   "images": [
-    { "name": "hong-pastel-cuc-1", "alt": "Bó hoa sáp hồng pastel lót giấy ren trắng, đựng trong túi giấy kraft quai dây thừng – Quỳnh Như Florist" },
-    { "name": "hong-pastel-cuc-2", "alt": "Cận cảnh bó hoa sáp hồng pastel: hoa hồng nhiều lớp cánh, cẩm chướng, cúc trắng và hoa nhỏ màu xanh" }
+    {
+      "name": "hong-pastel-cuc-1",
+      "alt": "Bó hoa sáp hồng pastel lót giấy ren trắng, đựng trong túi giấy kraft quai dây thừng – Quỳnh Như Florist"
+    },
+    {
+      "name": "hong-pastel-cuc-2",
+      "alt": "Cận cảnh bó hoa sáp hồng pastel: hoa hồng nhiều lớp cánh, cẩm chướng, cúc trắng và hoa nhỏ màu xanh"
+    }
   ],
   "body": [
-    ["p", "Bó hoa sáp này được đặt trong túi giấy kraft quai dây thừng, bên trong lót giấy ren trắng. Hoa xếp dày gần kín mặt túi, nên khi nhìn từ trên xuống, người nhận thấy trọn một mặt hoa."],
-    ["h2", "Có những loại hoa nào trong bó?"],
-    ["ul", ["Hoa hồng nhiều lớp cánh, tông hồng phấn", "Cẩm chướng và đồng tiền hồng", "Hoa ly hồng nhạt", "Cúc trắng nhụy vàng", "Hoa nhỏ năm cánh màu xanh", "Vài nhánh lá xanh mảnh"]],
-    ["img", "hong-pastel-cuc-2"],
-    ["h2", "Vì sao phối hồng pastel với cúc trắng và hoa xanh?"],
-    ["p", "Hồng pastel là tông nhẹ, dễ hợp với nhiều người nhận. Những bông cúc trắng và hoa xanh nhỏ điểm xen kẽ giúp bó hoa có chỗ nghỉ mắt, không bị một màu."],
-    ["h2", "Muốn đặt mẫu tương tự?"],
-    ["p", "Bạn gửi ảnh mẫu này qua Zalo 0857 380 325, kèm dịp và ngày cần hoa. Mẫu theo yêu cầu đặt trước 4–5 ngày. Tiệm làm sát với mẫu đã thống nhất; nếu phải đổi màu hay loại hoa, tiệm báo trước."]
-  ]
+    [
+      "p",
+      "Bó hoa sáp này được đặt trong túi giấy kraft quai dây thừng, bên trong lót giấy ren trắng. Hoa xếp dày gần kín mặt túi, nên khi nhìn từ trên xuống, người nhận thấy trọn một mặt hoa."
+    ],
+    [
+      "h2",
+      "Có những loại hoa nào trong bó?"
+    ],
+    [
+      "ul",
+      [
+        "Hoa hồng nhiều lớp cánh, tông hồng phấn",
+        "Cẩm chướng và đồng tiền hồng",
+        "Hoa ly hồng nhạt",
+        "Cúc trắng nhụy vàng",
+        "Hoa nhỏ năm cánh màu xanh",
+        "Vài nhánh lá xanh mảnh"
+      ]
+    ],
+    [
+      "img",
+      "hong-pastel-cuc-2"
+    ],
+    [
+      "h2",
+      "Vì sao phối hồng pastel với cúc trắng và hoa xanh?"
+    ],
+    [
+      "p",
+      "Hồng pastel là tông nhẹ, dễ hợp với nhiều người nhận. Những bông cúc trắng và hoa xanh nhỏ điểm xen kẽ giúp bó hoa có chỗ nghỉ mắt, không bị một màu."
+    ],
+    [
+      "h2",
+      "Muốn đặt mẫu tương tự?"
+    ],
+    [
+      "p",
+      "Bạn gửi ảnh mẫu này qua Zalo 0857 380 325, kèm dịp và ngày cần hoa. Mẫu theo yêu cầu đặt trước 4–5 ngày. Tiệm làm sát với mẫu đã thống nhất; nếu phải đổi màu hay loại hoa, tiệm báo trước."
+    ]
+  ],
+  "date": "2026-11-17"
 }

@@ -1,23 +1,60 @@
 {
-  "draft": true,
-  "_ghi_chu": "BẢN NHÁP — chờ chủ web duyệt. Ảnh gốc: Drive 'Hình hoa' (…xpk322, …fvy134), đã cắt bỏ gương chiếu hậu có bóng người. Tên các loại hoa là mô tả theo ảnh, chủ web kiểm lại.",
+  "draft": false,
+  "_ghi_chu": "Chủ web duyệt đăng 17/11/2026 (\"triển khai nhé\"). Ảnh gốc: Drive 'Hình hoa' (…xpk322, …fvy134), đã cắt bỏ gương chiếu hậu có bóng người. Tên các loại hoa là mô tả theo ảnh, chủ web kiểm lại.",
   "slug": "bo-hoa-sap-hong-nhieu-lop-giay",
   "title": "Bó hoa sáp hồng nhiều lớp giấy, điểm nhấn hoa ly viền ren",
   "desc": "Bó hoa sáp tông hồng gói nhiều lớp giấy hồng – trắng, vắt chuỗi hạt ngọc trai, điểm bông ly hồng viền ren. Xem chi tiết và cách đặt mẫu tương tự.",
   "h1": "Bó hoa sáp hồng nhiều lớp giấy: chi tiết nào làm nên vẻ bồng bềnh?",
   "cover": "hong-nhieu-lop-1",
   "images": [
-    { "name": "hong-nhieu-lop-1", "alt": "Bó hoa sáp tông hồng gói nhiều lớp giấy hồng và trắng xòe rộng, giữa là hoa hồng và hoa ly hồng – Quỳnh Như Florist" },
-    { "name": "hong-nhieu-lop-2", "alt": "Bó hoa sáp hồng nhìn từ trên xuống: hoa ly hồng viền ren, hồng nhiều sắc độ, chuỗi hạt ngọc trai trên lớp giấy" }
+    {
+      "name": "hong-nhieu-lop-1",
+      "alt": "Bó hoa sáp tông hồng gói nhiều lớp giấy hồng và trắng xòe rộng, giữa là hoa hồng và hoa ly hồng – Quỳnh Như Florist"
+    },
+    {
+      "name": "hong-nhieu-lop-2",
+      "alt": "Bó hoa sáp hồng nhìn từ trên xuống: hoa ly hồng viền ren, hồng nhiều sắc độ, chuỗi hạt ngọc trai trên lớp giấy"
+    }
   ],
   "body": [
-    ["p", "Điểm đầu tiên người nhận thấy ở bó hoa sáp này là phần giấy gói: nhiều lớp giấy hồng và trắng xếp so le, xòe rộng quanh phần hoa như những cánh hoa lớn."],
-    ["h2", "Những chi tiết nhỏ trong bó hoa"],
-    ["ul", ["Chuỗi hạt ngọc trai giả vắt nhẹ qua các lớp giấy", "Một bông ly hồng được bao viền ren trắng", "Hoa hồng nhiều sắc độ: hồng đậm, hồng phấn, trắng kem", "Cẩm chướng hồng, hoa đào nhỏ và hoa trắng nhỏ xen kẽ", "Dây ruy băng mảnh thắt nơ ở giữa bó"]],
-    ["img", "hong-nhieu-lop-2"],
-    ["h2", "Vì sao gói nhiều lớp giấy?"],
-    ["p", "Các lớp giấy xếp chồng tạo độ phồng cho bó hoa và làm nền cho phần hoa ở giữa nổi lên. Giấy hồng và trắng cùng tông với hoa nên cả bó nhìn liền một khối, mềm mại."],
-    ["h2", "Muốn đặt mẫu tương tự?"],
-    ["p", "Bạn gửi ảnh mẫu này qua Zalo 0857 380 325, kèm dịp, ngày cần hoa và ngân sách. Mẫu theo yêu cầu đặt trước 4–5 ngày. Tiệm làm sát với mẫu đã thống nhất; nếu phải đổi màu hay loại hoa, tiệm báo trước."]
-  ]
+    [
+      "p",
+      "Điểm đầu tiên người nhận thấy ở bó hoa sáp này là phần giấy gói: nhiều lớp giấy hồng và trắng xếp so le, xòe rộng quanh phần hoa như những cánh hoa lớn."
+    ],
+    [
+      "h2",
+      "Những chi tiết nhỏ trong bó hoa"
+    ],
+    [
+      "ul",
+      [
+        "Chuỗi hạt ngọc trai giả vắt nhẹ qua các lớp giấy",
+        "Một bông ly hồng được bao viền ren trắng",
+        "Hoa hồng nhiều sắc độ: hồng đậm, hồng phấn, trắng kem",
+        "Cẩm chướng hồng, hoa đào nhỏ và hoa trắng nhỏ xen kẽ",
+        "Dây ruy băng mảnh thắt nơ ở giữa bó"
+      ]
+    ],
+    [
+      "img",
+      "hong-nhieu-lop-2"
+    ],
+    [
+      "h2",
+      "Vì sao gói nhiều lớp giấy?"
+    ],
+    [
+      "p",
+      "Các lớp giấy xếp chồng tạo độ phồng cho bó hoa và làm nền cho phần hoa ở giữa nổi lên. Giấy hồng và trắng cùng tông với hoa nên cả bó nhìn liền một khối, mềm mại."
+    ],
+    [
+      "h2",
+      "Muốn đặt mẫu tương tự?"
+    ],
+    [
+      "p",
+      "Bạn gửi ảnh mẫu này qua Zalo 0857 380 325, kèm dịp, ngày cần hoa và ngân sách. Mẫu theo yêu cầu đặt trước 4–5 ngày. Tiệm làm sát với mẫu đã thống nhất; nếu phải đổi màu hay loại hoa, tiệm báo trước."
+    ]
+  ],
+  "date": "2026-11-17"
 }
