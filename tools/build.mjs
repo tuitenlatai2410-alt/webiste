@@ -30,9 +30,12 @@ const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/
 const slug = (s) => fold(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /* ---- Chữ dùng chung (tiếng Việt). Thêm thứ tiếng: tools/i18n/<lang>.json cùng khóa ---- */
-const LANGS = ['vi'];
-const T = JSON.parse(read('tools/i18n/vi.json'));
-const tTokens = Object.fromEntries(Object.entries(T).filter(([k]) => !k.startsWith('_')).map(([k, v]) => ['T_' + k, v]));
+// vi: bản chính. en: bản dịch, đang noindex (chưa có tên miền thật, chưa có người soát).
+const LANGS = ['vi', 'en'];
+const NOINDEX_LANGS = ['en'];
+const I18N = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(read(`tools/i18n/${l}.json`))]));
+const T = I18N.vi;
+const tTokensOf = (TT) => Object.fromEntries(Object.entries(TT).filter(([k]) => !k.startsWith('_')).map(([k, v]) => ['T_' + k, v]));
 
 /* ---- Khối bị ẩn vì thiếu thông tin ---- */
 const HIDDEN = [];
@@ -100,22 +103,6 @@ const POLICY_SECTIONS = POLICY.map((s) => `    <section class="policy__sec revea
 ${s.paras.map((t) => `      <p>${esc(t)}</p>`).join('\n')}
     </section>`).join('\n');
 
-/* ---- Liên kết tiện ích (thanh trên cùng, cuối menu điện thoại, chân trang) ---- */
-const UTIL_LINKS = [
-  ['/lien-he/#ban-do', T.ubar_map],
-  ['/tro-giup/', T.ubar_help],
-  ['/lien-he/', T.ubar_contact],
-  ...(POLICY_ON ? [['/chinh-sach/', T.ubar_policy]] : []),
-];
-const utilLis = UTIL_LINKS.map(([h, t]) => `<li><a href="${h}">${esc(t)}</a></li>`).join('');
-const UBAR = `<div class="ubar" role="region" aria-label="${esc(T.ubar_label)}">
-  <div class="ubar__in">
-    <p class="ubar__info">${HOURS_ON ? `<svg aria-hidden="true"><use href="#i-clock"/></svg><span>${esc(T.ubar_hours)} <b>${esc(C.HOURS)}</b></span><span class="ubar__note"><i aria-hidden="true">·</i>${esc(T.ubar_note)}</span>` : `<span>${esc(T.ubar_note)}</span>`}</p>
-    <ul class="ubar__links">${utilLis}</ul>
-  </div>
-</div>`;
-const NAV_UTIL = `      <ul class="nav__util">${utilLis}</ul>`;
-
 /* ---- Bộ lọc sản phẩm: chỉ xuất nút có dữ liệu ---- */
 const occUsed = Object.keys(OCC).filter((k) => PRODUCTS.some((p) => (p.occasions || []).includes(k)));
 const colorsReal = [...new Set(REAL.flatMap((p) => p.colors || []))];
@@ -139,13 +126,34 @@ ${[
 ].filter(Boolean).join('\n')}
     </div>`;
 
+/* ---- Phần dùng chung theo ngôn ngữ: thanh tiện ích, menu, chân trang… ---- */
+function chromeFor(L) {
+const T = I18N[L];
+const U = (key) => urlOf(L, key);
+/* ---- Liên kết tiện ích (thanh trên cùng, cuối menu điện thoại, chân trang) ---- */
+const UTIL_LINKS = [
+  [U('lien-he') + '#ban-do', T.ubar_map],
+  [U('tro-giup'), T.ubar_help],
+  [U('lien-he'), T.ubar_contact],
+  ...(POLICY_ON ? [[U('chinh-sach'), T.ubar_policy]] : []),
+];
+const utilLis = UTIL_LINKS.map(([h, t]) => `<li><a href="${h}">${esc(t)}</a></li>`).join('');
+const UBAR = `<div class="ubar" role="region" aria-label="${esc(T.ubar_label)}">
+  <div class="ubar__in">
+    <p class="ubar__info">${HOURS_ON ? `<svg aria-hidden="true"><use href="#i-clock"/></svg><span>${esc(T.ubar_hours)} <b>${esc(C.HOURS)}</b></span><span class="ubar__note"><i aria-hidden="true">·</i>${esc(T.ubar_note)}</span>` : `<span>${esc(T.ubar_note)}</span>`}</p>
+    <ul class="ubar__links">${utilLis}</ul>
+  </div>
+</div>`;
+const NAV_UTIL = `      <ul class="nav__util">${utilLis}</ul>`;
+
 /* ---- Menu chính + menu thả xuống ---- */
 function navItems(cur) {
   const items = [
-    ['home', '/', T.nav_home, ''],
-    ['gioi-thieu', '/gioi-thieu/', T.nav_about, 'gioi-thieu'],
-    ...(FEEDBACK_ON ? [['feedback', '/feedback/', T.nav_feedback, '']] : []),
-    ['san-pham', '/san-pham/', T.nav_products, 'san-pham'],
+    ['home', U('home'), T.nav_home, ''],
+    ['gioi-thieu', U('gioi-thieu'), T.nav_about, 'gioi-thieu'],
+    ...(FEEDBACK_ON ? [['feedback', U('feedback'), T.nav_feedback, '']] : []),
+    // Bản dịch chưa có trang Sản phẩm: link về bản tiếng Việt, không mở menu thả xuống
+    ['san-pham', U('san-pham'), T.nav_products, L === 'vi' ? 'san-pham' : ''],
   ];
   return items.map(([k, h, t, mega]) => `        <li${mega ? ` data-mega="${mega}"` : ''}><a href="${h}"${k === cur ? ' class="is-active" aria-current="page"' : ''}>${esc(t)}</a></li>`).join('\n');
 }
@@ -156,7 +164,7 @@ ${links.map(([href, t]) => `                <li><a href="${href}">${esc(t)}</a><
             </div>`;
 const MEGA_PANELS = `          <details class="mega__panel" data-panel="gioi-thieu"><summary>${esc(T.nav_about)}</summary>
             <div class="mega__cols">
-${megaCol(T.mega_about_h, [['/gioi-thieu/', T.mega_about_1], ['/gioi-thieu/#triet-ly', T.mega_about_2]])}
+${megaCol(T.mega_about_h, [[U('gioi-thieu'), T.mega_about_1], [U('gioi-thieu') + '#triet-ly', T.mega_about_2]])}
             </div>
           </details>
           <details class="mega__panel" data-panel="san-pham"><summary>${esc(T.nav_products)}</summary>
@@ -189,11 +197,16 @@ const WISH_PANEL = WISH_ON ? `<dialog class="wish" id="wish" aria-labelledby="wi
 /* ---- Chân trang ---- */
 const FOOT_MENU = [
   ['/', T.nav_home], ['/gioi-thieu/', T.nav_about], ...(FEEDBACK_ON ? [['/feedback/', T.nav_feedback]] : []),
-  ['/san-pham/', T.nav_products], ['/tro-giup/', T.foot_help], ['/lien-he/', T.ubar_contact],
+  ['/san-pham/', T.nav_products], ['/tro-giup/', T.foot_help], [U('lien-he'), T.ubar_contact],
   ...(POLICY_ON ? [['/chinh-sach/', T.foot_policy]] : []),
 ].map(([h, t]) => `        <li><a href="${h}">${esc(t)}</a></li>`).join('\n');
 const FOOT_HOURS = HOURS_ON ? `        <span class="footer__row"><svg aria-hidden="true"><use href="#i-clock"/></svg><span>${esc(T.ubar_hours)}: ${esc(C.HOURS)}</span></span>\n` : '';
-const CONTACT_HOURS = HOURS_ON ? `          <div><dt>GIỜ LÀM VIỆC</dt><dd>${esc(C.HOURS)}</dd></div>\n` : '';
+const CONTACT_HOURS = HOURS_ON ? `          <div><dt>${esc(T.hours_dt)}</dt><dd>${esc(C.HOURS)}</dd></div>\n` : '';
+
+
+const otherLangs = LANGS.filter((x) => x !== L);
+return { T, U, UBAR, NAV_UTIL, navItems, MEGA_PANELS, WISH_BTN, WISH_PANEL, FOOT_MENU, FOOT_HOURS, CONTACT_HOURS };
+}
 
 /* ---- Ô sản phẩm (HTML thật để Google index) ---- */
 const img = (name, alt, eager) =>
@@ -223,7 +236,7 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
       </li>`;
 }).join('\n');
 
-/* ---- Các trang (tiêu đề, mô tả lấy từ tools/i18n/vi.json) ---- */
+/* ---- Các trang (tiêu đề, mô tả lấy từ tools/i18n/<lang>.json) ---- */
 const PAGE_DEFS = [
   { key: 'home', path: '' },
   { key: 'gioi-thieu', path: 'gioi-thieu/' },
@@ -232,11 +245,26 @@ const PAGE_DEFS = [
   ...(POLICY_ON ? [{ key: 'chinh-sach', path: 'chinh-sach/', fresh: true }] : []),
   { key: 'lien-he', path: 'lien-he/' },
 ];
+for (const L of LANGS) if (hasPlaceholder(I18N[L].lang_note)) HIDDEN.push(`Bản ${L}: dòng "tiệm trả lời tin nhắn bằng thứ tiếng nào"`);
 if (!POLICY_ON) HIDDEN.push('Trang Chính sách (chưa có mục nào đủ thông tin)');
 if (!FEEDBACK_ON) HIDDEN.push('Trang Feedback + mục Feedback trên menu (chờ ảnh tin nhắn khách — đợt 2)');
 if (!WISH_ON) HIDDEN.push('Nút tim yêu thích (chờ mẫu thật có ảnh — đợt 2)');
-const PAGES = PAGE_DEFS.map((d) => ({ ...d, name: T[`page_${d.key}_name`], title: T[`page_${d.key}_title`], desc: T[`page_${d.key}_desc`] }));
-for (const pg of PAGES) {
+// Bản tiếng Anh: chỉ các trang đã ổn định. Trang chưa dịch thì link về bản tiếng Việt.
+const PAGE_DEFS_EN = [
+  { key: 'home', path: 'en/', tpl: 'en/home' },
+  { key: 'gioi-thieu', path: 'en/about/', tpl: 'en/gioi-thieu' },
+  { key: 'lien-he', path: 'en/contact/', tpl: 'en/lien-he' },
+];
+const mkPages = (L, defs) => defs.map((d) => ({ ...d, lang: L, tpl: d.tpl || d.key, name: I18N[L][`page_${d.key}_name`], title: I18N[L][`page_${d.key}_title`], desc: I18N[L][`page_${d.key}_desc`] }));
+const PAGES_BY_LANG = { vi: mkPages('vi', PAGE_DEFS), en: mkPages('en', PAGE_DEFS_EN) };
+const PAGES = PAGES_BY_LANG.vi;
+const ALL_PAGES = LANGS.flatMap((L) => PAGES_BY_LANG[L]);
+const VI_PATH = { feedback: 'feedback/', ...Object.fromEntries(PAGE_DEFS.map((d) => [d.key, d.path])) };
+function urlOf(L, key) {
+  const pg = (PAGES_BY_LANG[L] || []).find((p) => p.key === key);
+  return '/' + (pg ? pg.path : VI_PATH[key] || '');
+}
+for (const pg of ALL_PAGES) {
   const tl = [...pg.title].length, dl = [...pg.desc].length;
   if (tl > 60) console.warn('⚠ Tiêu đề dài hơn 60 ký tự:', pg.title);
   if (dl > 160) console.warn('⚠ Mô tả dài hơn 160 ký tự:', pg.desc);
@@ -244,7 +272,7 @@ for (const pg of PAGES) {
 }
 
 // /san-pham/ để noindex cho tới khi có mẫu thật (đang là 20 mẫu tham khảo)
-const noindex = (pg) => pg.key === 'san-pham' && !HAS_REAL_PRODUCTS;
+const noindex = (pg) => NOINDEX_LANGS.includes(pg.lang) || (pg.key === 'san-pham' && !HAS_REAL_PRODUCTS);
 
 /* ---- JSON-LD ---- */
 const sameAs = [C.TIKTOK_URL, C.FACEBOOK_URL, C.INSTAGRAM_URL];
@@ -276,12 +304,12 @@ if (!missing(C.EMAIL)) florist.email = C.EMAIL;
 const website = { '@type': 'WebSite', '@id': CANONICAL + '#website', url: CANONICAL, name: C.SHOP_NAME, inLanguage: 'vi', publisher: { '@id': CANONICAL + '#florist' } };
 function jsonld(pg) {
   const url = CANONICAL + pg.path;
-  const crumbs = [{ '@type': 'ListItem', position: 1, name: 'Trang chủ', item: CANONICAL }];
-  if (pg.path) crumbs.push({ '@type': 'ListItem', position: 2, name: pg.name, item: url });
+  const crumbs = [{ '@type': 'ListItem', position: 1, name: I18N[pg.lang].nav_home, item: CANONICAL + (pg.lang === 'vi' ? '' : pg.lang + '/') }];
+  if (pg.key !== 'home') crumbs.push({ '@type': 'ListItem', position: 2, name: pg.name, item: url });
   const pageType = { 'gioi-thieu': 'AboutPage', 'lien-he': 'ContactPage' }[pg.key] || 'WebPage';
   const graph = [
     florist, website,
-    { '@type': pageType, '@id': url + '#webpage', url, name: pg.title, description: pg.desc, inLanguage: 'vi', isPartOf: { '@id': CANONICAL + '#website' }, about: { '@id': CANONICAL + '#florist' } },
+    { '@type': pageType, '@id': url + '#webpage', url, name: pg.title, description: pg.desc, inLanguage: pg.lang, isPartOf: { '@id': CANONICAL + '#website' }, about: { '@id': CANONICAL + '#florist' } },
     { '@type': 'BreadcrumbList', itemListElement: crumbs },
   ];
   // FAQPage chỉ gồm các câu đang hiện trên trang
@@ -309,13 +337,11 @@ const EMAIL_ROW = missing(C.EMAIL) ? '' : `          <div><dt>EMAIL</dt><dd><a h
 const ver = (p) => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8);
 
 const common = {
-  ...tTokens,
   SITE_URL: SITE,
   SITE_HOST: SITE.replace(/^https?:\/\//, ''),
   HERO_SRCSET, HERO_SIZES,
   CRITICAL_CSS: critical,
   PRODUCT_CARDS, FAQ_ITEMS, EMAIL_ROW, FILTERS,
-  UBAR, NAV_UTIL, MEGA_PANELS, WISH_BTN, WISH_PANEL, FOOT_MENU, FOOT_HOURS, CONTACT_HOURS,
   POLICY_TOC, POLICY_SECTIONS,
   TODAY_QUOTE: esc(TODAY_QUOTE),
   PHONE: C.PHONE, PHONE_DISPLAY: C.PHONE_DISPLAY, ZALO_URL: C.ZALO_URL,
@@ -338,30 +364,57 @@ function scan(name, html) {
   if (bad.length) throw new Error(`Trang ${name} có chữ không được hiện cho khách: ${bad.join(', ')}`);
 }
 
-for (const pg of PAGES) {
+const CHROME = Object.fromEntries(LANGS.map((L) => [L, chromeFor(L)]));
+// Nút đổi ngôn ngữ: sang đúng trang tương ứng, chưa dịch thì về trang chủ của ngôn ngữ đó
+const LANG_NAMES = { vi: 'Tiếng Việt', en: 'English', zh: '中文', ko: '한국어', ja: '日本語' };
+function langLinks(pg) {
+  return LANGS.map((L) => {
+    const twin = PAGES_BY_LANG[L].find((p) => p.key === pg.key) || PAGES_BY_LANG[L][0];
+    return `<li><a href="/${twin.path}" hreflang="${L}" lang="${L}"${L === pg.lang ? ' aria-current="true"' : ''}>${LANG_NAMES[L]}</a></li>`;
+  }).join('');
+}
+// hreflang chỉ cho các ngôn ngữ được index
+function hreflang(pg) {
+  const langs = LANGS.filter((L) => !NOINDEX_LANGS.includes(L));
+  if (langs.length < 2 || NOINDEX_LANGS.includes(pg.lang)) return '';
+  return langs.map((L) => PAGES_BY_LANG[L].find((p) => p.key === pg.key)).filter(Boolean)
+    .map((p) => `<link rel="alternate" hreflang="${p.lang}" href="${CANONICAL + p.path}">`).join('\n')
+    + `\n<link rel="alternate" hreflang="x-default" href="${CANONICAL + (PAGES_BY_LANG.vi.find((p) => p.key === pg.key) || PAGES_BY_LANG.vi[0]).path}">`;
+}
+
+for (const pg of ALL_PAGES) {
+  const ch = CHROME[pg.lang];
   const tokens = {
     ...common,
+    ...tTokensOf(ch.T),
+    UBAR: ch.UBAR, NAV_UTIL: ch.NAV_UTIL + `\n      <ul class="nav__langs" aria-label="${esc(ch.T.lang_label)}">${langLinks(pg)}</ul>`,
+    MEGA_PANELS: ch.MEGA_PANELS, WISH_BTN: ch.WISH_BTN, WISH_PANEL: ch.WISH_PANEL,
+    FOOT_MENU: ch.FOOT_MENU, FOOT_HOURS: ch.FOOT_HOURS, CONTACT_HOURS: ch.CONTACT_HOURS,
+    HOME_URL: ch.U('home'),
+    LANG_SWITCH: `      <details class="lang"><summary class="lang__btn" aria-label="${esc(ch.T.lang_label)}: ${LANG_NAMES[pg.lang]}">${esc(ch.T.lang_cur)}<svg aria-hidden="true"><use href="#i-arrow"/></svg></summary><ul class="lang__list">${langLinks(pg)}</ul></details>`,
+    HREFLANG: hreflang(pg),
+    LANG_NOTE: ch.T.lang_note && !hasPlaceholder(ch.T.lang_note) ? `<p class="lang-note">${esc(ch.T.lang_note)}</p>` : '',
     PAGE: pg.key,
     ROBOTS: noindex(pg) ? 'noindex, follow' : 'index, follow, max-image-preview:large',
     TITLE: esc(pg.title), DESC: esc(pg.desc), CANONICAL: CANONICAL + pg.path,
     JSONLD: jsonld(pg),
-    NAV_ITEMS: navItems(pg.key),
+    NAV_ITEMS: ch.navItems(pg.key),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
     HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">\n` : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
-  const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + read(`tools/pages/${pg.key}.html`) + read('tools/partials/bottom.html');
+  const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + read(`tools/pages/${pg.tpl}.html`) + read('tools/partials/bottom.html');
   // Thay nhiều lượt: phần chèn vào (popup sản phẩm, form) cũng chứa token như {{ZALO_URL}}
   let out = raw;
-  for (let pass = 0; pass < 3 && /\{\{[A-Za-z_-]+\}\}/.test(out); pass++) {
-    out = out.replace(/\{\{([A-Za-z_-]+)\}\}/g, (m, k) => {
+  for (let pass = 0; pass < 3 && /\{\{[A-Za-z0-9_-]+\}\}/.test(out); pass++) {
+    out = out.replace(/\{\{([A-Za-z0-9_-]+)\}\}/g, (m, k) => {
       if (!(k in tokens)) throw new Error(`Thiếu token ${k} (${pg.key})`);
       return tokens[k];
     });
   }
   if (out.includes('{{')) throw new Error(`Còn token chưa thay trong trang ${pg.key}: ` + out.match(/\{\{[^}]*\}\}/)[0]);
-  scan(pg.key, out);
+  scan(pg.path || 'home', out);
   // Gắn ?v=<mã> vào file tĩnh để cache dài hạn mà vẫn cập nhật ngay khi sửa
   for (const f of ['assets/css/style.css', 'assets/js/config.js', 'assets/js/products.js', 'assets/js/main.js', 'assets/data/loi-chuc.json']) {
     out = out.split(`"/${f}"`).join(`"/${f}?v=${ver(f)}"`);
@@ -395,7 +448,7 @@ if (!POLICY_ON && fs.existsSync(path.join(ROOT, 'chinh-sach/index.html'))) fs.rm
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PAGES.filter((pg) => !noindex(pg)).map((pg) => `  <url>
+${ALL_PAGES.filter((pg) => !noindex(pg)).map((pg) => `  <url>
     <loc>${CANONICAL + pg.path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
@@ -416,7 +469,7 @@ write('404.html', page404);
 
 if (!FORM_ON) console.log('ℹ Form đặt hoa đang TẠM ẨN (ORDER_FORM_ENABLED: false)');
 if (missing(C.SITE_URL) || /example\.com/.test(C.SITE_URL)) console.warn('⚠ Chưa có tên miền thật — đang dùng', C.SITE_URL);
-console.log(`ℹ Ngôn ngữ: ${LANGS.join(', ')}`);
+console.log(`ℹ Ngôn ngữ: ${LANGS.join(', ')} (noindex: ${NOINDEX_LANGS.join(', ') || 'không'})`);
 if (HIDDEN.length) {
   console.log(`\nℹ ${HIDDEN.length} khối đang ẨN vì thiếu thông tin (xem MISSING-INFO.md):`);
   HIDDEN.forEach((h) => console.log('   – ' + h));

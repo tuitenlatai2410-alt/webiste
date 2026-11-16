@@ -53,7 +53,7 @@ Mỗi câu trả lời mở khóa một phần đang ẩn. Trả lời xong: s�
 | 6 | Giờ 07:00 – 22:00 áp dụng cả cuối tuần và ngày lễ? | Chỉnh schema giờ mở cửa |
 | 7 | Ruy băng in chữ CHANEL: tiệm đang dùng cho khách hay chỉ có trong ảnh đó? | Ảnh hộp hoa đỏ (đang thay tạm ở hero mẫu 3) |
 | 8 | Khách trong các ảnh chụp tin nhắn đã đồng ý cho đăng chưa? | Trang Feedback (đợt 2) |
-| 9 | Tiệm trả lời tin nhắn được bằng những thứ tiếng nào? | Đợt 3 (5 ngôn ngữ) |
+| 9 | Tiệm trả lời tin nhắn được bằng những thứ tiếng nào? | Dòng ghi chú trên trang `/en/contact/` (khóa `lang_note` trong `tools/i18n/en.json`) |
 | 10 | 中文 dùng giản thể hay phồn thể? | Đợt 3 |
 | 11 | Giá khoảng bao nhiêu cho từng loại? Có mức cho sinh viên không? | Trợ giúp › Giá |
 | 12 | Có nhận làm gấp mẫu theo yêu cầu không? | Trợ giúp › Làm gấp |

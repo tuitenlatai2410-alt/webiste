@@ -96,7 +96,7 @@ html.menu-open{overflow:hidden}
 .page-first{padding-top:40px}
 @media (min-width:1024px){.page-first{padding-top:56px}}
 .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.85rem;margin-bottom:28px;color:var(--gray-700)}
-.crumbs a{display:inline-flex;align-items:center;min-height:44px;color:var(--pink-ink);font-weight:500}
+.crumbs a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--pink-ink);font-weight:500}
 .crumbs a:hover{text-decoration:underline;text-underline-offset:3px}
 .crumbs [aria-current]{color:var(--black);font-weight:500}
 .contact .crumbs{position:relative}
@@ -375,7 +375,7 @@ html.modal-open{overflow:hidden}
 a.footer__row:hover{color:#fff}
 a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .footer__menu{display:grid;gap:2px}
-.footer__menu a{display:inline-block;min-height:44px;padding:10px 0;color:#fff}
+.footer__menu a{display:inline-block;min-width:44px;min-height:44px;padding:10px 0;color:#fff}
 .footer__menu a:hover{color:var(--pink)}
 .footer__copy{text-align:center;font-size:.8rem;margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);color:var(--gray-400)}
 /* Khối "Theo dõi chúng tôi" */
@@ -580,3 +580,12 @@ a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .wish__zalo{color:var(--pink-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
 .srch__list a.srch__zalo{display:inline-flex;justify-content:center;margin:2px 12px 10px;padding:.55em 1.15em;color:#fff;background:var(--pink-deep)}
 .srch__list a.srch__zalo:hover{background:var(--pink-ink)}
+
+/* Ngôn ngữ: danh sách trong menu điện thoại; ghi chú bản dịch */
+@media (max-width:1023.98px){
+  .nav__langs{display:flex;flex-wrap:wrap;gap:0 20px}
+  .nav__langs a{display:flex;align-items:center;min-height:44px;font-weight:600;font-size:.9rem;letter-spacing:.06em;color:var(--gray-700)}
+  .nav__langs a[aria-current="true"]{color:var(--pink-ink)}
+}
+.xlink small{font:500 .8rem/1 var(--sans);color:var(--gray-700)}
+.lang-note{margin-top:10px;font-size:.95rem}

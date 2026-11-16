@@ -56,7 +56,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .ubar__note{display:none}
 .ubar__note i{font-style:normal;margin:0 10px;color:var(--pink)}
 .ubar__links{display:none}
-.ubar__links a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:#e6e2e7;transition:color .2s}
+.ubar__links a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 12px;color:#e6e2e7;transition:color .2s}
 .ubar__links a:hover,.ubar__links a:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (min-width:768px){.ubar__note{display:inline}}
 @media (min-width:1024px){.ubar__in{justify-content:space-between;padding-inline:clamp(32px,4vw,72px)}.ubar__links{display:flex;margin-right:-12px}}
@@ -84,6 +84,18 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .nav__wish-n:empty,.nav__wish[data-n="0"] .nav__wish-n{display:none}
 .nav__wish ~ .nav__search-btn{display:none}
 .nav__util{display:none}
+.nav__langs{display:none}
+/* Nút đổi ngôn ngữ (máy tính): chữ in hoa đậm, mở danh sách */
+.lang{display:none;position:relative}
+.lang__btn{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 6px;font:700 .8rem/1 var(--sans);letter-spacing:.12em;color:var(--black);cursor:pointer;list-style:none}
+.lang__btn::-webkit-details-marker{display:none}
+.lang__btn svg{width:14px;height:14px;rotate:90deg;transition:rotate .25s}
+.lang[open] .lang__btn svg{rotate:-90deg}
+.lang__list{position:absolute;right:0;top:calc(100% + 6px);z-index:6;min-width:160px;padding:6px;background:#fff;border-radius:14px;box-shadow:0 18px 40px -18px rgba(20,18,20,.4),0 0 0 1px rgba(20,18,20,.06)}
+.lang__list a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;font-size:.95rem;color:var(--black)}
+.lang__list a:hover,.lang__list a:focus-visible{background:var(--gray-100)}
+.lang__list a[aria-current="true"]{font-weight:600;color:var(--pink-ink)}
+@media (min-width:1024px){.lang{display:block}}
 .nav__search-btn{width:44px;height:44px;border-radius:50%;display:grid;place-content:center;background:var(--gray-100);color:var(--black)}
 .nav__search-btn svg{width:22px;height:22px}
 .nav__burger{width:44px;height:44px;border-radius:50%;display:grid;place-content:center;gap:6px;background:var(--black)}

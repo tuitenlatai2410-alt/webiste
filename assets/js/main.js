@@ -13,6 +13,19 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var lowPower = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  // Chữ của JS theo ngôn ngữ trang (<html lang>). Trang Sản phẩm, Trợ giúp hiện chỉ có tiếng Việt.
+  var LANG = (html.getAttribute('lang') || 'vi').slice(0, 2);
+  var STR = {
+    vi: { menuOpen: 'Mở menu', menuClose: 'Đóng menu', zalo: 'Nhắn Zalo', none: 'Chưa có mẫu khớp. Nhắn Zalo để tiệm gợi ý.',
+      noneOcc: function (o) { return 'Chưa có mẫu cho dịp ' + o + ' trên web. Nhắn Zalo để tiệm gợi ý.'; },
+      tOcc: 'Theo dịp', tTable: 'Trụ để bàn', tType: 'Loại', tDip: 'Dịp', tHelp: 'Trợ giúp', tContact: 'Liên hệ', tPage: 'Trang',
+      saved: 'Đã lưu vào mẫu yêu thích', unsaved: 'Đã bỏ khỏi mẫu yêu thích' },
+    en: { menuOpen: 'Open menu', menuClose: 'Close menu', zalo: 'Message on Zalo', none: 'No matching design yet. Message us on Zalo for suggestions.',
+      noneOcc: function (o) { return 'No design for ' + o + ' on the website yet. Message us on Zalo for suggestions.'; },
+      tOcc: 'Occasions (VI)', tTable: 'Table stands (VI)', tType: 'Type (VI)', tDip: 'Occasion (VI)', tHelp: 'Help (VI)', tContact: 'Contact', tPage: 'Page',
+      saved: 'Saved to your list', unsaved: 'Removed from your list' }
+  };
+  var S = STR[LANG] || STR.vi;
   var missing = function (v) { return !v || String(v).indexOf('[CHƯA CÓ') === 0; };
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
@@ -138,7 +151,7 @@
       nav.classList.toggle('is-open', open);
       html.classList.toggle('menu-open', open);
       burger.setAttribute('aria-expanded', String(open));
-      burger.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+      burger.setAttribute('aria-label', open ? S.menuClose : S.menuOpen);
     }
     burger.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
     $$('#nav-menu a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
@@ -296,7 +309,12 @@
     [['cuoi', 'dam cuoi', 'dam hoi'], ['tiec cuoi']],
     [['cam on', 'tri an'], ['cam on']],
     [['de ban', 'trang tri', 'decor'], ['tru hoa de ban']],
-    [['sinh nhat', 'sn', 'birthday'], ['sinh nhat']]
+    [['sinh nhat', 'sn', 'birthday'], ['sinh nhat']],
+    [['rose', 'roses'], ['hoa hong']], [['pink'], ['hong']], [['white'], ['trang']], [['black'], ['den']], [['grey', 'gray'], ['xam']],
+    [['sunflower', 'sunflowers'], ['huong duong']], [['hydrangea'], ['cam tu cau']], [['baby breath', "baby's breath"], ['baby']],
+    [['graduation'], ['tot nghiep']], [['anniversary', 'love'], ['ky niem']], [['wedding'], ['tiec cuoi']], [['event'], ['su kien']],
+    [['thank you', 'thanks'], ['cam on']], [['teacher', 'teachers day'], ['20/11']], [['mother', 'mom', 'women'], ['20/10', '8/3']],
+    [['opening', 'congratulations'], ['chuc mung']], [['table', 'centerpiece', 'stand'], ['tru hoa de ban']]
   ];
   function productIndex(p) {
     var occ = (p.occasions || []).map(function (k) { return (OCC[k] || '') + ' ' + k.replace(/-/g, '/'); });
@@ -351,14 +369,12 @@
   }
   function noMatchText(raw, occ) {
     var o = occ.filter(function (k) { return OCC[k]; }).map(function (k) { return OCC[k]; });
-    return o.length
-      ? 'Chưa có mẫu cho dịp ' + o.join(', ') + ' trên web. Nhắn Zalo để tiệm gợi ý.'
-      : 'Chưa có mẫu khớp. Nhắn Zalo để tiệm gợi ý.';
+    return o.length ? S.noneOcc(o.join(', ')) : S.none;
   }
   function zaloBtn() {
     var a = doc.createElement('a');
     a.className = 'btn btn--pink btn--sm'; a.href = CFG.ZALO_URL || 'https://zalo.me/'; a.target = '_blank'; a.rel = 'noopener';
-    a.textContent = 'Nhắn Zalo';
+    a.textContent = S.zalo;
     return a;
   }
 
@@ -367,12 +383,13 @@
     if (!forms.length) return;
     var occUsed = Object.keys(OCC).filter(function (k) { return PRODUCTS.some(function (p) { return (p.occasions || []).indexOf(k) !== -1; }); });
     // Mục cố định: loại, dịp đang có mẫu, các trang của tiệm
+    var en = LANG === 'en', contact = en ? '/en/contact/' : '/lien-he/';
     var idx = [
-      ['Hoa sáp theo dịp', '/san-pham/?loai=hoa-theo-dip', 'Loại'], ['Trụ hoa để bàn decor', '/san-pham/?loai=tru-hoa-de-ban', 'Loại']
-    ].concat(occUsed.map(function (k) { return [OCC[k], '/san-pham/?dip=' + k, 'Dịp']; })).concat([
-      ['Quy trình đặt hoa 4 bước', '/tro-giup/#quy-trinh', 'Trợ giúp'], ['Câu hỏi thường gặp', '/tro-giup/#hoi-dap', 'Trợ giúp'],
-      ['Giờ làm việc', '/lien-he/', 'Liên hệ'], ['Chỉ đường tới tiệm', '/lien-he/#ban-do', 'Liên hệ'],
-      ['Giới thiệu', '/gioi-thieu/', 'Trang'], ['Liên hệ – địa chỉ tiệm', '/lien-he/', 'Trang']
+      ['Hoa sáp theo dịp', '/san-pham/?loai=hoa-theo-dip', S.tType], ['Trụ hoa để bàn decor', '/san-pham/?loai=tru-hoa-de-ban', S.tType]
+    ].concat(occUsed.map(function (k) { return [OCC[k], '/san-pham/?dip=' + k, S.tDip]; })).concat([
+      ['Quy trình đặt hoa 4 bước', '/tro-giup/#quy-trinh', S.tHelp], ['Câu hỏi thường gặp', '/tro-giup/#hoi-dap', S.tHelp],
+      [en ? 'Opening hours' : 'Giờ làm việc', contact, S.tContact], [en ? 'Directions to the shop' : 'Chỉ đường tới tiệm', contact + '#ban-do', S.tContact],
+      [en ? 'About' : 'Giới thiệu', en ? '/en/about/' : '/gioi-thieu/', S.tPage], [en ? 'Contact – shop address' : 'Liên hệ – địa chỉ tiệm', contact, S.tPage]
     ]);
     idx.forEach(function (r) { r.push(fold(r[0])); });
 
@@ -386,7 +403,7 @@
         list.textContent = '';
         if (!v) { list.hidden = true; return; }
         var res = searchProducts(raw), rows = res.hits.slice(0, 5).map(function (h) {
-          return [h.p.name, '/san-pham/#' + h.p.id, h.p.category === 'table' ? 'Trụ để bàn' : 'Theo dịp'];
+          return [h.p.name, '/san-pham/#' + h.p.id, h.p.category === 'table' ? S.tTable : S.tOcc];
         });
         var vs = variants(v).list;
         idx.forEach(function (r) {
@@ -491,7 +508,7 @@
       var b = e.target.closest && e.target.closest('[data-wish]');
       if (!b) return;
       e.preventDefault(); e.stopPropagation();
-      toast(wishToggle(b.getAttribute('data-wish')) ? 'Đã lưu vào mẫu yêu thích' : 'Đã bỏ khỏi mẫu yêu thích');
+      toast(wishToggle(b.getAttribute('data-wish')) ? S.saved : S.unsaved);
     }, true);
     if (!dlg || !btn) { wishSync(); return; }
     btn.addEventListener('click', function () { wishSync(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
@@ -1026,9 +1043,18 @@
     }, { rootMargin: '0px 0px -40px 0px' }).observe(foot);
   }
 
+  /* Nút đổi ngôn ngữ (máy tính): đóng khi bấm ra ngoài hoặc Esc */
+  function initLang() {
+    var d = $('.lang');
+    if (!d) return;
+    doc.addEventListener('click', function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && d.open) { d.open = false; $('summary', d).focus(); } });
+  }
+
   /* ---------- Khởi động ---------- */
   initIntro();
   initNav();
+  initLang();
   initQuote();
   initSearch();
   initWish();

@@ -20,7 +20,7 @@
   <p class="intro__name">Quỳnh Như <em>Florist</em></p>
 </div>
 
-<a class="skip-link" href="#main">Bỏ qua tới nội dung chính</a>
+<a class="skip-link" href="#main">{{T_skip}}</a>
 
 <!-- [B] THANH TIỆN ÍCH: giờ làm việc + liên kết nhanh (đứng yên). Điện thoại: chỉ hiện giờ, liên kết nằm cuối menu -->
 {{UBAR}}
@@ -28,7 +28,7 @@
 <!-- [C] MENU: logo · menu · tìm kiếm · tim (máy tính) | logo · tim · nút menu (điện thoại) -->
 <header class="nav" id="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="/" aria-label="{{T_nav_logo}}"><span class="nav__logo-name" aria-hidden="true">Quỳnh Như</span><span class="nav__logo-sub" aria-hidden="true">Florist</span></a>
+    <a class="nav__logo" href="{{HOME_URL}}" aria-label="{{T_nav_logo}}"><span class="nav__logo-name" aria-hidden="true">Quỳnh Như</span><span class="nav__logo-sub" aria-hidden="true">Florist</span></a>
     <nav class="nav__menu" id="nav-menu" aria-label="{{T_nav_label}}">
       <form class="nav__search nav__search--menu" action="/san-pham/" method="get" role="search">
         <svg aria-hidden="true"><use href="#i-search"/></svg>
@@ -50,6 +50,7 @@
         <svg aria-hidden="true"><use href="#i-search"/></svg>
         <input type="search" name="q" placeholder="{{T_search_ph}}" aria-label="{{T_search_label}}" autocomplete="off" enterkeyhint="search">
       </form>
+{{LANG_SWITCH}}
 {{WISH_BTN}}
       <button type="button" class="nav__search-btn" aria-label="{{T_search_btn}}"><svg aria-hidden="true"><use href="#i-search"/></svg></button>
       <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="{{T_nav_open}}"><span></span><span></span></button>

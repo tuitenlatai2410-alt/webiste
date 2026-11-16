@@ -117,3 +117,9 @@ File `_headers` đã cấu hình: cache 1 năm cho `/assets/*` (an toàn vì m�
 - Kho 100 câu nằm ở `assets/data/loi-chuc.json` (mỗi dòng một câu, giữ dấu ngoặc kép và dấu phẩy).
 - Mỗi ngày (theo giờ Việt Nam) web tự hiện 1 câu, xoay vòng hết 100 câu rồi lặp lại. Không cần đẩy web lại mỗi ngày.
 - Muốn thêm/sửa câu: sửa file trên rồi đẩy lên GitHub như bình thường.
+
+## Bản tiếng Anh (/en/)
+- Trang: `/en/` (trang chủ), `/en/about/`, `/en/contact/`. Nội dung ở `tools/pages/en/`, chữ dùng chung ở `tools/i18n/en.json`.
+- **Đang noindex** (Google không ghi nhận) cho tới khi có tên miền thật và người biết tiếng Anh đọc soát. Bỏ noindex: xóa `'en'` khỏi `NOINDEX_LANGS` trong `tools/build.mjs`; khi đó build tự thêm hreflang và đưa vào sitemap.
+- Trang chưa dịch (Sản phẩm, Trợ giúp, Chính sách) thì link từ bản tiếng Anh mở bản tiếng Việt.
+- Sửa nội dung: sửa bản Việt trước, rồi sửa câu tương ứng trong `tools/pages/en/`.

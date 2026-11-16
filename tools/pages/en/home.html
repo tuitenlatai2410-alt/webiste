@@ -1,0 +1,87 @@
+<!-- BẢN TIẾNG ANH của tools/pages/home.html — sửa bản Việt trước, rồi dịch lại phần đổi.
+     [D] HERO: bó hoa tách nền ở giữa; QUỲNH NHƯ FLORIST rất to, xám nhạt phía sau; hộp chữ nhỏ góc trái trên; nút góc trái dưới; ghi chú góc phải dưới -->
+<section class="hero" data-theme="xam" aria-labelledby="hero-title">
+  <div class="hero__stage" aria-roledescription="carousel" aria-label="Featured wax flower designs">
+    <h1 id="hero-title" class="hero__box">A small wax flower shop <span>in Thủ Dầu Một – Bình Dương</span></h1>
+    <div class="hero__slide hero__slide--xam is-active" data-theme="xam" role="group" aria-roledescription="slide" aria-label="1 / 3">
+      <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
+      <figure class="hero__cut">
+        <img src="/assets/img/hero/bo-hoa-xanh-tach-nen-620.webp"
+             srcset="{{HERO_SRCSET}}"
+             sizes="{{HERO_SIZES}}" width="1030" height="1095"
+             alt="Blue wax flower bouquet wrapped in black paper and tied with a blue ribbon – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
+    <div class="hero__slide hero__slide--photo hero__slide--hong" data-theme="hong" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
+      <figure class="hero__photo">
+        <img data-src="/assets/img/hero/bo-hoa-hong-that-1500.webp"
+             data-srcset="/assets/img/hero/bo-hoa-hong-that-800.webp 800w, /assets/img/hero/bo-hoa-hong-that-1500.webp 1500w"
+             sizes="100vw" width="1500" height="1840" style="object-position:50% 52%"
+             alt="Blush pink wax flower bouquet in white paper with a white silk bow, next to a kraft paper bag – Quỳnh Như Florist" decoding="async">
+      </figure>
+      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.02 — Blush pink</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
+    </div>
+    <div class="hero__slide hero__slide--photo hero__slide--do" data-theme="do" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
+      <figure class="hero__photo">
+        <picture>
+          <source media="(min-width:768px)" data-srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw" width="1500" height="1000">
+          <img data-src="/assets/img/hero/hoa-bo-hong-doc-840.webp"
+               data-srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w"
+               sizes="100vw" width="840" height="1050" style="object-position:50% 50%"
+               alt="Two pastel pink wax flower bouquets with white daisies and small blue flowers, one in a kraft paper bag – Quỳnh Như Florist" decoding="async">
+        </picture>
+      </figure>
+      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.03 — Pastel pink</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
+    </div>
+    <button type="button" class="hero__nav hero__nav--prev" aria-label="Previous design"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <button type="button" class="hero__nav hero__nav--next" aria-label="Next design"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="hero__dots"><button type="button" class="hero__dot" aria-label="Show design 1" aria-current="true"></button><button type="button" class="hero__dot" aria-label="Show design 2"></button><button type="button" class="hero__dot" aria-label="Show design 3"></button></div>
+  </div>
+  <div class="hero__foot">
+    <div class="hero__aside">
+      <p class="hero__note">Wax flowers <span>made to order</span> <span>order 4–5 days ahead</span></p>
+    </div>
+  </div>
+    <ul class="hero__social" aria-label="Quỳnh Như Florist on social media">
+      <li><a class="follow__fb" href="{{FACEBOOK_URL}}" target="_blank" rel="noopener" aria-label="Quỳnh Như Florist on Facebook"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+      <li><a class="follow__tt" href="{{TIKTOK_URL}}" target="_blank" rel="noopener" aria-label="Quỳnh Như Florist on TikTok"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+      <li><a class="follow__ig" href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener" aria-label="Quỳnh Như Florist on Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+      <li><a class="follow__zl" href="{{ZALO_URL}}" target="_blank" rel="noopener" aria-label="Quỳnh Như Florist on Zalo"><svg aria-hidden="true"><use href="#i-chat"/></svg></a></li>
+    </ul>
+</section>
+
+<!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
+<section class="section story" aria-labelledby="story-title">
+  <div class="wrap">
+    <div class="story__text reveal">
+      <p class="label">— ✦ About Quỳnh Như Florist ✦ —</p>
+      <h2 id="story-title" class="story__title">Every bouquet is a message <em>not yet put into words</em></h2>
+      <p>Quỳnh Như Florist is a small wax flower shop in Thủ Dầu Một – Bình Dương (now part of Ho Chi Minh City), making wax flowers for occasions and decorative table flower stands.</p>
+      <p>Wax flowers keep their shape and colour for a long time, so the gift can stay with the recipient long after the day it is given. The shop is new. We make your flowers close to the design you chose; if a colour or flower type has to change, we tell you first. We give careful advice from your first message until the flowers are in your hands.</p>
+      <p class="story__sign">Quỳnh Như Florist</p>
+      <p class="story__role">Wax flower shop · Thủ Dầu Một – Bình Dương</p>
+      <a class="story__btn" href="/en/about/">About Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="story__slider reveal" role="region" aria-label="Photos of our flowers – swipe to see more">
+    <button type="button" class="story__nav story__nav--prev" aria-label="Previous photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <ul class="story__track" tabindex="0">
+        <li class="story__slide"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Two pastel pink and blue wax flower bouquets, one in a kraft paper bag" loading="lazy" decoding="async"></li>
+        <li class="story__slide"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Blue wax flower bouquet in black paper next to a kraft paper bag" loading="lazy" decoding="async"></li>
+        <li class="story__slide"><img src="/assets/img/hero/gallery-3-1100.webp" srcset="/assets/img/hero/gallery-3-640.webp 640w, /assets/img/hero/gallery-3-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Close-up of a blue wax flower bouquet: lilies, blue roses, hydrangeas and white roses" loading="lazy" decoding="async"></li>
+    </ul>
+    <button type="button" class="story__nav story__nav--next" aria-label="Next photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="story__dots"><button type="button" class="story__dot" aria-label="Show photo 1" aria-current="true"></button><button type="button" class="story__dot" aria-label="Show photo 2"></button><button type="button" class="story__dot" aria-label="Show photo 3"></button></div>
+  </div>
+</section>
+
+
+<!-- KHÁM PHÁ: một hàng liên kết gọn -->
+<nav class="section explore" aria-label="Pages of Quỳnh Như Florist">
+  <ul class="wrap explore__row">
+    <li><a class="xlink" href="/en/about/">About Quỳnh Như <em>Florist</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/san-pham/" hreflang="vi">Our designs <small>(Vietnamese)</small><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/tro-giup/" hreflang="vi">Help &amp; FAQ <small>(Vietnamese)</small><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li><a class="xlink" href="/en/contact/">Message <em>the shop</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+  </ul>
+</nav>
