@@ -46,8 +46,8 @@ function shown(label, ...texts) {
 }
 
 // Ảnh bó hoa xanh ở hero (dùng chung cho thẻ preload và thẻ img); sizes khớp bề rộng hiển thị thật
-const HERO_SRCSET = ['480', '720', '960'].map((w) => `/assets/img/hero/mau-hong-do-${w}.webp ${w}w`).join(', ');
-const HERO_SIZES = '(min-width:1024px) 440px, 62vw';
+const HERO_SRCSET = ['400', '800', '1200'].map((w) => `/assets/img/products/sp-01-a-${w}.webp ${w}w`).join(', ');
+const HERO_SIZES = '(min-width:1024px) 55vw, 100vw';
 const SITE = C.SITE_URL.replace(/\/+$/, '');
 const CANONICAL = SITE + '/';
 const MAPS_URL = missing(C.MAPS_URL)
@@ -119,8 +119,16 @@ function chipGroup(key, title, allLabel, items) {
 ${items.map(([v, label]) => `        <button type="button" class="chip" data-k="${key}" data-v="${v}" aria-pressed="false">${esc(label)}</button>`).join('\n')}
       </div>`;
 }
+// Kiểu sản phẩm (suy từ tên mẫu và từ khóa): bó hoa, túi hoa, kèm gấu bông
+const KIEU_LABEL = { 'bo-hoa': 'Bó hoa', 'tui-hoa': 'Túi hoa', 'kem-gau': 'Kèm gấu bông' };
+const kieuOf = (p) => [
+  ...(/^Bó\s/.test(p.name) ? ['bo-hoa'] : []), ...(/^Túi\s/.test(p.name) ? ['tui-hoa'] : []),
+  ...((p.keywords || []).some((k) => /gấu bông|thú bông|thỏ bông/.test(k)) ? ['kem-gau'] : []),
+];
+const kieuUsed = Object.keys(KIEU_LABEL).filter((k) => REAL.some((p) => kieuOf(p).includes(k)));
 const FILTERS = `    <div class="filters" id="filters">
 ${[
+  kieuUsed.length ? chipGroup('kieu', 'Kiểu', 'Tất cả', kieuUsed.map((k) => [k, KIEU_LABEL[k]])) : '',
   LOAI.length > 1 ? chipGroup('loai', 'Loại', 'Tất cả', LOAI.map(([v, , l]) => [v, l])) : '',
   occUsed.length ? chipGroup('dip', 'Dịp', 'Mọi dịp', occUsed.map((k) => [k, OCC[k]])) : '',
   colorsReal.length ? chipGroup('mau', 'Màu', 'Mọi màu', colorsReal.map((c) => [slug(c), cap(c)])) : '',
@@ -222,6 +230,7 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
     : `<div class="ph${i % 3 ? ' ph--' + ((i % 3) + 1) : ''}"><svg aria-hidden="true"><use href="#i-flower"/></svg></div>`;
   const data = [
     `data-cat="${p.category}"`,
+    `data-kieu="${real ? kieuOf(p).join(' ') : ''}"`,
     `data-dip="${(p.occasions || []).join(' ')}"`,
     `data-mau="${real ? (p.colors || []).map(slug).join(' ') : ''}"`,
     `data-nb="${real ? (p.tags || []).join(' ') : ''}"`,
@@ -307,16 +316,31 @@ const HOME_STORIES = POSTS.length >= 2 ? `<section class="section stories" aria-
 </section>
 ` : '';
 
-/* ---- Mẫu nổi bật ở trang chủ: 4 mẫu thật đầu tiên (ảnh nền trắng) ---- */
-const FEATURED_IDS = ['sp-01', 'sp-14', 'sp-11', 'sp-18'];
-const HOME_FEATURED = REAL.length >= 4 ? `<section class="section featured" aria-labelledby="featured-title">
+/* ---- Trang chủ: nhóm sản phẩm + lưới mẫu đang có (ảnh nền trắng, theo thứ tự trong products.js) ---- */
+const cardSizes = 'sizes="(min-width:1024px) 290px, 46vw"';
+const pimg = (p) => img(p.images[0], `${p.name}: ${p.look || ''}`, false).replace('sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"', cardSizes);
+const CATS = [
+  ['bo-hoa', 'Bó hoa', 'Hồng, cẩm tú cầu, đồng tiền, hoa ly'],
+  ['tui-hoa', 'Túi hoa', 'Hoa xếp trong túi kraft, lót ren'],
+  ['kem-gau', 'Hoa kèm gấu bông', 'Thỏ bông, gấu tốt nghiệp'],
+].filter(([k]) => kieuUsed.includes(k)).map(([k, t, d]) => [k, t, d,
+  // ảnh đại diện: mẫu thấy trọn cả bó, ưu tiên mẫu chỉ thuộc đúng nhóm đó
+  { 'bo-hoa': REAL.find((p) => p.id === 'sp-19') }[k] || REAL.find((p) => kieuOf(p).join() === k && !['sp-08', 'sp-12'].includes(p.id)) || REAL.find((p) => kieuOf(p).includes(k))]);
+const HOME_FEATURED = REAL.length >= 4 ? `<section class="section hcats" aria-labelledby="hcats-title">
   <div class="wrap">
-    <div class="sec-head reveal"><p class="label">— ✦ MẪU HOA</p><h2 id="featured-title" class="h2">Mẫu hoa sáp của tiệm</h2></div>
-    <ul class="fgrid">${FEATURED_IDS.map((id) => REAL.find((p) => p.id === id)).filter(Boolean).map((p) => `<li class="reveal"><a class="fcard" href="/san-pham/#${p.id}"><span class="fcard__img">${img(p.images[0], `${p.name}: ${p.look || ''}`, false).replace('sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"', 'sizes="(min-width:1024px) 290px, 46vw"')}</span><span class="fcard__t">${esc(p.name)}</span></a></li>`).join('')}</ul>
-    <p class="featured__more"><a class="btn btn--line" href="/san-pham/">Xem tất cả mẫu</a></p>
+    <h2 id="hcats-title" class="hsec__t reveal">Tiệm có những gì</h2>
+    <ul class="cgrid">${CATS.map(([k, t, d, p]) => `<li class="reveal"><a class="ccard" href="/san-pham/?kieu=${k}"><span class="ccard__img">${pimg(p).replace(cardSizes, 'sizes="(min-width:1024px) 390px, 46vw"')}</span><span class="ccard__t">${t}</span><span class="ccard__d">${d}</span></a></li>`).join('')}</ul>
+  </div>
+</section>
+<section class="section featured" aria-labelledby="featured-title">
+  <div class="wrap">
+    <div class="hsec__head reveal"><h2 id="featured-title" class="hsec__t">Mẫu đang có</h2><a class="hsec__more" href="/san-pham/">Xem tất cả ${REAL.length} mẫu<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    <ul class="fgrid">${REAL.slice(0, 8).map((p) => `<li class="reveal"><a class="fcard" href="/san-pham/#${p.id}"><span class="fcard__img">${pimg(p)}</span><span class="fcard__t">${esc(p.name)}</span><span class="fcard__p">Liên hệ báo giá</span></a></li>`).join('')}</ul>
+    <p class="featured__more"><a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo chọn mẫu</a></p>
   </div>
 </section>
 ` : '';
+const HERO_P = REAL.find((p) => p.id === 'sp-14') || REAL[0];
 
 /* ---- Các trang (tiêu đề, mô tả lấy từ tools/i18n/<lang>.json) ---- */
 const PAGE_DEFS = [
@@ -493,7 +517,7 @@ for (const pg of ALL_PAGES) {
     NAV_ITEMS: ch.navItems(pg.key),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">\n` : '',
+    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" media="(max-width:767.98px)" imagesrcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w" imagesizes="100vw" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width:768px)" imagesrcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" imagesizes="100vw" fetchpriority="high">\n' : '',
     HOME_STORIES: pg.key === 'home' ? HOME_STORIES : '',
     HOME_FEATURED: pg.key === 'home' && pg.lang === 'vi' ? HOME_FEATURED : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',

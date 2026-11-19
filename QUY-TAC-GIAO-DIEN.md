@@ -11,8 +11,8 @@ Chốt ngày 19/11/2026. Giữ lâu dài. Chỉ đổi khi có lý do từ khác
 | Nền | Trắng phẳng `#FFFFFF`. Mảng nhạt chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
 | Chữ | Tím than `#2B1E27`. Mọi cặp chữ/nền đạt độ tương phản ≥ 4.5:1 |
 | Phông chữ | 2 họ: Cormorant Garamond (tiêu đề), Be Vietnam Pro (chữ thường). Không thêm họ thứ ba |
-| Bố cục | Rộng, thoáng. Hero: chữ trái, bó hoa thật trong khung vòm phải. Trang Sản phẩm: lưới ô ảnh nền trắng 4:5 |
-| Hiệu ứng | Chỉ 2 thứ: các khối hiện mượt khi kéo trang; ảnh đầu trang chuyển mờ chậm 6 giây. Không lắc, không nổi lên xuống, không cánh hoa rơi. Máy bật giảm chuyển động: tắt cả hai |
+| Bố cục | Trang chủ: MỘT ảnh hoa thật phủ kín màn hình, chữ trắng trên ảnh; bên dưới là nhóm sản phẩm và lưới "Mẫu đang có". Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5; bấm vào mở ảnh lớn thấy trọn bó |
+| Hiệu ứng | Chỉ 1 thứ: các khối hiện mượt khi kéo trang. Ảnh đầu trang đứng yên. Không lắc, không nổi lên xuống, không cánh hoa rơi. Máy bật giảm chuyển động: tắt hiệu ứng |
 | Ảnh | Chỉ ảnh thật trong Drive "Hình hoa" do tiệm làm. Ảnh sản phẩm nền trắng; ảnh blog giữ khung cảnh thật. Che thiệp, lời nhắn, mặt người, biển số |
 | Giọng viết | Ngắn, thật, nói đúng điều khách cần: mẫu gì, đặt trước bao lâu, nhận ở đâu, nhắn ai. Không hoa mỹ, không tự khen, không hứa điều tiệm chưa xác nhận |
 

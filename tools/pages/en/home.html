@@ -1,28 +1,21 @@
-<!-- [D] HERO: nền trắng, chữ trái, bó hoa thật (tách nền) trong khung vòm phải. Ảnh: Drive "Hình hoa". -->
+<!-- [D] HERO (chốt 19/11/2026): MỘT ảnh hoa thật phủ kín màn hình, chữ đặt trên ảnh. Ảnh: Drive "Hình hoa". -->
 <section class="hero" aria-labelledby="hero-title">
- <div class="hero__in">
+  <picture class="hero__bg">
+    <source media="(min-width:768px)" srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw">
+    <img src="/assets/img/hero/hoa-bo-hong-doc-840.webp" srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w" sizes="100vw"
+         width="840" height="1050" alt="Two pastel pink wax flower bouquets with white daisies and small blue flowers, one in a kraft paper bag – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+  </picture>
   <div class="hero__text">
     <p class="hero__kicker">Quỳnh Như Florist · Thủ Dầu Một</p>
     <h1 id="hero-title" class="hero__title">A small wax flower shop <span>in Thủ Dầu Một – Bình Dương</span></h1>
-    <p class="hero__sub">Wax flowers for occasions · made-to-order designs: order 4–5 days ahead</p>
-    <div class="hero__ctas"><a class="btn btn--pink" href="/san-pham/">See our designs</a><a class="btn btn--line" href="{{ZALO_URL}}" target="_blank" rel="noopener">Message on Zalo</a></div>
+    <ul class="hero__pts">
+      <li>Bouquets, flower bags, flowers with a teddy</li>
+      <li>Made-to-order designs: order 4–5 days ahead</li>
+      <li>Ready-made designs: same-day pickup</li>
+      <li>Message Zalo {{PHONE_DISPLAY}} to choose a design</li>
+    </ul>
+    <div class="hero__ctas"><a class="btn btn--pink" href="/san-pham/">See our designs</a><a class="btn btn--ghost" href="{{ZALO_URL}}" target="_blank" rel="noopener">Message on Zalo</a></div>
   </div>
-  <div class="hero__stage" aria-roledescription="carousel" aria-label="Wax flower designs of the shop">
-    <div class="hero__arch" aria-hidden="true"></div>
-    <figure class="hero__slide is-active" data-theme="m1" role="group" aria-roledescription="slide" aria-label="1 / 3">
-      <img src="/assets/img/hero/mau-hong-do-720.webp" srcset="/assets/img/hero/mau-hong-do-480.webp 480w, /assets/img/hero/mau-hong-do-720.webp 720w, /assets/img/hero/mau-hong-do-960.webp 960w" fetchpriority="high" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Red, pink and white wax flower bouquet with white daisies and a white organza bow – Quỳnh Như Florist" decoding="async">
-    </figure>
-    <figure class="hero__slide" data-theme="m2" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
-      <img data-src="/assets/img/hero/mau-hong-vang-720.webp" data-srcset="/assets/img/hero/mau-hong-vang-480.webp 480w, /assets/img/hero/mau-hong-vang-720.webp 720w, /assets/img/hero/mau-hong-vang-960.webp 960w" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Blush pink and white wax flower bouquet with pink gerberas and yellow daisies in pink paper – Quỳnh Như Florist" decoding="async">
-    </figure>
-    <figure class="hero__slide" data-theme="m3" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
-      <img data-src="/assets/img/hero/mau-xanh-720.webp" data-srcset="/assets/img/hero/mau-xanh-480.webp 480w, /assets/img/hero/mau-xanh-720.webp 720w, /assets/img/hero/mau-xanh-960.webp 960w" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Blue wax flower bouquet wrapped in black paper and tied with a blue ribbon – Quỳnh Như Florist" decoding="async">
-    </figure>
-    <button type="button" class="hero__nav hero__nav--prev" aria-label="Previous design"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <button type="button" class="hero__nav hero__nav--next" aria-label="Next design"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <div class="hero__dots"><button type="button" class="hero__dot" aria-label="Show design 1" aria-current="true"></button><button type="button" class="hero__dot" aria-label="Show design 2"></button><button type="button" class="hero__dot" aria-label="Show design 3"></button></div>
-  </div>
- </div>
 </section>
 
 <!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->

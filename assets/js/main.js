@@ -664,9 +664,9 @@
     var chips = $$('.chip'), note = $('#srch-note');
     var LOAI = { 'hoa-theo-dip': 'occasion', 'tru-hoa-de-ban': 'table' };
     var params = new URLSearchParams(location.search);
-    var state = { loai: params.get('loai') || '', dip: params.get('dip') || '', mau: params.get('mau') || '', nb: params.get('nb') || '', q: (params.get('q') || '').trim() };
+    var state = { kieu: params.get('kieu') || '', loai: params.get('loai') || '', dip: params.get('dip') || '', mau: params.get('mau') || '', nb: params.get('nb') || '', q: (params.get('q') || '').trim() };
     // Bỏ giá trị không có nút lọc tương ứng (ví dụ link cũ)
-    ['loai', 'dip', 'mau', 'nb'].forEach(function (k) {
+    ['kieu', 'loai', 'dip', 'mau', 'nb'].forEach(function (k) {
       if (state[k] && !chips.some(function (c) { return c.getAttribute('data-k') === k && c.getAttribute('data-v') === state[k]; })) state[k] = '';
     });
     function has(c, attr, v) { return (' ' + (c.getAttribute(attr) || '') + ' ').indexOf(' ' + v + ' ') !== -1; }
@@ -678,6 +678,7 @@
           && (!state.dip || has(c, 'data-dip', state.dip))
           && (!state.mau || has(c, 'data-mau', state.mau))
           && (!state.nb || has(c, 'data-nb', state.nb))
+          && (!state.kieu || has(c, 'data-kieu', state.kieu))
           && (!ids || ids.indexOf(c.id) !== -1);
         var was = !c.classList.contains('is-hidden');
         c.classList.toggle('is-hidden', !show);
@@ -704,7 +705,7 @@
       }
       if (push && history.replaceState) {
         var sp = new URLSearchParams();
-        ['loai', 'dip', 'mau', 'nb', 'q'].forEach(function (k) { if (state[k]) sp.set(k, state[k]); });
+        ['kieu', 'loai', 'dip', 'mau', 'nb', 'q'].forEach(function (k) { if (state[k]) sp.set(k, state[k]); });
         var qs = sp.toString();
         history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
       }
@@ -715,7 +716,7 @@
     if (note) note.addEventListener('click', function (e) {
       var a = e.target.closest('a[href="/san-pham/"]');
       if (!a) return;
-      e.preventDefault(); state = { loai: '', dip: '', mau: '', nb: '', q: '' }; apply(true);
+      e.preventDefault(); state = { kieu: '', loai: '', dip: '', mau: '', nb: '', q: '' }; apply(true);
     });
     apply(false);
 
