@@ -8,10 +8,10 @@ Chốt ngày 19/11/2026. Giữ lâu dài. Chỉ đổi khi có lý do từ khác
 |---|---|
 | Màu chính | Hồng `#C2437A` (nút chính, chữ nhấn, nhãn) |
 | Màu phụ | Xanh lá sage `#8EA58C` (đường viền, khung ảnh, icon); chữ màu xanh dùng `#4F6A4D` |
-| Nền | Trắng phẳng `#FFFFFF`. Mảng nhạt chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
+| Nền | Trắng phẳng `#FFFFFF` và trắng ngà `#F6F3F0`. Mảng nhạt khác chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
 | Chữ | Tím than `#2B1E27`. Mọi cặp chữ/nền đạt độ tương phản ≥ 4.5:1 |
 | Phông chữ | 2 họ: Cormorant Garamond (tiêu đề), Be Vietnam Pro (chữ thường). Không thêm họ thứ ba |
-| Bố cục | Trang chủ: MỘT ảnh hoa thật phủ kín màn hình, chữ trắng trên ảnh; bên dưới là nhóm sản phẩm và lưới "Mẫu đang có". Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5; bấm vào mở ảnh lớn thấy trọn bó |
+| Bố cục | Tối giản (chốt 19/11/2026 theo ảnh tham khảo của chủ web): trang chủ gồm phần đầu nền trắng ngà `#F6F3F0`, chữ trái + bó hoa thật tách nền phải; 3 hàng ảnh thật đánh số 01·02·03; 5 ô mẫu; bài blog; băng ảnh cuối trang. Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5, bấm vào mở ảnh lớn thấy trọn bó |
 | Hiệu ứng | Chỉ 1 thứ: các khối hiện mượt khi kéo trang. Ảnh đầu trang đứng yên. Không lắc, không nổi lên xuống, không cánh hoa rơi. Máy bật giảm chuyển động: tắt hiệu ứng |
 | Ảnh | Chỉ ảnh thật trong Drive "Hình hoa" do tiệm làm. Ảnh sản phẩm nền trắng; ảnh blog giữ khung cảnh thật. Che thiệp, lời nhắn, mặt người, biển số |
 | Giọng viết | Ngắn, thật, nói đúng điều khách cần: mẫu gì, đặt trước bao lâu, nhận ở đâu, nhắn ai. Không hoa mỹ, không tự khen, không hứa điều tiệm chưa xác nhận |

@@ -1,51 +1,41 @@
-<!-- [D] HERO (chốt 19/11/2026): MỘT ảnh hoa thật phủ kín màn hình, chữ đặt trên ảnh. Ảnh: Drive "Hình hoa". -->
-<section class="hero" aria-labelledby="hero-title">
-  <picture class="hero__bg">
-    <source media="(min-width:768px)" srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw">
-    <img src="/assets/img/hero/hoa-bo-hong-doc-840.webp" srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w" sizes="100vw"
-         width="840" height="1050" alt="Hai bó hoa sáp tông hồng pastel điểm cúc trắng và hoa nhỏ màu xanh, một bó trong túi giấy kraft – Quỳnh Như Florist" fetchpriority="high" decoding="async">
-  </picture>
-  <div class="hero__text">
-    <p class="hero__kicker">Quỳnh Như Florist · Thủ Dầu Một</p>
-    <h1 id="hero-title" class="hero__title">Tiệm hoa sáp nhỏ <span>tại Thủ Dầu Một – Bình Dương</span></h1>
-    <ul class="hero__pts">
-      <li>Bó hoa, túi hoa, hoa kèm gấu bông</li>
-      <li>Mẫu theo yêu cầu đặt trước 4–5 ngày</li>
-      <li>Mẫu có sẵn nhận ngay trong ngày</li>
-      <li>Nhắn Zalo {{PHONE_DISPLAY}} để chọn mẫu</li>
-    </ul>
-    <div class="hero__ctas"><a class="btn btn--pink" href="/san-pham/">Xem mẫu hoa</a><a class="btn btn--ghost" href="{{ZALO_URL}}" target="_blank" rel="noopener">Nhắn Zalo</a></div>
-  </div>
-</section>
-{{HOME_FEATURED}}
-
-<!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
-<section class="section story" aria-labelledby="story-title">
-  <div class="wrap">
-    <div class="story__text reveal">
-      <p class="label">— ✦ Về Quỳnh Như Florist ✦ —</p>
-      <h2 id="story-title" class="story__title">Mỗi bó hoa là một lời <em>chưa kịp nói thành câu</em></h2>
-      <p>Quỳnh Như Florist là tiệm hoa sáp nhỏ tại Thủ Dầu Một – Bình Dương (nay thuộc TP. Hồ Chí Minh), chuyên hoa sáp theo dịp và trụ hoa để bàn decor.</p>
-      <p>Hoa sáp giữ được dáng và màu lâu, nên món quà có thể ở lại bên người nhận thật lâu sau ngày trao. Tiệm còn mới. Tiệm làm sát với mẫu bạn đã chọn; nếu phải đổi màu hay loại hoa, tiệm báo trước. Tiệm tư vấn tận tâm từ lúc bạn nhắn tin đến khi hoa được trao tận tay.</p>
-      <p class="story__sign">Quỳnh Như Florist</p>
-      <p class="story__role">Tiệm hoa sáp · Thủ Dầu Một – Bình Dương</p>
-      <a class="story__btn" href="/gioi-thieu/">Tìm hiểu về Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+<!-- TRANG CHỦ (phong cách tối giản, chốt 19/11/2026): ảnh hoa thật · nền trắng ngà · ít chữ -->
+<section class="mhero" aria-labelledby="hero-title">
+  <div class="mhero__in">
+    <div class="mhero__txt">
+      <p class="mhero__k">Quỳnh Như Florist · Thủ Dầu Một</p>
+      <h1 id="hero-title" class="mhero__t">Hoa sáp nhỏ xinh,<br>làm theo mẫu bạn chọn.</h1>
+      <p class="mhero__d">Bó hoa, túi hoa, hoa kèm gấu bông cho sinh nhật, kỷ niệm, tốt nghiệp và những ngày cần nói một lời.</p>
+      <div class="mhero__cta"><a class="mbtn" href="/san-pham/">Xem mẫu hoa</a><a class="mlink" href="{{ZALO_URL}}" target="_blank" rel="noopener">Nhắn Zalo {{PHONE_DISPLAY}}</a></div>
     </div>
-  </div>
-  <div class="story__slider reveal" role="region" aria-label="Ảnh hoa của tiệm – vuốt ngang để xem thêm">
-    <button type="button" class="story__nav story__nav--prev" aria-label="Ảnh trước"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <ul class="story__track" tabindex="0">
-        <li class="story__slide"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Hai bó hoa sáp tông hồng – xanh pastel, một bó đặt trong túi giấy kraft" loading="lazy" decoding="async"></li>
-        <li class="story__slide"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Bó hoa sáp tông xanh dương gói giấy đen đặt cạnh túi giấy kraft" loading="lazy" decoding="async"></li>
-        <li class="story__slide"><img src="/assets/img/hero/gallery-3-1100.webp" srcset="/assets/img/hero/gallery-3-640.webp 640w, /assets/img/hero/gallery-3-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Cận cảnh bó hoa sáp xanh dương: hoa ly, hồng xanh, cẩm tú cầu và hồng trắng" loading="lazy" decoding="async"></li>
-    </ul>
-    <button type="button" class="story__nav story__nav--next" aria-label="Ảnh sau"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <div class="story__dots"><button type="button" class="story__dot" aria-label="Xem ảnh 1" aria-current="true"></button><button type="button" class="story__dot" aria-label="Xem ảnh 2"></button><button type="button" class="story__dot" aria-label="Xem ảnh 3"></button></div>
+    <figure class="mhero__img">
+      <img src="/assets/img/hero/mau-hong-vang-720.webp" srcset="{{HERO_SRCSET}}" sizes="{{HERO_SIZES}}" width="720" height="909" alt="Bó hoa sáp hồng phấn, trắng và đồng tiền hồng, điểm cúc vàng – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+    </figure>
   </div>
 </section>
 
+<section class="mrows" aria-label="Đặt hoa ở Quỳnh Như Florist">
+  <div class="wrap">
+    <article class="mrow reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 560px, 100vw" width="1100" height="733" alt="Hai bó hoa sáp hồng pastel điểm cúc trắng, một bó trong túi giấy kraft" loading="lazy" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">01</p><h2 class="mrow__t">Hoa sáp theo dịp</h2><p>Sinh nhật, kỷ niệm, tốt nghiệp, 20/10, 20/11. Bạn cho tiệm biết dịp và người nhận, tiệm gợi ý mẫu và màu.</p></div>
+    </article>
+    <article class="mrow mrow--rev reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/hoa-ly-ngang-736.webp" srcset="/assets/img/hero/hoa-ly-ngang-480.webp 480w, /assets/img/hero/hoa-ly-ngang-736.webp 736w" sizes="(min-width:1024px) 560px, 100vw" width="460" height="733" alt="Cận cảnh cánh hoa ly sáp trắng đính hạt" fetchpriority="high" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">02</p><h2 class="mrow__t">Làm theo mẫu bạn chọn</h2><p>Gửi ảnh mẫu qua Zalo. Mẫu theo yêu cầu đặt trước 4–5 ngày; nếu phải đổi màu hay loại hoa, tiệm báo trước.</p></div>
+    </article>
+    <article class="mrow reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 560px, 100vw" width="1100" height="733" alt="Bó hoa sáp xanh dương gói giấy đen đặt cạnh túi giấy kraft" loading="lazy" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">03</p><h2 class="mrow__t">Nhận hoa</h2><p>Mẫu có sẵn nhận ngay trong ngày tại tiệm ở Phú Lợi, Thủ Dầu Một. Giờ làm việc 07:00 – 22:00.</p></div>
+    </article>
+  </div>
+</section>
 
+{{HOME_FEATURED}}
 {{HOME_STORIES}}
+<section class="mband" aria-labelledby="mband-title">
+  <img src="/assets/img/hero/hoa-bo-hong-1500.webp" srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw" width="1500" height="1000" alt="Hai bó hoa sáp tông hồng pastel điểm cúc trắng và hoa nhỏ màu xanh" loading="lazy" decoding="async">
+  <div class="mband__txt wrap"><h2 id="mband-title" class="mband__t">Mẫu hoa sáp của tiệm</h2><p>Hoa thật của tiệm, chụp lúc trao cho khách.</p><a class="mbtn mbtn--light" href="/san-pham/">Xem tất cả mẫu</a></div>
+</section>
 <!-- LỜI CHÚC HÔM NAY: mỗi ngày (giờ Việt Nam) một câu từ kho assets/data/loi-chuc.json -->
 <section class="loichuc" aria-labelledby="loichuc-title" data-src="/assets/data/loi-chuc.json">
   <div class="wrap">

@@ -1,56 +1,38 @@
-<!-- [D] HERO (chốt 19/11/2026): MỘT ảnh hoa thật phủ kín màn hình, chữ đặt trên ảnh. Ảnh: Drive "Hình hoa". -->
-<section class="hero" aria-labelledby="hero-title">
-  <picture class="hero__bg">
-    <source media="(min-width:768px)" srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw">
-    <img src="/assets/img/hero/hoa-bo-hong-doc-840.webp" srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w" sizes="100vw"
-         width="840" height="1050" alt="Two pastel pink wax flower bouquets with white daisies and small blue flowers, one in a kraft paper bag – Quỳnh Như Florist" fetchpriority="high" decoding="async">
-  </picture>
-  <div class="hero__text">
-    <p class="hero__kicker">Quỳnh Như Florist · Thủ Dầu Một</p>
-    <h1 id="hero-title" class="hero__title">A small wax flower shop <span>in Thủ Dầu Một – Bình Dương</span></h1>
-    <ul class="hero__pts">
-      <li>Bouquets, flower bags, flowers with a teddy</li>
-      <li>Made-to-order designs: order 4–5 days ahead</li>
-      <li>Ready-made designs: same-day pickup</li>
-      <li>Message Zalo {{PHONE_DISPLAY}} to choose a design</li>
-    </ul>
-    <div class="hero__ctas"><a class="btn btn--pink" href="/san-pham/">See our designs</a><a class="btn btn--ghost" href="{{ZALO_URL}}" target="_blank" rel="noopener">Message on Zalo</a></div>
-  </div>
-</section>
-
-<!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
-<section class="section story" aria-labelledby="story-title">
-  <div class="wrap">
-    <div class="story__text reveal">
-      <p class="label">— ✦ About Quỳnh Như Florist ✦ —</p>
-      <h2 id="story-title" class="story__title">Every bouquet is a message <em>not yet put into words</em></h2>
-      <p>Quỳnh Như Florist is a small wax flower shop in Thủ Dầu Một – Bình Dương (now part of Ho Chi Minh City), making wax flowers for occasions and decorative table flower stands.</p>
-      <p>Wax flowers keep their shape and colour for a long time, so the gift can stay with the recipient long after the day it is given. The shop is new. We make your flowers close to the design you chose; if a colour or flower type has to change, we tell you first. We give careful advice from your first message until the flowers are in your hands.</p>
-      <p class="story__sign">Quỳnh Như Florist</p>
-      <p class="story__role">Wax flower shop · Thủ Dầu Một – Bình Dương</p>
-      <a class="story__btn" href="/en/about/">About Quỳnh Như Florist<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+<!-- BẢN TIẾNG ANH của tools/pages/home.html — sửa bản Việt trước. -->
+<!-- TRANG CHỦ (phong cách tối giản, chốt 19/11/2026): ảnh hoa thật · nền trắng ngà · ít chữ -->
+<section class="mhero" aria-labelledby="hero-title">
+  <div class="mhero__in">
+    <div class="mhero__txt">
+      <p class="mhero__k">Quỳnh Như Florist · Thủ Dầu Một</p>
+      <h1 id="hero-title" class="mhero__t">Small wax flowers,<br>made to the design you choose.</h1>
+      <p class="mhero__d">Bouquets, flower bags and flowers with a teddy for birthdays, anniversaries, graduations and the days you want to say something.</p>
+      <div class="mhero__cta"><a class="mbtn" href="/san-pham/">See our designs</a><a class="mlink" href="{{ZALO_URL}}" target="_blank" rel="noopener">Zalo {{PHONE_DISPLAY}}</a></div>
     </div>
-  </div>
-  <div class="story__slider reveal" role="region" aria-label="Photos of our flowers – swipe to see more">
-    <button type="button" class="story__nav story__nav--prev" aria-label="Previous photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <ul class="story__track" tabindex="0">
-        <li class="story__slide"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Two pastel pink and blue wax flower bouquets, one in a kraft paper bag" loading="lazy" decoding="async"></li>
-        <li class="story__slide"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Blue wax flower bouquet in black paper next to a kraft paper bag" loading="lazy" decoding="async"></li>
-        <li class="story__slide"><img src="/assets/img/hero/gallery-3-1100.webp" srcset="/assets/img/hero/gallery-3-640.webp 640w, /assets/img/hero/gallery-3-1100.webp 1100w" sizes="(min-width:1024px) 760px, 82vw" width="1100" height="733" alt="Close-up of a blue wax flower bouquet: lilies, blue roses, hydrangeas and white roses" loading="lazy" decoding="async"></li>
-    </ul>
-    <button type="button" class="story__nav story__nav--next" aria-label="Next photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    <div class="story__dots"><button type="button" class="story__dot" aria-label="Show photo 1" aria-current="true"></button><button type="button" class="story__dot" aria-label="Show photo 2"></button><button type="button" class="story__dot" aria-label="Show photo 3"></button></div>
+    <figure class="mhero__img">
+      <img src="/assets/img/hero/mau-hong-vang-720.webp" srcset="{{HERO_SRCSET}}" sizes="{{HERO_SIZES}}" width="720" height="909" alt="Blush pink and white wax flower bouquet with pink gerberas and yellow daisies – Quỳnh Như Florist" fetchpriority="high" decoding="async">
+    </figure>
   </div>
 </section>
 
+<section class="mrows" aria-label="Ordering at Quỳnh Như Florist">
+  <div class="wrap">
+    <article class="mrow reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/gallery-1-1100.webp" srcset="/assets/img/hero/gallery-1-640.webp 640w, /assets/img/hero/gallery-1-1100.webp 1100w" sizes="(min-width:1024px) 560px, 100vw" width="1100" height="733" alt="Two pastel pink wax flower bouquets with white daisies, one in a kraft paper bag" loading="lazy" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">01</p><h2 class="mrow__t">Wax flowers for occasions</h2><p>Birthdays, anniversaries, graduations, Women’s Day, Teachers’ Day. Tell us the occasion and recipient; we suggest designs and colours.</p></div>
+    </article>
+    <article class="mrow mrow--rev reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/hoa-ly-ngang-736.webp" srcset="/assets/img/hero/hoa-ly-ngang-480.webp 480w, /assets/img/hero/hoa-ly-ngang-736.webp 736w" sizes="(min-width:1024px) 560px, 100vw" width="460" height="733" alt="Close-up of a white wax lily with small beads" fetchpriority="high" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">02</p><h2 class="mrow__t">Made to your design</h2><p>Send a photo on Zalo. Made-to-order designs: order 4–5 days ahead; if a colour or flower must change, we tell you first.</p></div>
+    </article>
+    <article class="mrow reveal">
+      <figure class="mrow__img"><img src="/assets/img/hero/gallery-2-1100.webp" srcset="/assets/img/hero/gallery-2-640.webp 640w, /assets/img/hero/gallery-2-1100.webp 1100w" sizes="(min-width:1024px) 560px, 100vw" width="1100" height="733" alt="Blue wax flower bouquet in black paper next to a kraft paper bag" loading="lazy" decoding="async"></figure>
+      <div class="mrow__txt"><p class="mrow__no">03</p><h2 class="mrow__t">Pickup</h2><p>Ready-made designs: same-day pickup at the shop in Phú Lợi, Thủ Dầu Một. Open 07:00 – 22:00.</p></div>
+    </article>
+  </div>
+</section>
 
+<section class="mband" aria-labelledby="mband-title">
+  <img src="/assets/img/hero/hoa-bo-hong-1500.webp" srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw" width="1500" height="1000" alt="Two pastel pink wax flower bouquets with white daisies and small blue flowers" loading="lazy" decoding="async">
+  <div class="mband__txt wrap"><h2 id="mband-title" class="mband__t">Our wax flower designs</h2><p>Real flowers from the shop, photographed when handed to customers.</p><a class="mbtn mbtn--light" href="/san-pham/">See all designs</a></div>
+</section>
 {{LANG_NOTE}}
-<!-- KHÁM PHÁ: một hàng liên kết gọn -->
-<nav class="section explore" aria-label="Pages of Quỳnh Như Florist">
-  <ul class="wrap explore__row">
-    <li><a class="xlink" href="/en/about/">About Quỳnh Như <em>Florist</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-    <li><a class="xlink" href="/san-pham/" hreflang="vi">Our designs <small>(Vietnamese)</small><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-    <li><a class="xlink" href="/tro-giup/" hreflang="vi">Help &amp; FAQ <small>(Vietnamese)</small><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-    <li><a class="xlink" href="/en/contact/">Message <em>the shop</em><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-  </ul>
-</nav>

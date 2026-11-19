@@ -46,8 +46,8 @@ function shown(label, ...texts) {
 }
 
 // Ảnh bó hoa xanh ở hero (dùng chung cho thẻ preload và thẻ img); sizes khớp bề rộng hiển thị thật
-const HERO_SRCSET = ['400', '800', '1200'].map((w) => `/assets/img/products/sp-01-a-${w}.webp ${w}w`).join(', ');
-const HERO_SIZES = '(min-width:1024px) 55vw, 100vw';
+const HERO_SRCSET = ['480', '720', '960'].map((w) => `/assets/img/hero/mau-hong-vang-${w}.webp ${w}w`).join(', ');
+const HERO_SIZES = '(min-width:1024px) 460px, 64vw';
 const SITE = C.SITE_URL.replace(/\/+$/, '');
 const CANONICAL = SITE + '/';
 const MAPS_URL = missing(C.MAPS_URL)
@@ -326,17 +326,10 @@ const CATS = [
 ].filter(([k]) => kieuUsed.includes(k)).map(([k, t, d]) => [k, t, d,
   // ảnh đại diện: mẫu thấy trọn cả bó, ưu tiên mẫu chỉ thuộc đúng nhóm đó
   { 'bo-hoa': REAL.find((p) => p.id === 'sp-19') }[k] || REAL.find((p) => kieuOf(p).join() === k && !['sp-08', 'sp-12'].includes(p.id)) || REAL.find((p) => kieuOf(p).includes(k))]);
-const HOME_FEATURED = REAL.length >= 4 ? `<section class="section hcats" aria-labelledby="hcats-title">
+const HOME_FEATURED = REAL.length >= 5 ? `<section class="section mtiles" aria-labelledby="featured-title">
   <div class="wrap">
-    <h2 id="hcats-title" class="hsec__t reveal">Tiệm có những gì</h2>
-    <ul class="cgrid">${CATS.map(([k, t, d, p]) => `<li class="reveal"><a class="ccard" href="/san-pham/?kieu=${k}"><span class="ccard__img">${pimg(p).replace(cardSizes, 'sizes="(min-width:1024px) 390px, 46vw"')}</span><span class="ccard__t">${t}</span><span class="ccard__d">${d}</span></a></li>`).join('')}</ul>
-  </div>
-</section>
-<section class="section featured" aria-labelledby="featured-title">
-  <div class="wrap">
-    <div class="hsec__head reveal"><h2 id="featured-title" class="hsec__t">Mẫu đang có</h2><a class="hsec__more" href="/san-pham/">Xem tất cả ${REAL.length} mẫu<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-    <ul class="fgrid">${REAL.slice(0, 8).map((p) => `<li class="reveal"><a class="fcard" href="/san-pham/#${p.id}"><span class="fcard__img">${pimg(p)}</span><span class="fcard__t">${esc(p.name)}</span><span class="fcard__p">Liên hệ báo giá</span></a></li>`).join('')}</ul>
-    <p class="featured__more"><a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo chọn mẫu</a></p>
+    <div class="mtiles__head reveal"><h2 id="featured-title" class="mtiles__t">Mẫu đang có</h2><a class="mlink" href="/san-pham/">Xem tất cả ${REAL.length} mẫu</a></div>
+    <ul class="mtiles__grid">${REAL.slice(0, 5).map((p) => `<li class="reveal"><a class="mtile" href="/san-pham/#${p.id}"><span class="mtile__img">${pimg(p).replace(cardSizes, 'sizes="(min-width:1024px) 230px, 46vw"')}</span><span class="mtile__t">${esc(p.name)}</span><span class="mtile__p">Liên hệ báo giá</span></a></li>`).join('')}</ul>
   </div>
 </section>
 ` : '';
@@ -517,7 +510,8 @@ for (const pg of ALL_PAGES) {
     NAV_ITEMS: ch.navItems(pg.key),
     // Trang chủ: CSS phần dưới tải sau (hero nằm trong CSS quan trọng); trang con: tải ngay để không nháy giao diện
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
-    HERO_PRELOAD: pg.key === 'home' ? '<link rel="preload" as="image" media="(max-width:767.98px)" imagesrcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w" imagesizes="100vw" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width:768px)" imagesrcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" imagesizes="100vw" fetchpriority="high">\n' : '',
+    HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">
+` : '',
     HOME_STORIES: pg.key === 'home' ? HOME_STORIES : '',
     HOME_FEATURED: pg.key === 'home' && pg.lang === 'vi' ? HOME_FEATURED : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
