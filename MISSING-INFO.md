@@ -72,3 +72,15 @@ Mỗi câu trả lời mở khóa một phần đang ẩn. Trả lời xong: s�
 - **Đã loại vì có dấu hiệu là ảnh của tiệm khác:** ảnh có logo + số điện thoại "Như Thảo Flower & Gift – Hải Phòng"; ảnh có thẻ "Favorite Flowers"; ảnh có thẻ "Floral Sense"; ảnh gắn số "385" chụp cạnh hộp CHANEL.
 - **Cần chủ web xác nhận:** 20 ảnh đang dùng đều là hoa do tiệm làm và tiệm tự chụp. Ảnh nào không phải, báo để gỡ.
 - Chưa thấy ảnh chụp tin nhắn khách → trang Feedback chưa mở. Đề xuất để ảnh tin nhắn vào thư mục con "Feedback".
+
+## Cần chủ tiệm viết (vài câu, lời thật) — mở khóa bài "Câu chuyện của tiệm"
+Mẫu sẵn: `tools/posts/_MAU-cau-chuyen-cua-tiem.json.txt`.
+1. Vì sao bạn mở tiệm hoa sáp?
+2. Bạn chọn hoa, chọn màu cho một bó như thế nào?
+3. Điều gì tiệm không bao giờ làm?
+4. Giao hàng ở khu vực nào? (giá có thể bỏ, không cần khung giá)
+5. Khách thanh toán bằng cách nào?
+6. Nếu hoa không đúng mẫu đã chốt, tiệm xử lý thế nào?
+
+## Phản hồi khách về website
+(Ghi ngày · kênh · nội dung. Đánh giá lại mỗi tuần, lần đầu 26/11/2026 — xem QUY-TAC-GIAO-DIEN.md mục 4.)

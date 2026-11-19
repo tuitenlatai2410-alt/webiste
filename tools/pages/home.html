@@ -1,52 +1,28 @@
-<!-- [D] HERO: bó hoa tách nền ở giữa; QUỲNH NHƯ FLORIST rất to, xám nhạt phía sau; hộp chữ nhỏ góc trái trên; nút góc trái dưới; ghi chú góc phải dưới -->
-<section class="hero" data-theme="xam" aria-labelledby="hero-title">
-  <div class="hero__stage" aria-roledescription="carousel" aria-label="Mẫu hoa sáp nổi bật">
-    <h1 id="hero-title" class="hero__box">Tiệm hoa sáp nhỏ <span>tại Thủ Dầu Một – Bình Dương</span></h1>
-    <div class="hero__slide hero__slide--xam is-active" data-theme="xam" role="group" aria-roledescription="slide" aria-label="1 / 3">
-      <p class="hero__big" aria-hidden="true"><span class="deco" data-text="Quynh Nhu"></span><span class="deco" data-text="Florist"></span></p>
-      <figure class="hero__cut">
-        <img src="/assets/img/hero/bo-hoa-xanh-tach-nen-620.webp"
-             srcset="{{HERO_SRCSET}}"
-             sizes="{{HERO_SIZES}}" width="1030" height="1095"
-             alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh – Quỳnh Như Florist" fetchpriority="high" decoding="async">
-      </figure>
-    </div>
-    <div class="hero__slide hero__slide--photo hero__slide--hong" data-theme="hong" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
-      <figure class="hero__photo">
-        <img data-src="/assets/img/hero/bo-hoa-hong-that-1500.webp"
-             data-srcset="/assets/img/hero/bo-hoa-hong-that-800.webp 800w, /assets/img/hero/bo-hoa-hong-that-1500.webp 1500w"
-             sizes="100vw" width="1500" height="1840" style="object-position:50% 52%"
-             alt="Bó hoa sáp tông hồng phấn gói giấy trắng, thắt nơ lụa trắng, đặt cạnh túi giấy kraft – Quỳnh Như Florist" decoding="async">
-      </figure>
-      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.02 — Hồng phấn</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
-    </div>
-    <div class="hero__slide hero__slide--photo hero__slide--do" data-theme="do" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
-      <figure class="hero__photo">
-        <picture>
-          <source media="(min-width:768px)" data-srcset="/assets/img/hero/hoa-bo-hong-960.webp 960w, /assets/img/hero/hoa-bo-hong-1500.webp 1500w" sizes="100vw" width="1500" height="1000">
-          <img data-src="/assets/img/hero/hoa-bo-hong-doc-840.webp"
-               data-srcset="/assets/img/hero/hoa-bo-hong-doc-480.webp 480w, /assets/img/hero/hoa-bo-hong-doc-840.webp 840w"
-               sizes="100vw" width="840" height="1050" style="object-position:50% 50%"
-               alt="Hai bó hoa sáp tông hồng pastel điểm hoa cúc trắng và hoa nhỏ màu xanh, một bó đặt trong túi giấy kraft – Quỳnh Như Florist" decoding="async">
-        </picture>
-      </figure>
-      <div class="hero__cap" aria-hidden="true"><span class="hero__lbl">No.03 — Hồng pastel</span><span class="hero__name"><span class="deco" data-text="QUYNH NHU"></span><span class="deco" data-text="FLORIST"></span></span></div>
-    </div>
+<!-- [D] HERO: nền trắng, chữ trái, bó hoa thật (tách nền) trong khung vòm phải. Ảnh: Drive "Hình hoa". -->
+<section class="hero" aria-labelledby="hero-title">
+ <div class="hero__in">
+  <div class="hero__text">
+    <p class="hero__kicker">Quỳnh Như Florist · Thủ Dầu Một</p>
+    <h1 id="hero-title" class="hero__title">Tiệm hoa sáp nhỏ <span>tại Thủ Dầu Một – Bình Dương</span></h1>
+    <p class="hero__sub">Hoa sáp theo dịp · mẫu theo yêu cầu đặt trước 4–5 ngày</p>
+    <div class="hero__ctas"><a class="btn btn--pink" href="/san-pham/">Xem mẫu hoa</a><a class="btn btn--line" href="{{ZALO_URL}}" target="_blank" rel="noopener">Nhắn Zalo</a></div>
+  </div>
+  <div class="hero__stage" aria-roledescription="carousel" aria-label="Mẫu hoa sáp của tiệm">
+    <div class="hero__arch" aria-hidden="true"></div>
+    <figure class="hero__slide is-active" data-theme="m1" role="group" aria-roledescription="slide" aria-label="1 / 3">
+      <img src="/assets/img/hero/mau-hong-do-720.webp" srcset="/assets/img/hero/mau-hong-do-480.webp 480w, /assets/img/hero/mau-hong-do-720.webp 720w, /assets/img/hero/mau-hong-do-960.webp 960w" fetchpriority="high" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Bó hoa sáp hồng đỏ và trắng, điểm cúc trắng, thắt nơ voan trắng – Quỳnh Như Florist" decoding="async">
+    </figure>
+    <figure class="hero__slide" data-theme="m2" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
+      <img data-src="/assets/img/hero/mau-hong-vang-720.webp" data-srcset="/assets/img/hero/mau-hong-vang-480.webp 480w, /assets/img/hero/mau-hong-vang-720.webp 720w, /assets/img/hero/mau-hong-vang-960.webp 960w" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Bó hoa sáp hồng phấn, trắng và đồng tiền hồng, điểm cúc vàng, gói giấy hồng – Quỳnh Như Florist" decoding="async">
+    </figure>
+    <figure class="hero__slide" data-theme="m3" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
+      <img data-src="/assets/img/hero/mau-xanh-720.webp" data-srcset="/assets/img/hero/mau-xanh-480.webp 480w, /assets/img/hero/mau-xanh-720.webp 720w, /assets/img/hero/mau-xanh-960.webp 960w" sizes="{{HERO_SIZES}}" width="720" height="900" alt="Bó hoa sáp tông xanh dương gói giấy đen, buộc ruy băng xanh – Quỳnh Như Florist" decoding="async">
+    </figure>
     <button type="button" class="hero__nav hero__nav--prev" aria-label="Mẫu trước"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
     <button type="button" class="hero__nav hero__nav--next" aria-label="Mẫu sau"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
     <div class="hero__dots"><button type="button" class="hero__dot" aria-label="Xem mẫu 1" aria-current="true"></button><button type="button" class="hero__dot" aria-label="Xem mẫu 2"></button><button type="button" class="hero__dot" aria-label="Xem mẫu 3"></button></div>
   </div>
-  <div class="hero__foot">
-    <div class="hero__aside">
-      <p class="hero__note">Hoa sáp <span>theo yêu cầu</span> <span>đặt trước 4–5 ngày</span></p>
-    </div>
-  </div>
-    <ul class="hero__social" aria-label="Mạng xã hội của Quỳnh Như Florist">
-      <li><a class="follow__fb" href="{{FACEBOOK_URL}}" target="_blank" rel="noopener" aria-label="Facebook của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
-      <li><a class="follow__tt" href="{{TIKTOK_URL}}" target="_blank" rel="noopener" aria-label="TikTok của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
-      <li><a class="follow__ig" href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener" aria-label="Instagram của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
-      <li><a class="follow__zl" href="{{ZALO_URL}}" target="_blank" rel="noopener" aria-label="Zalo của Quỳnh Như Florist"><svg aria-hidden="true"><use href="#i-chat"/></svg></a></li>
-    </ul>
+ </div>
 </section>
 
 <!-- VỀ QUỲNH NHƯ FLORIST: chữ căn giữa + băng ảnh ngang lướt qua lại → trang Giới thiệu -->
@@ -75,6 +51,7 @@
 </section>
 
 
+{{HOME_FEATURED}}
 {{HOME_STORIES}}<!-- KHÁM PHÁ: một hàng liên kết gọn -->
 <nav class="section explore" aria-label="Các trang của Quỳnh Như Florist">
   <ul class="wrap explore__row">

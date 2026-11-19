@@ -1,0 +1,27 @@
+{
+  "draft": true,
+  "_ghi_chu": "MẪU BÀI – chủ tiệm điền phần [CHƯA CÓ …] bằng lời của chính mình, vài câu là đủ. Điền xong: đổi tên tệp thành cau-chuyen-cua-tiem.json, đổi draft thành false. Build tự kiểm checklist SEO 8 bước.",
+  "slug": "cau-chuyen-tiem-hoa-sap-quynh-nhu",
+  "keyword": "tiệm hoa sáp Quỳnh Như",
+  "title": "Câu chuyện tiệm hoa sáp Quỳnh Như ở Thủ Dầu Một",
+  "desc": "Vì sao mở tiệm hoa sáp Quỳnh Như, tiệm chọn hoa thế nào, điều tiệm không bao giờ làm, và cách đặt hoa: Zalo 0857 380 325, đặt trước 4–5 ngày.",
+  "h1": "Tiệm hoa sáp Quỳnh Như: vì sao mở tiệm và điều tiệm giữ",
+  "date": "",
+  "cover": "",
+  "images": [],
+  "body": [
+    ["p", "Tiệm hoa sáp Quỳnh Như là tiệm nhỏ ở Phú Lợi, khu vực Thủ Dầu Một. [CHƯA CÓ – 1–2 câu: vì sao bạn mở tiệm]"],
+    ["h2", "Tiệm chọn hoa thế nào?"],
+    ["p", "[CHƯA CÓ – 2–3 câu: bạn chọn hoa, chọn màu cho một bó như thế nào]"],
+    ["h2", "Điều tiệm không bao giờ làm"],
+    ["p", "[CHƯA CÓ – 1–2 câu]"],
+    ["h2", "Đặt hoa ở tiệm"],
+    ["ul", [
+      "Nhắn Zalo 0857 380 325: gửi dịp, ngày cần hoa, màu thích",
+      "Mẫu theo yêu cầu đặt trước 4–5 ngày; mẫu có sẵn nhận ngay trong ngày",
+      "[CHƯA CÓ – khu vực giao hàng]",
+      "[CHƯA CÓ – cách thanh toán]",
+      "[CHƯA CÓ – nếu hoa không đúng mẫu đã chốt, tiệm xử lý thế nào]"
+    ]]
+  ]
+}

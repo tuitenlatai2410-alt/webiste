@@ -46,8 +46,8 @@ function shown(label, ...texts) {
 }
 
 // Ảnh bó hoa xanh ở hero (dùng chung cho thẻ preload và thẻ img); sizes khớp bề rộng hiển thị thật
-const HERO_SRCSET = ['480', '620', '820', '1030'].map((w) => `/assets/img/hero/bo-hoa-xanh-tach-nen-${w}.webp ${w}w`).join(', ');
-const HERO_SIZES = '(min-width:1024px) 660px, (min-width:768px) 440px, 92vw';
+const HERO_SRCSET = ['480', '720', '960'].map((w) => `/assets/img/hero/mau-hong-do-${w}.webp ${w}w`).join(', ');
+const HERO_SIZES = '(min-width:1024px) 440px, 62vw';
 const SITE = C.SITE_URL.replace(/\/+$/, '');
 const CANONICAL = SITE + '/';
 const MAPS_URL = missing(C.MAPS_URL)
@@ -243,7 +243,18 @@ const PRODUCT_CARDS = PRODUCTS.map((p, i) => {
 const POSTS_ALL = fs.readdirSync(path.join(ROOT, 'tools/posts')).filter((f) => f.endsWith('.json')).sort()
   .map((f) => JSON.parse(read('tools/posts/' + f)));
 for (const p of POSTS_ALL) if (p.draft) HIDDEN.push(`Blog › bản nháp chờ duyệt: ${p.title}`);
-const POSTS = POSTS_ALL.filter((p) => !p.draft && !hasPlaceholder(JSON.stringify(p)));
+// Checklist SEO 8 bước (tools/seo-check.mjs): bài chưa đạt đủ 8 bước thì không đăng
+const { seoCheck, SEO_STEPS } = await import('./seo-check.mjs');
+const SEO_REPORT = [];
+const NOW = process.env.QNF_NOW ? new Date(process.env.QNF_NOW) : new Date();
+const POSTS = POSTS_ALL.filter((p) => {
+  if (p.draft) return false;
+  const r = seoCheck(p, ROOT);
+  SEO_REPORT.push([p, r]);
+  if (r.some((x) => !x.ok)) { HIDDEN.push(`Blog › chưa đạt checklist SEO: ${p.title}`); return false; }
+  if (p.publishAt && new Date(p.publishAt) > NOW) { HIDDEN.push(`Blog › chờ đăng lúc ${p.publishAt}: ${p.title}`); return false; }
+  return !hasPlaceholder(JSON.stringify(p));
+});
 const BLOG_ON = POSTS.length > 0;
 if (!BLOG_ON) HIDDEN.push('Trang /blog/ (chưa có bài nào được duyệt)');
 if (POSTS.length < 2) HIDDEN.push('Khối "Câu chuyện từ tiệm" ở trang chủ (cần ít nhất 2 bài đã duyệt)');
@@ -272,7 +283,8 @@ function postHTML(p) {
     <div class="post__body">
 ${body}
     </div>
-    <p class="post__cta"><a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo hỏi mẫu này</a></p>
+    <p class="post__cta"><a class="btn btn--pink" href="{{ZALO_URL}}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Nhắn Zalo hỏi mẫu này</a> <a class="btn btn--line" href="/san-pham/">Xem các mẫu khác</a></p>
+    <p class="post__more">Cách đặt hoa, thời gian nhận hoa: xem <a href="/tro-giup/">Trợ giúp</a>.</p>
   </div>
 </article>
 `;
@@ -291,6 +303,17 @@ const HOME_STORIES = POSTS.length >= 2 ? `<section class="section stories" aria-
   <div class="wrap">
     <div class="sec-head reveal"><p class="label">— ✦ BLOG</p><h2 id="stories-title" class="h2">Câu chuyện từ tiệm</h2></div>
     <ul class="bgrid">${POSTS.slice(0, 3).map(blogCard).join('')}</ul>
+  </div>
+</section>
+` : '';
+
+/* ---- Mẫu nổi bật ở trang chủ: 4 mẫu thật đầu tiên (ảnh nền trắng) ---- */
+const FEATURED_IDS = ['sp-01', 'sp-14', 'sp-11', 'sp-18'];
+const HOME_FEATURED = REAL.length >= 4 ? `<section class="section featured" aria-labelledby="featured-title">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="label">— ✦ MẪU HOA</p><h2 id="featured-title" class="h2">Mẫu hoa sáp của tiệm</h2></div>
+    <ul class="fgrid">${FEATURED_IDS.map((id) => REAL.find((p) => p.id === id)).filter(Boolean).map((p) => `<li class="reveal"><a class="fcard" href="/san-pham/#${p.id}"><span class="fcard__img">${img(p.images[0], `${p.name}: ${p.look || ''}`, false).replace('sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"', 'sizes="(min-width:1024px) 290px, 46vw"')}</span><span class="fcard__t">${esc(p.name)}</span></a></li>`).join('')}</ul>
+    <p class="featured__more"><a class="btn btn--line" href="/san-pham/">Xem tất cả mẫu</a></p>
   </div>
 </section>
 ` : '';
@@ -472,6 +495,7 @@ for (const pg of ALL_PAGES) {
     STYLE_LINK: pg.key === 'home' ? STYLE_ASYNC : STYLE_BLOCK,
     HERO_PRELOAD: pg.key === 'home' ? `<link rel="preload" as="image" imagesrcset="${HERO_SRCSET}" imagesizes="${HERO_SIZES}" fetchpriority="high">\n` : '',
     HOME_STORIES: pg.key === 'home' ? HOME_STORIES : '',
+    HOME_FEATURED: pg.key === 'home' && pg.lang === 'vi' ? HOME_FEATURED : '',
     PAGE_EXTRA: pg.key === 'san-pham' ? '\n' + read('tools/partials/product-modal.html') : '',
   };
   const raw = read('tools/partials/head.html') + read('tools/partials/top.html') + (pg.content || read(`tools/pages/${pg.tpl}.html`)) + read('tools/partials/bottom.html');
@@ -540,6 +564,13 @@ write('404.html', page404);
 if (!FORM_ON) console.log('ℹ Form đặt hoa đang TẠM ẨN (ORDER_FORM_ENABLED: false)');
 if (missing(C.SITE_URL) || /example\.com/.test(C.SITE_URL)) console.warn('⚠ Chưa có tên miền thật — đang dùng', C.SITE_URL);
 console.log(`ℹ Ngôn ngữ: ${LANGS.join(', ')} (noindex: ${NOINDEX_LANGS.join(', ') || 'không'})`);
+if (SEO_REPORT.length) {
+  console.log('\nℹ Checklist SEO 8 bước cho bài blog:');
+  for (const [p, r] of SEO_REPORT) {
+    console.log(`   ${r.every((x) => x.ok) ? '✅' : '❌'} ${p.slug}`);
+    r.forEach((x, i) => console.log(`      ${x.ok ? '✓' : '✗'} ${i + 1}. ${SEO_STEPS[i]}${x.ok ? '' : ' — ' + x.why}`));
+  }
+}
 if (HIDDEN.length) {
   console.log(`\nℹ ${HIDDEN.length} khối đang ẨN vì thiếu thông tin (xem MISSING-INFO.md):`);
   HIDDEN.forEach((h) => console.log('   – ' + h));

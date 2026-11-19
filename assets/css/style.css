@@ -89,7 +89,7 @@ html.menu-open{overflow:hidden}
 .btn--lg{min-height:54px;padding:.85em 2em;font-size:1rem}
 
 /* Hiện dần khi cuộn tới */
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
 .js .reveal.is-in{opacity:1;transform:none}
 
 /* ---------- Trang con: đường dẫn + khoảng trên ---------- */
@@ -603,3 +603,29 @@ a.footer__row:hover span{text-decoration:underline;text-underline-offset:3px}
 .bcard{display:block;color:var(--black)}.bcard__img{display:block;aspect-ratio:4/5;overflow:hidden;border-radius:16px}
 .bcard__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}.bcard:hover img{transform:scale(1.03)}
 .bcard__t{display:block;margin-top:12px;font:600 1.25rem/1.3 var(--serif)}
+
+/* ---------- Bộ quy tắc giao diện (19/11/2026): trắng phẳng, hồng chính + sage phụ ---------- */
+.loichuc{background:var(--sage-soft)}
+.loichuc__lead,.chips__h,.faq__gh{color:var(--sage-ink)}
+.label{color:var(--pink-ink)}
+.faq{background:var(--white)}
+.qa{border-color:var(--line)}
+.pcard__link{background:#fff;box-shadow:0 0 0 1px var(--line)}
+.pcard__media{background:#fff}
+.xlink{border-color:var(--line)}
+.xlink svg{color:var(--sage)}
+.bcard__img{box-shadow:0 0 0 1px var(--line)}
+.perks svg{color:var(--sage)}
+.chip:hover{border-color:var(--sage)}
+/* Mẫu nổi bật ở trang chủ */
+.featured{padding-top:64px}
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (min-width:1024px){.fgrid{grid-template-columns:repeat(4,1fr);gap:20px}}
+.fcard{display:block;color:var(--black)}
+.fcard__img{display:block;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.fcard__img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.fcard:hover .fcard__img img{transform:scale(1.03)}
+.fcard__t{display:block;margin-top:10px;font-weight:500;font-size:.95rem}
+.featured__more{margin-top:24px;text-align:center}
+@media (prefers-reduced-motion:reduce){.fcard__img img{transition:none}}
+.post__more{margin-top:14px;font-size:.95rem}.post__more a{color:var(--pink-ink);text-decoration:underline;text-underline-offset:3px}.post__cta{display:flex;flex-wrap:wrap;gap:12px}
