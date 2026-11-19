@@ -11,8 +11,8 @@ Chốt ngày 19/11/2026. Giữ lâu dài. Chỉ đổi khi có lý do từ khác
 | Nền | Trắng phẳng `#FFFFFF` và trắng ngà `#F6F3F0`. Mảng nhạt khác chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
 | Chữ | Tím than `#2B1E27`. Mọi cặp chữ/nền đạt độ tương phản ≥ 4.5:1 |
 | Phông chữ | 2 họ: Cormorant Garamond (tiêu đề), Be Vietnam Pro (chữ thường). Không thêm họ thứ ba |
-| Bố cục | Tối giản (chốt 19/11/2026 theo ảnh tham khảo của chủ web): trang chủ gồm phần đầu nền trắng ngà `#F6F3F0`, chữ trái + bó hoa thật tách nền phải; 3 hàng ảnh thật đánh số 01·02·03; 5 ô mẫu; bài blog; băng ảnh cuối trang. Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5, bấm vào mở ảnh lớn thấy trọn bó |
-| Hiệu ứng | Chỉ 1 thứ: các khối hiện mượt khi kéo trang. Ảnh đầu trang đứng yên. Không lắc, không nổi lên xuống, không cánh hoa rơi. Máy bật giảm chuyển động: tắt hiệu ứng |
+| Bố cục | Phần đầu trang chủ giữ như cũ (chủ web chốt 19/11/2026): bó hoa xanh tách nền giữa, chữ QUYNH NHU FLORIST mờ phía sau, "Tiệm hoa sáp nhỏ" góc trái, ghi chú góc phải, mũi tên và chấm chuyển mẫu. Bên dưới theo phong cách tối giản: 3 hàng ảnh thật 01·02·03, 5 ô mẫu, blog, băng ảnh cuối trang. Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5, bấm vào mở ảnh lớn thấy trọn bó |
+| Hiệu ứng | Các khối hiện mượt khi kéo trang; phần đầu trang chuyển mẫu chậm 6 giây như cũ. Không lắc, không nổi lên xuống, không cánh hoa rơi. Máy bật giảm chuyển động: tắt hiệu ứng |
 | Ảnh | Chỉ ảnh thật trong Drive "Hình hoa" do tiệm làm. Ảnh sản phẩm nền trắng; ảnh blog giữ khung cảnh thật. Che thiệp, lời nhắn, mặt người, biển số |
 | Giọng viết | Ngắn, thật, nói đúng điều khách cần: mẫu gì, đặt trước bao lâu, nhận ở đâu, nhắn ai. Không hoa mỹ, không tự khen, không hứa điều tiệm chưa xác nhận |
 

@@ -46,8 +46,8 @@ function shown(label, ...texts) {
 }
 
 // Ảnh bó hoa xanh ở hero (dùng chung cho thẻ preload và thẻ img); sizes khớp bề rộng hiển thị thật
-const HERO_SRCSET = ['480', '720', '960'].map((w) => `/assets/img/hero/mau-hong-vang-${w}.webp ${w}w`).join(', ');
-const HERO_SIZES = '(min-width:1024px) 460px, 64vw';
+const HERO_SRCSET = ['480', '620', '820', '1030'].map((w) => `/assets/img/hero/bo-hoa-xanh-tach-nen-${w}.webp ${w}w`).join(', ');
+const HERO_SIZES = '(min-width:1024px) 660px, (min-width:768px) 440px, 92vw';
 const SITE = C.SITE_URL.replace(/\/+$/, '');
 const CANONICAL = SITE + '/';
 const MAPS_URL = missing(C.MAPS_URL)
