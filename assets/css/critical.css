@@ -211,6 +211,9 @@ button{cursor:pointer;background:none;border:0;padding:0}
   .hero__ctas{flex-direction:column;align-items:flex-start;gap:14px}
 }
 
+/* Nền phần đầu trang chủ: gradient bạch kim ánh ngọc trai + hạt mịn (chủ web chọn kiểu 2, 20/11/2026) */
+.hero[data-theme="xam"]{--h-big:#DCD8DE;--h-on:#2B1E27;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(55% 65% at 15% 25%,#FFFFFF 0%,rgba(255,255,255,0) 65%),radial-gradient(40% 55% at 88% 80%,rgba(240,214,224,.75) 0%,rgba(240,214,224,0) 70%),radial-gradient(45% 50% at 78% 12%,rgba(220,228,240,.8) 0%,rgba(220,228,240,0) 70%),linear-gradient(135deg,#F2F1F2 0%,#E4E4E8 60%,#EEEDEF 100%)}
+@media (min-width:1024px){.hero__nav{background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}}
 @media (prefers-reduced-motion:reduce){.hero__slide--photo .hero__photo img{transition:none;transform:none}.hero,.hero__slide,.hero__slide.is-active,.hero__slide .hero__cut img{transition:none}.hero__slide:not(.is-active) .hero__cut img{transform:none}}
 
 

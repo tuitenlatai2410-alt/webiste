@@ -8,7 +8,7 @@ Chốt ngày 19/11/2026. Giữ lâu dài. Chỉ đổi khi có lý do từ khác
 |---|---|
 | Màu chính | Hồng `#C2437A` (nút chính, chữ nhấn, nhãn) |
 | Màu phụ | Xanh lá sage `#8EA58C` (đường viền, khung ảnh, icon); chữ màu xanh dùng `#4F6A4D` |
-| Nền | Trắng phẳng `#FFFFFF` và trắng ngà `#F6F3F0`. Mảng nhạt khác chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
+| Nền | Trắng phẳng `#FFFFFF` và trắng ngà `#F6F3F0`. Riêng phần đầu trang chủ: gradient bạch kim ánh ngọc trai (trắng – bạc, ánh hồng và xanh rất nhạt, hạt mịn). Mảng nhạt khác chỉ dùng hồng phấn `#F6D9E3` và sage nhạt `#EAF0E8` |
 | Chữ | Tím than `#2B1E27`. Mọi cặp chữ/nền đạt độ tương phản ≥ 4.5:1 |
 | Phông chữ | 2 họ: Cormorant Garamond (tiêu đề), Be Vietnam Pro (chữ thường). Không thêm họ thứ ba |
 | Bố cục | Phần đầu trang chủ giữ như cũ (chủ web chốt 19/11/2026): bó hoa xanh tách nền giữa, chữ QUYNH NHU FLORIST mờ phía sau, "Tiệm hoa sáp nhỏ" góc trái, ghi chú góc phải, mũi tên và chấm chuyển mẫu. Bên dưới theo phong cách tối giản: 3 hàng ảnh thật 01·02·03, 5 ô mẫu, blog, băng ảnh cuối trang. Trang Sản phẩm: lưới thẻ ảnh nền trắng 4:5, bấm vào mở ảnh lớn thấy trọn bó |
